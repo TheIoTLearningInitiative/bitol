@@ -15,6 +15,7 @@ vehicle = connect(connection_string, wait_ready=True)
 
 # Get some vehicle attributes (state)
 print "Get some vehicle attribute values:"
+print "Autopilot Firmware version: %s" % vehicle.version
 print " GPS: %s" % vehicle.gps_0
 print " Battery: %s" % vehicle.battery
 print " Last Heartbeat: %s" % vehicle.last_heartbeat
