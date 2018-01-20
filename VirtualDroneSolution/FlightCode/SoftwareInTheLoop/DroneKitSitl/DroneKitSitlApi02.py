@@ -8,6 +8,7 @@ import sys
 copter_args = ['-S', '--model', 'quad', '--home=20.6207591,-103.3991668,584,353']
 
 sitl = SITL()
+sitl.download('copter', '3.3')
 sitl.launch(copter_args, await_ready=True, use_saved_data=True)
 vehicle = dronekit.connect(connection_string, wait_ready=True)
 print vehicle.parameters["COMPASS_USE"]
