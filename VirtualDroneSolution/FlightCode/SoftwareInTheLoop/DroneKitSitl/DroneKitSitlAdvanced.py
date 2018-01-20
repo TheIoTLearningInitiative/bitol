@@ -5,7 +5,7 @@ from dronekit_sitl import version_list
 from dronekit_sitl import download
 import sys
 
-copter_args = ['-S', '--model', 'quad', '--home=-35.363261,149.165230,584,353']
+copter_args = ['-S', '--model', 'quad', '--home=20.6207591,-103.3991668,584,353']
 
 sitl = SITL()
 sitl.launch(copter_args, await_ready=True, use_saved_data=True)
