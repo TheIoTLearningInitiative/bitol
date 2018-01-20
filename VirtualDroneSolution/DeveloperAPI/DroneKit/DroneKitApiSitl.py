@@ -4,8 +4,7 @@ import dronekit_sitl
 
 print "Start DroneKit Simulator (SITL)"
 sitl = dronekit_sitl.start_default()
-#connection_string = sitl.connection_string()
-connection_string = '127.0.0.1:14560'
+connection_string = sitl.connection_string()
 
 # Import DroneKit-Python
 from dronekit import connect, VehicleMode
