@@ -15,7 +15,12 @@ vehicle = connect(connection_string, wait_ready=True)
 
 # Get some vehicle attributes (state)
 print "Get some vehicle attribute values:"
-print "Autopilot Firmware version: %s" % vehicle.version
+print " Autopilot Firmware version: %s" % vehicle.version
+print " Autopilot capabilities (supports ftp): %s" % vehicle.capabilities.ftp
+print " Global Location: %s" % vehicle.location.global_frame
+print " Global Location (relative altitude): %s" % vehicle.location.global_relative_frame
+print " Local Location: %s" % vehicle.location.local_frame  #NED
+print " Attitude: %s" % vehicle.attitude
 print " GPS: %s" % vehicle.gps_0
 print " Battery: %s" % vehicle.battery
 print " Last Heartbeat: %s" % vehicle.last_heartbeat
