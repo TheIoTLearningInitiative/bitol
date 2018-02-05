@@ -59,7 +59,8 @@ def arm_and_takeoff(aTargetAltitude):
     print("Arming motors")
     # Copter should arm in GUIDED mode
     vehicle.mode = VehicleMode("GUIDED")
-    vehicle.armed = True    
+    vehicle.armed = True
+    vehicle.airspeed = 10
 
     while not vehicle.armed:      
         print(" Waiting for arming...")
@@ -80,11 +81,15 @@ def arm_and_takeoff(aTargetAltitude):
 
 
 try:
-    # Use the python gps package to access the laptop GPS
-    gpsd = gps.gps(mode=gps.WATCH_ENABLE)
-
+  
     #Arm and take off to altitude of 5 meters
     arm_and_takeoff(5)
+
+    print("Start Fake GPS")
+    time.sleep(2)
+
+    # Use the python gps package to access the laptop GPS
+    gpsd = gps.gps(mode=gps.WATCH_ENABLE)
 
     while True:
     
