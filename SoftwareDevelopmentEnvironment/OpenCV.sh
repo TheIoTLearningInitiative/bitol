@@ -47,6 +47,8 @@ EOM
 
 source $HOME/.bashrc
 
+sleep 5
+
 mkvirtualenv cv -p python3
 workon cv
 pip install numpy
