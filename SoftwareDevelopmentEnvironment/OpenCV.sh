@@ -47,7 +47,9 @@ EOM
 
 sleep 1
 
-. $HOME/.bashrc
+source $HOME/.bashrc
+
+sleep 1
 
 mkvirtualenv cv -p python3
 workon cv
