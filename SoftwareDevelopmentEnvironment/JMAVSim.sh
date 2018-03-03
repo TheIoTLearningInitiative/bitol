@@ -6,7 +6,8 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_PX4=$HOME/src/Firmware
+export DIRECTORY_SOURCE=$HOME/src/
+export DIRECTORY_PX4=DIRECTORY_SOURCE/Firmware
 
 # =============================================================================
 # Functions
