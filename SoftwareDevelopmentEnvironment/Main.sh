@@ -6,7 +6,8 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_BITOL="Bitol"
+export DIRECTORY_ROOT=~/
+export DIRECTORY_BITOL=Bitol
 
 # =============================================================================
 # Functions
