@@ -6,7 +6,7 @@ set -x
 # Variables
 # =============================================================================
 
-export ROOT_DIRECTORY="~/"
+# None
 
 # =============================================================================
 # Functions
@@ -20,7 +20,7 @@ export ROOT_DIRECTORY="~/"
 
 cd $ROOT_DIRECTORY
 
-cat << EOM >> .bashrc
+cat << EOM >> $HOME/.bashrc
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
