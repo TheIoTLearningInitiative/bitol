@@ -7,7 +7,7 @@ set -x
 # =============================================================================
 
 export DIRECTORY_SOURCE=$HOME/src/
-export DIRECTORY_PX4=DIRECTORY_SOURCE/Firmware
+export DIRECTORY_PX4=$DIRECTORY_SOURCE/Firmware
 
 # =============================================================================
 # Functions
