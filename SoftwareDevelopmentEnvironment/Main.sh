@@ -6,7 +6,6 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_ROOT=~/
 export DIRECTORY_BITOL=Bitol
 
 # =============================================================================
@@ -20,6 +19,8 @@ export DIRECTORY_BITOL=Bitol
 # =============================================================================
 
 # wget -O - https://raw.githubusercontent.com/TheIoTLearningInitiative/Bitol/master/SoftwareDevelopmentEnvironment/Main.sh | sh
+
+cd $HOME
 
 sudo apt-get update
 sudo apt-get upgrade -y
