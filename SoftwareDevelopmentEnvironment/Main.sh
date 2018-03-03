@@ -21,6 +21,8 @@ export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL/SoftwareDevelop
 
 # wget -O - https://raw.githubusercontent.com/TheIoTLearningInitiative/Bitol/master/SoftwareDevelopmentEnvironment/Main.sh | bash
 
+echo "Software Development Environment :: Started"
+
 cd $HOME
 
 sudo apt-get update
@@ -55,5 +57,7 @@ bash GStreamer.sh
 bash JMAVSim.sh
 
 cd $HOME
+
+echo "Software Development Environment :: Completed"
 
 # End of File
