@@ -48,6 +48,8 @@ EOM
 sleep 1
 
 source $HOME/.bashrc
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
 
 sleep 1
 
