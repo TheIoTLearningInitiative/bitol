@@ -22,6 +22,7 @@ export DIRECTORY_ARDUCOPTER=$DIRECTORY_ARDUPILOT/ArduCopter
 
 cd $HOME
 
+source $HOME/.bashrc
 cd $DIRECTORY_ARDUCOPTER
 sim_vehicle.py -w
 
