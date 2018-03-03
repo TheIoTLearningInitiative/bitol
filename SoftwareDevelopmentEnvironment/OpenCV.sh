@@ -18,7 +18,9 @@ export ROOT_DIRECTORY=~/
 # Main
 # =============================================================================
 
-cat << EOM >> $ROOT_DIRECTORY/.bashrc
+cd $ROOT_DIRECTORY
+
+cat << EOM >> .bashrc
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
