@@ -45,9 +45,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 EOM
 
-source $HOME/.bashrc
+sleep 1
 
-sleep 5
+. $HOME/.bashrc
 
 mkvirtualenv cv -p python3
 workon cv
