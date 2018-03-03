@@ -20,12 +20,7 @@ export DIRECTORY_PX4=$HOME/src/
 
 cd $HOME
 
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get autoremove
-
 cd $DIRECTORY_PX4/Firmware/
-
 make posix jmavsim
 
 cd $HOME
