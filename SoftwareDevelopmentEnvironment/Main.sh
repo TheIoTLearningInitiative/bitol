@@ -42,4 +42,15 @@ fi
 
 cd $HOME
 
+bash OpenCV.sh
+bash PX4.sh
+bash MAVLink.sh
+bash Ardupilot.sh
+bash SITLSimulator.sh
+bash DroneKit.sh
+bash QGroundControl.sh
+bash APMPLanner.sh
+bash GStreamer.sh
+bash JMAVSim.sh
+
 # End of File
