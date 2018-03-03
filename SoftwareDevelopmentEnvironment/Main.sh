@@ -19,9 +19,9 @@ export ROOT_DIRECTORY=~/
 # =============================================================================
 
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get autoremove
+sudo apt-get upgrade -y
+sudo apt-get autoremove -y
 
-sudo apt install git
+sudo apt install git -y
 
 # End of File
