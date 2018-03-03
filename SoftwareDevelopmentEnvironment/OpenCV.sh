@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+# set -x
 
 # =============================================================================
 # Variables
@@ -17,26 +17,6 @@ set -x
 # =============================================================================
 # Main
 # =============================================================================
-
-cat << EOM >> $HOME/.bashrc
-# virtualenv and virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-EOM
-
-sleep 1
-
-#. $HOME/.bashrc
-export WORKON_HOME=$HOME/.virtualenvs
-source `which virtualenvwrapper.sh`
-
-sleep 1
-
-mkvirtualenv cv -p python3
-workon cv
-pip install numpy
-
-exit 0
 
 sudo apt-get update
 sudo apt-get upgrade
@@ -68,10 +48,6 @@ EOM
 sleep 1
 
 source $HOME/.bashrc
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
-sleep 1
 
 mkvirtualenv cv -p python3
 workon cv
