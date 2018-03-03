@@ -6,7 +6,8 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_BITOL=Bitol
+export DIRECTORY_BITOL=$HOME/Bitol/
+export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL
 
 # =============================================================================
 # Functions
@@ -40,7 +41,7 @@ else
     git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 bash OpenCV.sh
 bash PX4.sh
@@ -52,5 +53,7 @@ bash QGroundControl.sh
 bash APMPLanner.sh
 bash GStreamer.sh
 bash JMAVSim.sh
+
+cd $HOME
 
 # End of File
