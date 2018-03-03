@@ -86,4 +86,6 @@ cd $ROOT_DIRECTORY
 
 pip install imutils
 
+cd $HOME
+
 # End of File
