@@ -37,6 +37,8 @@ sudo apt-get -y install python-pip && pip install --upgrade pip
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/.cache/pip
 
+exit 0
+
 cat << EOM >> $ROOT_DIRECTORY/.bashrc
 
 # virtualenv and virtualenvwrapper
