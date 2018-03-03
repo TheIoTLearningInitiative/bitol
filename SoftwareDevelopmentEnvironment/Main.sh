@@ -6,7 +6,7 @@ set -x
 # Variables
 # =============================================================================
 
-export ROOT_DIRECTORY=~/
+# None
 
 # =============================================================================
 # Functions
@@ -22,6 +22,10 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 
-sudo apt install git -y
+sudo apt install -y tree
+sudo apt install -y jstest-gtk
+sudo apt-get install -y gpsd gpsd-clients
+
+sudo apt install -y git
 
 # End of File
