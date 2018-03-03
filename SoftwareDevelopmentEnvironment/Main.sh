@@ -40,4 +40,6 @@ else
     git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
+cd $HOME
+
 # End of File
