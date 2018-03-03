@@ -6,7 +6,7 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_PX4=$HOME/src/
+export DIRECTORY_PX4=$HOME/src/Firmware
 
 # =============================================================================
 # Functions
@@ -20,7 +20,7 @@ export DIRECTORY_PX4=$HOME/src/
 
 cd $HOME
 
-cd $DIRECTORY_PX4/Firmware/
+cd $DIRECTORY_PX4
 make posix jmavsim
 
 cd $HOME
