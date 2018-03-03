@@ -18,6 +18,8 @@
 # Main
 # =============================================================================
 
+cd $HOME
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get autoremove
