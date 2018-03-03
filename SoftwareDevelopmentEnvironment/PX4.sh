@@ -29,4 +29,6 @@ sudo usermod -a -G dialout $USER
 
 wget -O - https://raw.githubusercontent.com/PX4/Devguide/master/build_scripts/ubuntu_sim_nuttx.sh | bash
 
+cd $HOME
+
 # End of File
