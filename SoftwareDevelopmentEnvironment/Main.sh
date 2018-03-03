@@ -32,10 +32,10 @@ sudo apt install -y git
 
 if [ -d "$DIRECTORY_BITOL" ]
 then
-	cd $DIRECTORY_BITOL
-  git pull
+    cd $DIRECTORY_BITOL
+    git pull
 else
-	git clone https://github.com/TheIoTLearningInitiative/Bitol.git
+    git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
 # End of File
