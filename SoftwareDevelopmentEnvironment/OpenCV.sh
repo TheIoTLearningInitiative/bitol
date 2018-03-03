@@ -49,6 +49,9 @@ sleep 1
 
 source $HOME/.bashrc
 
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
 mkvirtualenv cv -p python3
 workon cv
 pip install numpy
