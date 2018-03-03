@@ -18,18 +18,6 @@ set -x
 # Main
 # =============================================================================
 
-cd $ROOT_DIRECTORY
-
-cat << EOM >> $HOME/.bashrc
-
-# virtualenv and virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
-EOM
-
-exit 0
-
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get autoremove
@@ -49,12 +37,22 @@ sudo apt-get -y install python-pip && pip install --upgrade pip
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/.cache/pip
 
-source $ROOT_DIRECTORY/.bashrc
+cat << EOM >> $HOME/.bashrc
+
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+EOM
+
+source $HOME/.bashrc
 
 mkvirtualenv cv -p python3
 workon cv
 pip install numpy
-cd ~
+
+cd $HOME
+
 git clone https://github.com/opencv/opencv/
 git clone https://github.com/opencv/opencv_contrib
 cd ~/opencv
