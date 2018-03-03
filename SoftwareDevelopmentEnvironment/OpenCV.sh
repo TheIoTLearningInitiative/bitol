@@ -26,10 +26,9 @@ EOM
 
 sleep 1
 
-. $HOME/.bashrc
-
-echo $WORKON_HOME
-ls /usr/local/bin/virtualenvwrapper.sh
+#. $HOME/.bashrc
+export WORKON_HOME=$HOME/.virtualenvs
+source `which virtualenvwrapper.sh`
 
 sleep 1
 
