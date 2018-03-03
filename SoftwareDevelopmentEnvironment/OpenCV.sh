@@ -37,9 +37,7 @@ sudo apt-get -y install python-pip && pip install --upgrade pip
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/.cache/pip
 
-cd $ROOT_DIRECTORY
-
-cat << EOM >> .bashrc
+cat << EOM >> $ROOT_DIRECTORY/.bashrc
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
@@ -47,7 +45,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 EOM
 
-source ~/.bashrc
+source $ROOT_DIRECTORY/.bashrc
 
 mkvirtualenv cv -p python3
 workon cv
