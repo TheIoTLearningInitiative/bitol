@@ -18,6 +18,16 @@ export ROOT_DIRECTORY=~/
 # Main
 # =============================================================================
 
+cat << EOM >> $ROOT_DIRECTORY/.bashrc
+
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+EOM
+
+exit 0
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get autoremove
@@ -36,16 +46,6 @@ sudo apt-get -y install python2.7-dev python3.5-dev
 sudo apt-get -y install python-pip && pip install --upgrade pip
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/.cache/pip
-
-exit 0
-
-cat << EOM >> $ROOT_DIRECTORY/.bashrc
-
-# virtualenv and virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
-EOM
 
 source $ROOT_DIRECTORY/.bashrc
 
