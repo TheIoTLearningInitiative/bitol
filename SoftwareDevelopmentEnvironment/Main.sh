@@ -7,7 +7,7 @@ set -x
 # =============================================================================
 
 export DIRECTORY_BITOL=$HOME/Bitol/
-export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL
+export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL/SoftwareDevelopmentEnvironment/
 
 # =============================================================================
 # Functions
