@@ -23,6 +23,8 @@ sudo apt install -y python-pip python-dev
 sudo pip install dronekit
 sudo pip install dronekit-sitl -UI
 
+git clone https://github.com/dronekit/dronekit-python.git
+
 cd $HOME
 
 # End of File
