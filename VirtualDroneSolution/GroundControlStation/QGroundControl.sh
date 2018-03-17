@@ -15,7 +15,14 @@ export QGROUNDCONTROL_FILE=$HOME/QGroundControl.AppImage
 # Functions
 # =============================================================================
 
-# None
+shutdown() {
+  # Get our process group id
+  PGID=$(ps -o pgid= $1 | grep -o [0-9]*)
+
+  # Kill it in a new new process group
+  setsid kill -- -$PGID
+  exit 0
+}
 
 # =============================================================================
 # Main
@@ -31,7 +38,9 @@ if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
     JMAVSim.sh stop &
     QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
-    kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
+    #kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
+    shutdown $QGROUNDCONTROL_PID
+    trap "shutdown" SIGINT SIGTERM
 fi
 
 cd $HOME
