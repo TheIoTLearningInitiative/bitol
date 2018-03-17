@@ -39,7 +39,7 @@ if [ "$JMAVSIM_ARGUMENT_ACTION" = "start" ]; then
     make posix jmavsim
 elif [ "$JMAVSIM_ARGUMENT_ACTION" = "stop" ]; then
     JMAVSIM_PID=`cat $JMAVSIM_PID_PATH`
-    kill $(list_descendants ${JMAVSIM_PID})
+    kill -- -$(ps -o pgid=$JMAVSIM_PID | grep -o [0-9]*)
 fi
 
 cd $HOME
