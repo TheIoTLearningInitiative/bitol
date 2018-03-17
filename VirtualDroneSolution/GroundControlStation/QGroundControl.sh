@@ -7,7 +7,7 @@ set -x
 # =============================================================================
 
 export QGROUNDCONTROL_PID=$$
-export QGROUNDCONTROL_PID_PATH=$HOME/qgroundcontrol"
+export QGROUNDCONTROL_PID_PATH=$HOME/qgroundcontrol
 export QGROUNDCONTROL_ARGUMENT_ACTION=$1
 export QGROUNDCONTROL_FILE=$HOME/QGroundControl.AppImage"
 
