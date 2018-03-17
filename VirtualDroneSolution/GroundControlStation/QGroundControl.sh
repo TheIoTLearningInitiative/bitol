@@ -18,6 +18,7 @@ export QGROUNDCONTROL_FILE=$HOME/QGroundControl.AppImage
 shutdown() {
   # Get our process group id
   PGID=$(ps -o pgid= $1 | grep -o [0-9]*)
+  echo $PGID
 
   # Kill it in a new new process group
   setsid kill -- -$PGID
