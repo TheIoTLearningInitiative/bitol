@@ -48,6 +48,8 @@ cat << EOM >> $HOME/.bashrc
 source $HOME/Bitol/Main.sh
 EOM
 
+source $HOME/.bashrc
+
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 bash OpenCV.sh
