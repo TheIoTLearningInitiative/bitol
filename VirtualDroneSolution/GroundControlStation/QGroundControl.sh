@@ -34,7 +34,7 @@ cd $HOME
 if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
     echo $QGROUNDCONTROL_PID > $QGROUNDCONTROL_PID_PATH
     $QGROUNDCONTROL_FILE &
-    sleep 
+    sleep 1
     JMAVSim.sh start &
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
     JMAVSim.sh stop &
