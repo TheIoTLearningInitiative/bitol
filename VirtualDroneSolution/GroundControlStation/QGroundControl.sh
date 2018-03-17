@@ -29,9 +29,9 @@ if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
     sleep 
     JMAVSim.sh start &
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
-    JMAVSim.sh stop
-    #QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
-    #kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
+    JMAVSim.sh stop &
+    QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
+    kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
 fi
 
 cd $HOME
