@@ -28,7 +28,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     echo $DRONEKIT_PID > $DRONEKIT_PID_PATH
     JMAVSim.sh start &
     sleep 3
-    mavproxy.py --master=tcp:127.0.0.1:5760 \
+    mavproxy.py --master=udp:127.0.0.1:14550 \
                 --out=udpout:127.0.0.1:14570 \
                 --out=udpout:127.0.0.1:14580
     sleep 3
