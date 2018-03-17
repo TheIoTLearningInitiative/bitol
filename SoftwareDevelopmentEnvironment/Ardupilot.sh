@@ -27,8 +27,7 @@ sudo pip install future pymavlink MAVProxy
 
 cat << EOM >> $HOME/.bashrc
 
-export PATH=$PATH:$HOME/src/ardupilot/Tools/autotest
-export PATH=/usr/lib/ccache:$PATH
+export PATH=$PATH:$HOME/src/ardupilot/Tools/autotest:/usr/lib/ccache
 
 EOM
 
