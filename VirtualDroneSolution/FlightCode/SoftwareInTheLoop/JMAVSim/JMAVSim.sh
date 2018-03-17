@@ -33,11 +33,11 @@ list_descendants ()
 
 cd $HOME
 
-if [ "$LOCAL_DEVICE" = "start" ]; then
+if [ "$JMAVSIM_ARGUMENT_ACTION" = "start" ]; then
     echo $JMAVSIM_PID > $JMAVSIM_PID_PATH
     cd $DIRECTORY_PX4
     make posix jmavsim
-elif [ "$LOCAL_DEVICE" = "stop" ]; then
+elif [ "$JMAVSIM_ARGUMENT_ACTION" = "stop" ]; then
     cat $JMAVSIM_PID_PATH
     JMAVSIM_PID=kill $(list_descendants ${LOCAL_PID})
 fi
