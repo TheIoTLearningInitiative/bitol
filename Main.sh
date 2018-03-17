@@ -12,6 +12,7 @@ export MAIN_DIRECTORY=`dirname "$(readlink -f "$0")"`
 export MAIN_ARGUMENT_ACTION=$1
 
 export JMAVSIM=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/JMAVSim/
+export SIMVEHICLE=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/ArdupilotSitl/
 
 # =============================================================================
 # Functions
@@ -24,5 +25,6 @@ export JMAVSIM=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop
 # =============================================================================
 
 export PATH=$PATH:$JMAVSIM
+export PATH=$PATH:$SIMVEHICLE
 
 # End Of File
