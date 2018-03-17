@@ -34,6 +34,7 @@ sudo apt install -y jstest-gtk
 sudo apt install -y gpsd gpsd-clients
 
 sudo apt install -y git
+sudo apt install -y nmap
 
 if [ -d "$DIRECTORY_BITOL" ]
 then
