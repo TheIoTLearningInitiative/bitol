@@ -25,9 +25,9 @@ cd $HOME
 
 if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
     echo $QGROUNDCONTROL_PID > $QGROUNDCONTROL_PID_PATH
-    $QGROUNDCONTROL_FILE
+    $QGROUNDCONTROL_FILE &
     sleep 
-    JMAVSim.sh start
+    JMAVSim.sh start &
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
     JMAVSim.sh stop
     QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
