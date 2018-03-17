@@ -27,5 +27,6 @@ export QGROUNDCONTROL=$MAIN_DIRECTORY/VirtualDroneSolution/GroundControlStation/
 
 export PATH=$PATH:$JMAVSIM
 export PATH=$PATH:$SIMVEHICLE
+export PATH=$PATH:$QGROUNDCONTROL
 
 # End Of File
