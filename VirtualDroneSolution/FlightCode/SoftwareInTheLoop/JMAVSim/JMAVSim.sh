@@ -38,7 +38,7 @@ if [ "$JMAVSIM_ARGUMENT_ACTION" = "start" ]; then
     cd $DIRECTORY_PX4
     make posix jmavsim
 elif [ "$JMAVSIM_ARGUMENT_ACTION" = "stop" ]; then
-    JMAVSIM_PID=cat $JMAVSIM_PID_PATH
+    JMAVSIM_PID=`cat $JMAVSIM_PID_PATH`
     kill $(list_descendants ${JMAVSIM_PID})
 fi
 
