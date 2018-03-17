@@ -9,7 +9,7 @@ set -x
 export DRONEKIT_PID=$$
 export DRONEKIT_PID_PATH=$HOME/dronekit
 export DRONEKIT_ARGUMENT_ACTION=$1
-export DRONEKIT_DIRECTORY=$HOME/Bitol/VirtualDroneSolution/DeveloperApi/
+export DRONEKIT_DIRECTORY=$HOME/Bitol/VirtualDroneSolution/DeveloperAPI/
 export DRONEKIT_PX4=$DRONEKIT_DIRECTORY/DroneKitPythonPx4.py
 
 # =============================================================================
