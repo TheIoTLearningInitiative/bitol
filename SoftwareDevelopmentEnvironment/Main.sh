@@ -44,6 +44,10 @@ else
     git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
+cat << EOM >> $HOME/.bashrc
+source $HOME/Bitol/Main.sh
+EOM
+
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 bash OpenCV.sh
