@@ -39,6 +39,8 @@ git clone git://github.com/ArduPilot/ardupilot.git
 cd $DIRECTORY_ARDUPILOT
 git submodule update --init --recursive
 
+nohup sim_vehicle.py -v ArduCopter -l 20.654544,-103.3930971,30,0 &
+
 cd $HOME
 
 # End of File
