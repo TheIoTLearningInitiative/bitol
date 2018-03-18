@@ -42,7 +42,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     QGroundControl.sh start &
     sleep 10
     
-    python $DRONEKIT_PYTHON
+    python $DRONEKIT_PX4
     
 elif [ "$DRONEKIT_ARGUMENT_ACTION" = "stop" ]; then
     
