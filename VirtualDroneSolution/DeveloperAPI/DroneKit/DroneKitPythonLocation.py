@@ -96,6 +96,9 @@ print " Alt: %s" % vehicle.location.global_relative_frame.alt
 # Change to AUTO mode
 PX4setMode(MAV_MODE_AUTO)
 time.sleep(1)
+vehicle.mode = VehicleMode("GUIDED")
+vehicle.armed = True
+vehicle.airspeed = 5
 
 # Load commands
 cmds = vehicle.commands
