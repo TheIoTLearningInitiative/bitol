@@ -18,7 +18,7 @@ import time, sys, argparse, math
 # Settings
 ################################################################################################
 
-connection_string       = '127.0.0.1:14580'
+connection_string       = '127.0.0.1:14560'
 MAV_MODE_AUTO   = 4
 # https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
 
@@ -69,7 +69,7 @@ def get_location_offset_meters(original_location, dNorth, dEast, alt):
 # Listeners
 ################################################################################################
 
-home_position_set = False
+home_position_set = True
 
 #Create a message listener for home position fix
 @vehicle.on_message('HOME_POSITION')
