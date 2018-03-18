@@ -30,7 +30,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     echo $DRONEKIT_PID > $DRONEKIT_PID_PATH
     
     # =========================================================================
-    # SITL: DroneKit-Sitl <> PX4 JMAVSim <> Ardupilot SimVehicle
+    # SITL: DroneKit-Sitl <> PX4 Sitl JMAVSim <> Ardupilot Sitl SimVehicle
     # =========================================================================
     # screen -dm -S dronekit-sitl dronekit-sitl copter --home=20.6207591,-103.3991668,30,0 &
     # JMAVSim.sh start &
