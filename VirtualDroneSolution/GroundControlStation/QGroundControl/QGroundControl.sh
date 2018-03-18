@@ -34,10 +34,7 @@ cd $HOME
 if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
     echo $QGROUNDCONTROL_PID > $QGROUNDCONTROL_PID_PATH
     $QGROUNDCONTROL_FILE &
-    sleep 1
-    JMAVSim.sh start &
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
-    JMAVSim.sh stop &
     QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
     #kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
     shutdown $QGROUNDCONTROL_PID
