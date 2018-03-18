@@ -19,6 +19,6 @@
 
 # Materials
 
-> Drone Software Development [Google Drive](https://drive.google.com/drive/u/0/folders/0B6h7kxp-oIy8X1pSOFd0UHBZRzA)
-> Drone Software Development [Gitbook](https://theiotlearninginitiative.gitbooks.io/bitol/content/)
-> Drone Software Development [Github](https://github.com/TheIoTLearningInitiative/Bitol)
+> - Drone Software Development [Google Drive](https://drive.google.com/drive/u/0/folders/0B6h7kxp-oIy8X1pSOFd0UHBZRzA)
+> - Drone Software Development [Gitbook](https://theiotlearninginitiative.gitbooks.io/bitol/content/)
+> - Drone Software Development [Github](https://github.com/TheIoTLearningInitiative/Bitol)
