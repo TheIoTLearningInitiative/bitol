@@ -8,7 +8,7 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
  
 import argparse  
 parser = argparse.ArgumentParser()
-parser.add_argument('--connect', default='127.0.0.1:14540')
+parser.add_argument('--connect', default='127.0.0.1:14560')
 args = parser.parse_args()
  
 # Connect to the Vehicle
