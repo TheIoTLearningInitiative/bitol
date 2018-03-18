@@ -29,16 +29,15 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
 
     echo $DRONEKIT_PID > $DRONEKIT_PID_PATH
     
-    #JMAVSim.sh start &
-    #screen -dm -S dronekit-sitl dronekit-sitl copter --home=20.6207591,-103.3991668,30,0 &
+    # screen -dm -S dronekit-sitl dronekit-sitl copter --home=20.6207591,-103.3991668,30,0 &
+    # JMAVSim.sh start &
     SimVehicle.sh start &
     sleep 10
     
-    #mavproxy.py --master=udp:127.0.0.1:14550 \
-    #            --out=udpout:127.0.0.1:14570 \
-    #            --out=udpout:127.0.0.1:14580 &
-    #screen -dm -S mavproxy mavproxy.py --master=tcp:127.0.0.1:5760 --out=udpout:127.0.0.1:14550 --out=udpout:127.0.0.1:14560
-    #sleep 10
+    # screen -dm -S mavproxy mavproxy.py --master=tcp:127.0.0.1:5760 --out=udpout:127.0.0.1:14550 --out=udpout:127.0.0.1:14560
+    # screen -dm -S mavproxy.py --master=udp:127.0.0.1:14550 --out=udpout:127.0.0.1:14570 --out=udpout:127.0.0.1:14580
+    # None
+    # sleep 10
     
     QGroundControl.sh start &
     sleep 10
