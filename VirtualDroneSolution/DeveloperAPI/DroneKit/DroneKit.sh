@@ -36,9 +36,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     #mavproxy.py --master=udp:127.0.0.1:14550 \
     #            --out=udpout:127.0.0.1:14570 \
     #            --out=udpout:127.0.0.1:14580 &
-    nohup mavproxy.py --master=tcp:127.0.0.1:5760 \
-                --out=udpout:127.0.0.1:14550 \
-                --out=udpout:127.0.0.1:14560 &
+    screen -dm -S mavproxy mavproxy.py --master=tcp:127.0.0.1:5760 --out=udpout:127.0.0.1:14550 --out=udpout:127.0.0.1:14560
     sleep 10
     
     QGroundControl.sh start &
