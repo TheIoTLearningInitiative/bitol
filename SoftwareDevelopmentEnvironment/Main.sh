@@ -59,6 +59,7 @@ bash MAVLink.sh
 bash Ardupilot.sh
 bash SITLSimulator.sh
 bash DroneKit.sh
+# bash DroneCore.sh
 bash QGroundControl.sh
 bash APMPLanner.sh
 bash GStreamer.sh
