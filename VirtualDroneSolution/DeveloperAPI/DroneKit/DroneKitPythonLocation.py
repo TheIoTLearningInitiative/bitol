@@ -10,7 +10,7 @@
 #!/usr/bin/python
 
 # Import DroneKit-Python
-from dronekit import connect, Command, LocationGlobal
+from dronekit import connect, VehicleMode, Command, LocationGlobal
 from pymavlink import mavutil
 import time, sys, argparse, math
 
