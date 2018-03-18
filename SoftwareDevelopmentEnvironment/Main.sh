@@ -35,6 +35,7 @@ sudo apt install -y gpsd gpsd-clients
 
 sudo apt install -y git
 sudo apt install -y nmap
+sudo apt install -y screen
 
 if [ -d "$DIRECTORY_BITOL" ]
 then
