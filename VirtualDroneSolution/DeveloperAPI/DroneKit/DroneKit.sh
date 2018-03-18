@@ -33,8 +33,8 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     # SITL: DroneKit-Sitl <> PX4 Sitl JMAVSim <> Ardupilot Sitl SimVehicle
     # =========================================================================
     # screen -dm -S dronekit-sitl dronekit-sitl copter --home=20.6207591,-103.3991668,30,0 &
-    # JMAVSim.sh start &
-    SimVehicle.sh start &
+    # screen -dm -S jmavsim JMAVSim.sh start &
+    screen -dm -S simvehicle  SimVehicle.sh start &
     sleep 10
 
     # =========================================================================
