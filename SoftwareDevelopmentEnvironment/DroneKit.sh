@@ -6,7 +6,8 @@ set -x
 # Variables
 # =============================================================================
 
-# None
+export DIRECTORY_SOURCE=$HOME/src/
+
 # =============================================================================
 # Functions
 # =============================================================================
@@ -23,7 +24,8 @@ sudo apt install -y python-pip python-dev
 sudo pip install dronekit
 sudo pip install dronekit-sitl -UI
 
-export DIRECTORY_SOURCE=$HOME/src/
+cd $DIRECTORY_SOURCE
+
 git clone https://github.com/dronekit/dronekit-python.git
 cd dronekit-python
 python setup.py build
