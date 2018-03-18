@@ -10,7 +10,7 @@ export DRONEKIT_PID=$$
 export DRONEKIT_PID_PATH=$HOME/dronekit
 export DRONEKIT_ARGUMENT_ACTION=$1
 export DRONEKIT_DIRECTORY=$HOME/Bitol/VirtualDroneSolution/DeveloperAPI/DroneKit/
-export DRONEKIT_PYTHON=$DRONEKIT_DIRECTORY/DroneKitPython.py
+export DRONEKIT_PYTHON=$DRONEKIT_DIRECTORY/DroneKitPythonAttributes.py
 export DRONEKIT_PX4=$DRONEKIT_DIRECTORY/DroneKitPythonLocation.py
 
 # =============================================================================
