@@ -10,8 +10,8 @@ export DRONEKIT_PID=$$
 export DRONEKIT_PID_PATH=$HOME/dronekit
 export DRONEKIT_ARGUMENT_ACTION=$1
 export DRONEKIT_DIRECTORY=$HOME/Bitol/VirtualDroneSolution/DeveloperAPI/DroneKit/
-export DRONEKIT_PYTHON=$DRONEKIT_DIRECTORY/DroneKitPythonAttributes.py
-export DRONEKIT_PX4=$DRONEKIT_DIRECTORY/DroneKitPythonLocation.py
+export DRONEKIT_PYTHON_ATTRIBUTES=$DRONEKIT_DIRECTORY/DroneKitPythonAttributes.py
+export DRONEKIT_PYTHON_PX4=$DRONEKIT_DIRECTORY/DroneKitPythonLocation.py
 
 # =============================================================================
 # Functions
@@ -42,7 +42,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     QGroundControl.sh start &
     sleep 10
     
-    python $DRONEKIT_PX4
+    python $DRONEKIT_PYTHON_PX4
     
 elif [ "$DRONEKIT_ARGUMENT_ACTION" = "stop" ]; then
     
