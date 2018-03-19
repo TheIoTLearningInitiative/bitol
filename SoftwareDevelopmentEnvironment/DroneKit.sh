@@ -20,7 +20,14 @@ export DIRECTORY_SOURCE=$HOME/src/
 
 cd $HOME
 
-sudo apt install -y python-pip python-dev
+sudo apt update -y
+sudo apt install -y build-essential python-pip python-dev
+sudo apt install -y python-cherrypy3
+sudo apt install -y python-matplotlib
+sudo apt install -y python-gps gpsd gpsd-clients
+
+sudo pip install sphinx monotonic future nose mock sphinx-3dr-theme
+sudo pip install pymavlink
 sudo pip install dronekit
 sudo pip install dronekit-sitl -UI
 
