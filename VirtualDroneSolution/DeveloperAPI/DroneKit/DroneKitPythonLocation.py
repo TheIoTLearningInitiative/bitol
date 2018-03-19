@@ -16,7 +16,7 @@ import time, sys, argparse, math
 # Settings
 ################################################################################################
 
-connection_string       = '127.0.0.1:14540'
+connection_string       = '127.0.0.1:14551'
 MAV_MODE_AUTO   = 4
 # https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
 
