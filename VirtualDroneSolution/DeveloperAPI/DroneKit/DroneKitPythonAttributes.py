@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-connection_string = '127.0.0.1:14560'
+connection_string = '127.0.0.1:14551'
 
 # Import DroneKit-Python
 from dronekit import connect, VehicleMode
