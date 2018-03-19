@@ -7,10 +7,8 @@
 # Code partly based on DroneKit (c) Copyright 2015-2016, 3D Robotics.
 ################################################################################################
 
-#!/usr/bin/python
-
 # Import DroneKit-Python
-from dronekit import connect, VehicleMode, Command, LocationGlobal
+from dronekit import connect, Command, LocationGlobal
 from pymavlink import mavutil
 import time, sys, argparse, math
 
@@ -18,9 +16,10 @@ import time, sys, argparse, math
 # Settings
 ################################################################################################
 
-connection_string       = '127.0.0.1:14560'
+connection_string       = '127.0.0.1:14540'
 MAV_MODE_AUTO   = 4
 # https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
+
 
 # Parse connection argument
 parser = argparse.ArgumentParser()
@@ -29,7 +28,6 @@ args = parser.parse_args()
 
 if args.connect:
     connection_string = args.connect
-
 
 ################################################################################################
 # Init
@@ -69,7 +67,7 @@ def get_location_offset_meters(original_location, dNorth, dEast, alt):
 # Listeners
 ################################################################################################
 
-home_position_set = True
+home_position_set = False
 
 #Create a message listener for home position fix
 @vehicle.on_message('HOME_POSITION')
@@ -96,9 +94,6 @@ print " Alt: %s" % vehicle.location.global_relative_frame.alt
 # Change to AUTO mode
 PX4setMode(MAV_MODE_AUTO)
 time.sleep(1)
-vehicle.mode = VehicleMode("GUIDED")
-vehicle.armed = True
-vehicle.airspeed = 5
 
 # Load commands
 cmds = vehicle.commands
@@ -155,6 +150,7 @@ while nextwaypoint < len(vehicle.commands):
 # wait for the vehicle to land
 while vehicle.commands.next > 0:
     time.sleep(1)
+
 
 # Disarm vehicle
 vehicle.armed = False
