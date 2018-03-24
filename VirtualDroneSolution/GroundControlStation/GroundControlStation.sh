@@ -31,17 +31,17 @@ shutdown() {
 cd $HOME
 
 if [ "$GROUNDCONTROLSTATION_ARGUMENT_ACTION" = "start" ]; then
+    JMAVSim.sh start &
+    sleep 1
     echo $GROUNDCONTROLSTATION_PID > $GROUNDCONTROLSTATION_PID_PATH
     QGroundControl.sh start &
-    sleep 1
-    JMAVSim.sh start &
 elif [ "$GROUNDCONTROLSTATION_ARGUMENT_ACTION" = "stop" ]; then
-    JMAVSim.sh stop &
-    QGroundControl.sh start &
+    QGroundControl.sh stop &
     GROUNDCONTROLSTATION_PID=`cat $GROUNDCONTROLSTATION_PID_PATH`
     #kill -- -$(ps -o pgid=$GROUNDCONTROLSTATION_PID | grep -o [0-9]*)
     shutdown $GROUNDCONTROLSTATION_PID
     trap "shutdown" SIGINT SIGTERM
+    JMAVSim.sh stop &
 fi
 
 cd $HOME
