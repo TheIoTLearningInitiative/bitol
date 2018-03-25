@@ -131,6 +131,7 @@ print " GPS: %s" % vehicle.gps_0
 print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
 # Change to AUTO mode
+MAV_MODE_AUTO   = 4
 PX4setMode(MAV_MODE_AUTO)
 time.sleep(1)
 
