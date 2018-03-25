@@ -5,7 +5,6 @@ from dronekit import connect, VehicleMode, LocationGlobalRelative
 from pymavlink import mavutil
 import time, sys, argparse, math
 from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlobalRelative
- 
 
 # Set up option parsing to get connection string
 import argparse
