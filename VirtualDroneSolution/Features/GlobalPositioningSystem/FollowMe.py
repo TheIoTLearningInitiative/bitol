@@ -31,7 +31,6 @@ args = parser.parse_args()
 connection_string = args.connect
 sitl = None
 
-
 #Start SITL if no connection string specified
 if not connection_string:
     import dronekit_sitl
@@ -41,8 +40,6 @@ if not connection_string:
 # Connect to the Vehicle
 print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
-
-
 
 def arm_and_takeoff(aTargetAltitude):
     """
@@ -77,8 +74,6 @@ def arm_and_takeoff(aTargetAltitude):
             print("Reached target altitude")
             break
         time.sleep(1)
-
-
 
 try:
   
