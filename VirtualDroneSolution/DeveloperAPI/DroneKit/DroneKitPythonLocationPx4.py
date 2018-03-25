@@ -20,7 +20,6 @@ connection_string       = '127.0.0.1:14551'
 MAV_MODE_AUTO   = 4
 # https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
 
-
 # Parse connection argument
 parser = argparse.ArgumentParser()
 parser.add_argument("-c", "--connect", help="connection string")
@@ -80,7 +79,7 @@ def listener(self, name, home_position):
 ################################################################################################
 
 # wait for a home position lock
-while not home_position_set:
+while home_position_set:
     print "Waiting for home position..."
     time.sleep(1)
 
@@ -150,7 +149,6 @@ while nextwaypoint < len(vehicle.commands):
 # wait for the vehicle to land
 while vehicle.commands.next > 0:
     time.sleep(1)
-
 
 # Disarm vehicle
 vehicle.armed = False
