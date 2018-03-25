@@ -9,7 +9,7 @@ import sys
 
 if __name__ == "__main__":
 
-    filePath = os.path.dirname(os.path.realpath(__file__)))
+    filePath = os.path.dirname(os.path.realpath(__file__))
     print (print filePath)
     cascPath = "haarcascade_frontalface_alt.xml"
     devVideo = os.environ['MAIN_DEV_VIDEO']
