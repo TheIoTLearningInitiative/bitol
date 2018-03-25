@@ -10,8 +10,7 @@ export DRONEKIT_PID=$$
 export DRONEKIT_PID_PATH=$HOME/dronekit
 export DRONEKIT_ARGUMENT_ACTION=$1
 export DRONEKIT_DIRECTORY=$HOME/Bitol/VirtualDroneSolution/DeveloperAPI/DroneKit/
-export DRONEKIT_PYTHON_ATTRIBUTES=$DRONEKIT_DIRECTORY/DroneKitPythonAttributes.py
-export DRONEKIT_PYTHON_PX4=$DRONEKIT_DIRECTORY/DroneKitPythonLocation.py
+export DRONEKIT_PYTHON_APPLICATION=$DRONEKIT_DIRECTORY/DroneKitPythonGoto.py
 
 # =============================================================================
 # Functions
@@ -57,7 +56,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     # Developer API: DroneKit
     # =========================================================================
 
-    python $DRONEKIT_PYTHON_PX4
+    python $DRONEKIT_PYTHON_APPLICATION
     
 elif [ "$DRONEKIT_ARGUMENT_ACTION" = "stop" ]; then
     
