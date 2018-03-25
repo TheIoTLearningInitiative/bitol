@@ -79,6 +79,10 @@ try:
   
     #Arm and take off to altitude of 5 meters
     arm_and_takeoff(5)
+    
+    cmds = vehicle.commands
+    cmds.clear()
+    cmds.upload()
 
     print("Start Fake GPS")
     time.sleep(2)
