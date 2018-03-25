@@ -74,6 +74,10 @@ def arm_and_takeoff(aTargetAltitude):
 
 arm_and_takeoff(10)
 
+cmds = vehicle.commands
+cmds.clear()
+cmds.upload()
+
 print("Set default/target airspeed to 3")
 vehicle.airspeed = 3
 
