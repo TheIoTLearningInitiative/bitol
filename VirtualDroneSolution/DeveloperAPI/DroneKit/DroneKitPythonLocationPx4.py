@@ -119,9 +119,9 @@ def listener(self, name, home_position):
 ################################################################################################
 
 # wait for a home position lock
-while not home_position_set:
-    print "Waiting for home position..."
-    time.sleep(1)
+# while not home_position_set:
+#     print "Waiting for home position..."
+#     time.sleep(1)
 
 # Display basic vehicle state
 print " Type: %s" % vehicle._vehicle_type
@@ -131,9 +131,10 @@ print " GPS: %s" % vehicle.gps_0
 print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
 # Change to AUTO mode
-MAV_MODE_AUTO   = 4
-PX4setMode(MAV_MODE_AUTO)
-time.sleep(1)
+# MAV_MODE_AUTO   = 4
+# PX4setMode(MAV_MODE_AUTO)
+# time.sleep(1)
+arm_and_takeoff(10)
 
 # Load commands
 cmds = vehicle.commands
@@ -176,8 +177,7 @@ cmds.upload()
 time.sleep(2)
 
 # Arm vehicle
-vehicle.armed = True
-arm_and_takeoff(10)
+# vehicle.armed = True
 
 # monitor mission execution
 nextwaypoint = vehicle.commands.next
@@ -193,8 +193,11 @@ while vehicle.commands.next > 0:
     time.sleep(1)
 
 # Disarm vehicle
-vehicle.armed = False
-time.sleep(1)
+# vehicle.armed = False
+# time.sleep(1)
+
+print("Returning to Launch")
+vehicle.mode = VehicleMode("RTL")
 
 # Close vehicle object before exiting script
 vehicle.close()
