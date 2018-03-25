@@ -32,11 +32,9 @@ if not connection_string:
     sitl = dronekit_sitl.start_default()
     connection_string = sitl.connection_string()
 
-
 # Connect to the Vehicle
 print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
-
 
 def get_location_metres(original_location, dNorth, dEast):
     """
@@ -72,8 +70,6 @@ def get_distance_metres(aLocation1, aLocation2):
     dlat = aLocation2.lat - aLocation1.lat
     dlong = aLocation2.lon - aLocation1.lon
     return math.sqrt((dlat*dlat) + (dlong*dlong)) * 1.113195e5
-
-
 
 def distance_to_current_waypoint():
     """
@@ -114,7 +110,8 @@ def adds_square_mission(aLocation, aSize):
     cmds = vehicle.commands
 
     print(" Clear any existing commands")
-    cmds.clear() 
+    cmds = vehicle.commands
+    cmds.upload()
 
     print(" Define/add new commands.")
     # Add new commands. The meaning/order of the parameters is documented in the Command class. 
