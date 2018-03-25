@@ -56,7 +56,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     # Developer API: DroneKit
     # =========================================================================
 
-    python $DRONEKIT_PYTHON_APPLICATION
+    # python $DRONEKIT_PYTHON_APPLICATION
     
 elif [ "$DRONEKIT_ARGUMENT_ACTION" = "stop" ]; then
     
