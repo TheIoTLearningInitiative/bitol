@@ -15,6 +15,7 @@ export SIMVEHICLE=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheL
 export GROUNDCONTROLSTATION=$MAIN_DIRECTORY/VirtualDroneSolution/GroundControlStation/
 export QGROUNDCONTROL=$MAIN_DIRECTORY/VirtualDroneSolution/GroundControlStation/QGroundControl/
 export DRONEKIT=$MAIN_DIRECTORY/VirtualDroneSolution/DeveloperAPI/DroneKit/
+export GPS=$MAIN_DIRECTORY/VirtualDroneSolution/Features/GlobalPositioningSystem/
 
 # =============================================================================
 # Functions
@@ -26,7 +27,6 @@ export DRONEKIT=$MAIN_DIRECTORY/VirtualDroneSolution/DeveloperAPI/DroneKit/
 # Main
 # =============================================================================
 
-
 # VirtualDroneSolution/FlightCode/SoftwareInTheLoop/
 export PATH=$PATH:$JMAVSIM
 export PATH=$PATH:$SIMVEHICLE
@@ -37,5 +37,8 @@ export PATH=$PATH:$QGROUNDCONTROL
 
 # VirtualDroneSolution/DeveloperAPI/DroneKit/
 export PATH=$PATH:$DRONEKIT
+
+# VirtualDroneSolution/Features/GlobalPositioningSystem/
+export PATH=$PATH:$GPS
 
 # End Of File
