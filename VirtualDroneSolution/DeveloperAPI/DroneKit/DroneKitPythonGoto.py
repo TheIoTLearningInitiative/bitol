@@ -77,10 +77,10 @@ cmds = vehicle.commands
 cmds.clear()
 cmds.upload()
 
-latd01=os.environ['MAIN_LAT_D01']
-lond01=os.environ['MAIN_LON_D01']
-latd01=os.environ.get('MAIN_LAT_D01')
-lond02=os.environ.get('MAIN_LON_D01')
+latd01=int(os.environ['MAIN_LAT_D01'])
+lond01=int(os.environ['MAIN_LON_D01'])
+latd01=int(os.environ.get('MAIN_LAT_D01'))
+lond02=int(os.environ.get('MAIN_LON_D01'))
 
 print("Set default/target airspeed to 3")
 vehicle.airspeed = 10
