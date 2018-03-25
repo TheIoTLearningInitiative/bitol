@@ -14,7 +14,6 @@ import time
 import math
 from pymavlink import mavutil
 
-
 #Set up option parsing to get connection string
 import argparse
 parser = argparse.ArgumentParser(description='Demonstrates basic mission operations.')
@@ -87,7 +86,6 @@ def distance_to_current_waypoint():
     distancetopoint = get_distance_metres(vehicle.location.global_frame, targetWaypointLocation)
     return distancetopoint
 
-
 def download_mission():
     """
     Download the current mission from the vehicle.
@@ -95,8 +93,6 @@ def download_mission():
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready() # wait until download is complete.
-
-
 
 def adds_square_mission(aLocation, aSize):
     """
@@ -134,7 +130,6 @@ def adds_square_mission(aLocation, aSize):
     print(" Upload new commands to vehicle")
     cmds.upload()
 
-
 def arm_and_takeoff(aTargetAltitude):
     """
     Arms vehicle and fly to aTargetAltitude.
@@ -145,7 +140,6 @@ def arm_and_takeoff(aTargetAltitude):
     while not vehicle.is_armable:
         print(" Waiting for vehicle to initialise...")
         time.sleep(1)
-
 
     print("Arming motors")
     # Copter should arm in GUIDED mode
@@ -168,10 +162,8 @@ def arm_and_takeoff(aTargetAltitude):
             break
         time.sleep(1)
 
-
 print('Create a new mission (for current location)')
 adds_square_mission(vehicle.location.global_frame,50)
-
 
 # From Copter 3.3 you will be able to take off using a mission item. Plane must take off using a mission item (currently).
 arm_and_takeoff(10)
@@ -182,7 +174,6 @@ vehicle.commands.next=0
 
 # Set mode to AUTO to start mission
 vehicle.mode = VehicleMode("AUTO")
-
 
 # Monitor mission. 
 # Demonstrates getting and setting the command number
@@ -203,7 +194,6 @@ while True:
 
 print('Return to launch')
 vehicle.mode = VehicleMode("RTL")
-
 
 #Close vehicle object before exiting script
 print("Close vehicle object")
