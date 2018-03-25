@@ -3,7 +3,7 @@ import time
 from dronekit_sitl import SITL
 from dronekit_sitl import version_list
 
-copter_args = ['-S', '--model', 'quad', '--home=-20.6207591,-103.3991668,584,353']
+copter_args = ['-S', '--model', 'quad', '--home=$MAIN_LAT,$MAIN_LON,584,353']
 
 versions = version_list()
 print versions.keys()
