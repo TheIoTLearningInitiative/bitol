@@ -26,10 +26,16 @@ export DRONEKIT=$MAIN_DIRECTORY/VirtualDroneSolution/DeveloperAPI/DroneKit/
 # Main
 # =============================================================================
 
+
+# VirtualDroneSolution/FlightCode/SoftwareInTheLoop/
 export PATH=$PATH:$JMAVSIM
 export PATH=$PATH:$SIMVEHICLE
+
+# VirtualDroneSolution/GroundControlStation/
 export PATH=$PATH:$GROUNDCONTROLSTATION
 export PATH=$PATH:$QGROUNDCONTROL
+
+# VirtualDroneSolution/DeveloperAPI/DroneKit/
 export PATH=$PATH:$DRONEKIT
 
 # End Of File
