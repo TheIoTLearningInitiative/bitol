@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # Based on research work from https://github.com/Reyes-fred/Xiaomin and authors
+# See also https://github.com/opencv/opencv/tree/master/data/haarcascades
 
 import cv2
 import os
@@ -8,7 +9,7 @@ import sys
 
 if __name__ == "__main__":
 
-    cascPath = "HaarcascadeFrontalfaceAlt.xml"
+    cascPath = "haarcascade_frontalface_alt.xml"
     videoCapture = cv2.VideoCapture("/dev/video0")
 
     while True:
