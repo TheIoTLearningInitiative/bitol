@@ -19,6 +19,8 @@ export MAIN_LON_D01=-103.3912226
 export MAIN_LAT_D02=20.654654
 export MAIN_LON_D02=-103.3909989
 
+export MAIN_DEV_VIDEO=/dev/video0
+
 export JMAVSIM=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/JMAVSim/
 export SIMVEHICLE=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/ArdupilotSitl/
 export GROUNDCONTROLSTATION=$MAIN_DIRECTORY/VirtualDroneSolution/GroundControlStation/
