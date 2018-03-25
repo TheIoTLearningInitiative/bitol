@@ -4,8 +4,9 @@ MAINTAINER Abraham Arce <xe1gyq@gmail.com>
 
 ENV TIMEZONE America/Mexico_City
 ENV DEBIAN_FRONTEND noninteractive
+ENV USER root
 
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+# RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN     apt-get update && \
         apt-get -y upgrade && \
