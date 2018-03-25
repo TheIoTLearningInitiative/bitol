@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Based on research work from https://github.com/Reyes-fred/Xiaomin and authors
+
 import cv2
 import os
 import sys
