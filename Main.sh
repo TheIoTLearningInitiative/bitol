@@ -13,6 +13,12 @@ export MAIN_DIRECTORY=`dirname "$(readlink -f "$0")"`
 export MAIN_LAT=20.6546009
 export MAIN_LON=-103.3915602
 
+export MAIN_LAT_D01=20.6549092
+export MAIN_LON_D01=-103.3912226
+
+export MAIN_LAT_D02=20.654654
+export MAIN_LON_D02=-103.3909989
+
 export JMAVSIM=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/JMAVSim/
 export SIMVEHICLE=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/ArdupilotSitl/
 export GROUNDCONTROLSTATION=$MAIN_DIRECTORY/VirtualDroneSolution/GroundControlStation/
