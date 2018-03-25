@@ -70,7 +70,6 @@ def arm_and_takeoff(aTargetAltitude):
             break
         time.sleep(1)
 
-
 arm_and_takeoff(10)
 
 cmds = vehicle.commands
