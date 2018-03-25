@@ -10,8 +10,8 @@ export MAIN_PID=$$
 export MAIN_PID_PATH="/tmp/main"
 export MAIN_DIRECTORY=`dirname "$(readlink -f "$0")"`
 
-export MAIN_LAT=20.6207591
-export MAIN_LON=-103.3991668
+export MAIN_LAT=20.6546009
+export MAIN_LON=-103.3915602
 
 export JMAVSIM=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/JMAVSim/
 export SIMVEHICLE=$MAIN_DIRECTORY/VirtualDroneSolution/FlightCode/SoftwareInTheLoop/ArdupilotSitl/
