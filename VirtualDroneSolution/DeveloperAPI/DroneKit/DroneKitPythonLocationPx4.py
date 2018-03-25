@@ -20,7 +20,6 @@ connection_string       = '127.0.0.1:14551'
 MAV_MODE_AUTO   = 4
 # https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
 
-
 # Parse connection argument
 parser = argparse.ArgumentParser()
 parser.add_argument("-c", "--connect", help="connection string")
@@ -98,6 +97,7 @@ time.sleep(1)
 # Load commands
 cmds = vehicle.commands
 cmds.clear()
+cmds.upload()
 
 home = vehicle.location.global_relative_frame
 
@@ -150,7 +150,6 @@ while nextwaypoint < len(vehicle.commands):
 # wait for the vehicle to land
 while vehicle.commands.next > 0:
     time.sleep(1)
-
 
 # Disarm vehicle
 vehicle.armed = False
