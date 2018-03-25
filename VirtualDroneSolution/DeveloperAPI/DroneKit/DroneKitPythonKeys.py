@@ -3,7 +3,6 @@
 Simple script for take off and control with arrow keys
 """
 
-
 import time
 from threading import Thread
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
@@ -11,7 +10,6 @@ from pymavlink import mavutil
 
 #- Importing Tkinter: sudo apt-get install python-tk
 import Tkinter as tk
-
 
 #-- Connect to the vehicle
 print('Connecting...')
@@ -32,7 +30,6 @@ velocity_x = 0
 velocity_y = 0
 velocity_z = 0
 stop = False
-
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
