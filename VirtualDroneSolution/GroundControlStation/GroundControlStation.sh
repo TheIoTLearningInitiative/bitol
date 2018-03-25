@@ -34,7 +34,7 @@ if [ "$GROUNDCONTROLSTATION_ARGUMENT_ACTION" = "start" ]; then
     JMAVSim.sh start &
     sleep 1
     echo $GROUNDCONTROLSTATION_PID > $GROUNDCONTROLSTATION_PID_PATH
-    QGroundControl.sh start &
+    QGroundControl.sh start
 elif [ "$GROUNDCONTROLSTATION_ARGUMENT_ACTION" = "stop" ]; then
     QGroundControl.sh stop &
     GROUNDCONTROLSTATION_PID=`cat $GROUNDCONTROLSTATION_PID_PATH`
