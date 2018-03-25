@@ -22,7 +22,7 @@ if __name__ == "__main__":
             flags = cv2.cv.CV_HAAR_SCALE_IMAGE
         )
 
-        print "Found {0} faces!".format(len(faces))
+        #print "Found {0} faces!".format(len(faces))
 
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
