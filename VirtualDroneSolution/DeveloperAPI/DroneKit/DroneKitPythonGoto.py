@@ -79,7 +79,7 @@ cmds.clear()
 cmds.upload()
 
 print("Set default/target airspeed to 3")
-vehicle.airspeed = 3
+vehicle.airspeed = 10
 
 print("Going towards first point for 30 seconds ...")
 point1 = LocationGlobalRelative(20.653544,-103.3920971, 20)
@@ -90,7 +90,7 @@ time.sleep(30)
 
 print("Going towards second point for 30 seconds (groundspeed set to 10 m/s) ...")
 point2 = LocationGlobalRelative(20.652544,-103.3910971, 20)
-vehicle.simple_goto(point2, groundspeed=10)
+vehicle.simple_goto(point2, groundspeed=20)
 
 # sleep so we can see the change in map
 time.sleep(30)
