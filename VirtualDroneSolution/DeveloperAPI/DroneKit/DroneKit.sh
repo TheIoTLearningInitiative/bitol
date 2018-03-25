@@ -60,9 +60,9 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     
 elif [ "$DRONEKIT_ARGUMENT_ACTION" = "stop" ]; then
     
-    QGroundControl.sh stop &
+    QGroundControl.sh stop
     sleep 1
-    SimVehicle.sh stop &
+    SimVehicle.sh stop
     sleep 1
     DRONEKIT_PID=`cat $DRONEKIT_PID_PATH`
     kill -- -$(ps -o pgid=$DRONEKIT_PID | grep -o [0-9]*)
