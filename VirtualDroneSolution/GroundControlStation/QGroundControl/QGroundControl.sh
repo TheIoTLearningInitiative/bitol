@@ -16,11 +16,8 @@ export QGROUNDCONTROL_FILE=$HOME/QGroundControl.AppImage
 # =============================================================================
 
 shutdown() {
-  # Get our process group id
   PGID=$(ps -o pgid=$1 | grep -o [0-9]*)
   echo $PGID
-
-  # Kill it in a new new process group
   setsid kill -9 -$PGID
   exit 0
 }
@@ -36,7 +33,6 @@ if [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "start" ]; then
     $QGROUNDCONTROL_FILE &
 elif [ "$QGROUNDCONTROL_ARGUMENT_ACTION" = "stop" ]; then
     QGROUNDCONTROL_PID=`cat $QGROUNDCONTROL_PID_PATH`
-    #kill -- -$(ps -o pgid=$QGROUNDCONTROL_PID | grep -o [0-9]*)
     shutdown $QGROUNDCONTROL_PID
     trap "shutdown" SIGINT SIGTERM
 fi
