@@ -10,7 +10,7 @@ import sys
 if __name__ == "__main__":
 
     cascPath = "haarcascade_frontalface_alt.xml"
-    devVideo = str(os.environ['MAIN_DEV_VIDEO'])
+    devVideo = os.environ['MAIN_DEV_VIDEO']
     print(devVideo)
     videoCapture = cv2.VideoCapture(devVideo)
 
