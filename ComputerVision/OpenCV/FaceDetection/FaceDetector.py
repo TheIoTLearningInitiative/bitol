@@ -6,7 +6,7 @@ import sys
 
 if __name__ == "__main__":
 
-    cascPath = "haarcascade_frontalface_alt.xml"
+    cascPath = "HaarcascadeFrontalfaceAlt.xml"
     videoCapture = cv2.VideoCapture("/dev/video0")
 
     while True:
