@@ -60,7 +60,7 @@ if [ "$GPS_ARGUMENT_ACTION" = "start" ]; then
     cd $GPS_DIRECTORY
     gpsfake -c 1 FakeGpsData.log
     sleep 3
-    python FollowMe.py --connect "127.0.0.1:14551"
+    # python FollowMe.py --connect "127.0.0.1:14551"
     
 elif [ "$GPS_ARGUMENT_ACTION" = "stop" ]; then
     
