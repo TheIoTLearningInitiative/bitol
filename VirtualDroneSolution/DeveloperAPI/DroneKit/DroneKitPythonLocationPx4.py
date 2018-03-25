@@ -177,6 +177,7 @@ time.sleep(2)
 
 # Arm vehicle
 vehicle.armed = True
+arm_and_takeoff(10)
 
 # monitor mission execution
 nextwaypoint = vehicle.commands.next
