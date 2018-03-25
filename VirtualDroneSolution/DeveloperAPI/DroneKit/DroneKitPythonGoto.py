@@ -77,8 +77,8 @@ cmds = vehicle.commands
 cmds.clear()
 cmds.upload()
 
-print os.environ['MAIN_LAT_D01']
-print os.environ['MAIN_LON_D01']
+print(os.environ['MAIN_LAT_D01'])
+print(os.environ['MAIN_LON_D01'])
 
 time.sleep(5)
 
