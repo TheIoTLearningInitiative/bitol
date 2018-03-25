@@ -12,7 +12,7 @@ if __name__ == "__main__":
     while True:
    
         faceCascade = cv2.CascadeClassifier(cascPath)
-        image = videoCapture.read()
+        ret, image = videoCapture.read()
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(
             gray,
