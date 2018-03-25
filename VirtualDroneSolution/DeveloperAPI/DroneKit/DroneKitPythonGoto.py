@@ -80,20 +80,18 @@ cmds.upload()
 print(os.environ['MAIN_LAT_D01'])
 print(os.environ['MAIN_LON_D01'])
 
-time.sleep(5)
-
 print("Set default/target airspeed to 3")
 vehicle.airspeed = 10
 
 print("Going towards first point for 30 seconds ...")
-point1 = LocationGlobalRelative(str(os.environ['MAIN_LAT_D01']),str(os.environ['MAIN_LON_D01']), 20)
+point1 = LocationGlobalRelative(os.environ.get['MAIN_LAT_D01'],os.environ.get['MAIN_LON_D01'], 20)
 vehicle.simple_goto(point1)
 
 # sleep so we can see the change in map
 time.sleep(30)
 
 print("Going towards second point for 30 seconds (groundspeed set to 10 m/s) ...")
-point2 = LocationGlobalRelative(os.environ['MAIN_LAT_D02'],os.environ['MAIN_LON_D02'], 20)
+point2 = LocationGlobalRelative(os.environ.get['MAIN_LAT_D02'],os.environ.get['MAIN_LON_D02'], 20)
 vehicle.simple_goto(point2, groundspeed=20)
 
 # sleep so we can see the change in map
