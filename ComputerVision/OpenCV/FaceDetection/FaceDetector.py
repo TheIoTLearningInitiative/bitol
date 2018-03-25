@@ -21,7 +21,7 @@ if __name__ == "__main__":
             minSize=(30, 30),
         )
 
-        print "Found {0} faces!".format(len(faces))
+        print("Found {0} faces!".format(len(faces)))
 
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
