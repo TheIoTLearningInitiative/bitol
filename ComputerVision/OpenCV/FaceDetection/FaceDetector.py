@@ -9,9 +9,8 @@ import sys
 
 if __name__ == "__main__":
 
-    filePath = os.path.dirname(os.path.realpath(__file__))
-    print(filePath)
-    cascPath = "haarcascade_frontalface_alt.xml"
+    scriptPath = os.path.dirname(os.path.realpath(__file__))
+    cascPath = scriptPath + "/haarcascade_frontalface_alt.xml"
     devVideo = os.environ['MAIN_DEV_VIDEO']
     videoCapture = cv2.VideoCapture(devVideo)
 
