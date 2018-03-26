@@ -44,11 +44,11 @@ else
     git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
-cat << EOM >> $HOME/.bashrc
-source $HOME/Bitol/Main.sh
-EOM
+# cat << EOM >> $HOME/.bashrc
+# source $HOME/Bitol/Main.sh
+# EOM
 
-source $HOME/.bashrc
+# source $HOME/.bashrc
 
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
