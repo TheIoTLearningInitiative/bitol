@@ -12,15 +12,21 @@ RUN     apt-get update && \
         apt-get -y upgrade && \
         apt-get install -y tightvncserver && \
         apt-get install -y --no-install-recommends ubuntu-desktop && \
-        apt-get install -y gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
-        mkdir /root/.vnc
+        apt-get install -y gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal && \
+        rm -rf /var/lib/apt/lists/*
+RUN     mkdir /root/.vnc
 
 ADD xstartup /root/.vnc/xstartup
 ADD passwd /root/.vnc/passwd
 
 RUN chmod 600 /root/.vnc/passwd
+RUN useradd -ms /bin/bash user
 
+# USER user
+# WORKDIR /home/user
 # CMD ["bash"]
+
 CMD /usr/bin/vncserver :1 -geometry 1280x800 -depth 24 && tail -f /root/.vnc/*:1.log
 
 EXPOSE 5901
+
