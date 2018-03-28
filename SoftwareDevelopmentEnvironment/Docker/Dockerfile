@@ -8,6 +8,11 @@ ENV USER root
 
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
+RUN \
+    groupadd user && \
+    useradd -g user -s /bin/bash -d /home/user -m user && \
+( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
+
 RUN     apt-get update && \
         apt-get -y upgrade && \
         apt-get install -y tightvncserver && \
@@ -20,7 +25,7 @@ ADD xstartup /root/.vnc/xstartup
 ADD passwd /root/.vnc/passwd
 
 RUN chmod 600 /root/.vnc/passwd
-RUN useradd -ms /bin/bash user
+# RUN useradd -ms /bin/bash user
 
 # USER user
 # WORKDIR /home/user
