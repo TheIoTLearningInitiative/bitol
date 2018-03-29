@@ -20,7 +20,9 @@ export DIRECTORY_PX4=$DIRECTORY_SOURCE/Firmware
 # =============================================================================
 
 cd $DIRECTORY_PX4
-make posix jmavsim
+screen -dm -S make posix jmavsim
+
+sleep 300
 
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
