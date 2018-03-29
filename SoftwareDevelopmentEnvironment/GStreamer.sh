@@ -18,11 +18,7 @@ set -x
 # Main
 # =============================================================================
 
-cd $HOME
-
 list=$(apt-cache --names-only search ^gstreamer1.0-* | awk '{ print $1 }' | grep -v gstreamer1.0-hybris)
 sudo apt install -y $list
-
-cd $HOME
 
 # End of File
