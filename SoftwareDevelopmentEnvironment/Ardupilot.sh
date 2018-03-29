@@ -19,8 +19,6 @@ export DIRECTORY_ARDUPILOT=$DIRECTORY_SOURCE/ardupilot/
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo apt-get install -y python-matplotlib python-serial python-wxgtk3.0 python-wxtools python-lxml
 sudo apt-get install -y python-scipy python-opencv ccache gawk git python-pip python-pexpect
 sudo pip install future pymavlink MAVProxy
@@ -33,6 +31,7 @@ export PATH=/usr/lib/ccache:$PATH
 EOM
 
 source $HOME/.bashrc
+
 
 cd $DIRECTORY_SOURCE
 git clone git://github.com/ArduPilot/ardupilot.git
