@@ -20,12 +20,12 @@ export DIRECTORY_ARDUCOPTER=$DIRECTORY_ARDUPILOT/ArduCopter
 # Main
 # =============================================================================
 
-cd $HOME
-
 source $HOME/.bashrc
 cd $DIRECTORY_ARDUCOPTER
-sim_vehicle.py -w
+screen -dm -S sim_vehicle.py -v ArduCopter -l 20.6546009,-103.3915602,30,0
 
-cd $HOME
+sleep 15
+
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
