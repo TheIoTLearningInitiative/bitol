@@ -18,8 +18,6 @@ set -x
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get autoremove
@@ -29,6 +27,6 @@ sudo usermod -a -G dialout $USER
 
 wget -O - https://raw.githubusercontent.com/PX4/Devguide/master/build_scripts/ubuntu_sim_nuttx.sh | bash
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
