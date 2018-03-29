@@ -18,8 +18,6 @@ set -x
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get autoremove
@@ -82,10 +80,8 @@ sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
 cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
 ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
 
-cd $ROOT_DIRECTORY
-
 pip install imutils
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
