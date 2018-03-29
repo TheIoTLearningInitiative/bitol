@@ -18,10 +18,6 @@ set -x
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo pip install --upgrade future pymavlink MAVProxy
-
-cd $HOME
 
 # End of File
