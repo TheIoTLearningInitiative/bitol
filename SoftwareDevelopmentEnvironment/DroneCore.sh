@@ -18,8 +18,6 @@ export DIRECTORY_SOURCE=$HOME/src/
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo apt-get update -y
 sudo apt-get -y install cmake build-essential colordiff astyle git libcurl4-openssl-dev doxygen
 
@@ -32,6 +30,6 @@ make default
 
 # Building Error!
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
