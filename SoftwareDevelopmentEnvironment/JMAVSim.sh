@@ -19,11 +19,9 @@ export DIRECTORY_PX4=$DIRECTORY_SOURCE/Firmware
 # Main
 # =============================================================================
 
-cd $HOME
-
 cd $DIRECTORY_PX4
 make posix jmavsim
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
