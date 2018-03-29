@@ -18,8 +18,6 @@ export DIRECTORY_SOURCE=$HOME/src/
 # Main
 # =============================================================================
 
-cd $HOME
-
 sudo apt update -y
 sudo apt install -y build-essential python-pip python-dev
 sudo apt install -y python-cherrypy3
@@ -38,6 +36,6 @@ cd dronekit-python
 python setup.py build
 sudo python setup.py install
 
-cd $HOME
+cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
 # End of File
