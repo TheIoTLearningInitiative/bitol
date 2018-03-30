@@ -31,7 +31,13 @@ EOM
 
 source $HOME/.bashrc
 
-cd $DIRECTORY_SOURCE
+if [ -d "$DIRECTORY_SOURCE" ]
+then
+    cd $DIRECTORY_SOURCE
+else
+    mkdir $DIRECTORY_SOURCE
+fi
+
 git clone git://github.com/ArduPilot/ardupilot.git
 cd ardupilot
 git submodule update --init --recursive
