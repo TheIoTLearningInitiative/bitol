@@ -25,6 +25,9 @@ export DIRECTORY_ARDUPILOT=$DIRECTORY_SOURCE/ardupilot
 
 cd $HOME
 
+export PATH=$PATH:$DIRECTORY_SOURCE/ardupilot/Tools/autotest
+export PATH=/usr/lib/ccache:$PATH
+
 if [ "$SIMVEHICLE_ARGUMENT_ACTION" = "start" ]; then
     echo $SIMVEHICLE_PID > $SIMVEHICLE_PID_PATH
     cd $DIRECTORY_ARDUPILOT
