@@ -47,13 +47,12 @@ fi
 # cat << EOM >> $HOME/.bashrc
 # source $HOME/Bitol/Main.sh
 # EOM
-
 # source $HOME/.bashrc
 
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
-#bash OpenCV.sh
-#bash PX4.sh
+bash OpenCV.sh
+bash PX4.sh
 bash MAVLink.sh
 bash Ardupilot.sh
 bash SITLSimulator.sh
@@ -62,7 +61,7 @@ bash DroneKit.sh
 bash QGroundControl.sh
 bash APMPLanner.sh
 bash GStreamer.sh
-#bash JMAVSim.sh
+bash JMAVSim.sh
 
 cd $HOME
 
