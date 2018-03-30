@@ -33,7 +33,7 @@ if [ "$DRONEKIT_ARGUMENT_ACTION" = "start" ]; then
     # =========================================================================
     # screen -dm -S dronekit-sitl dronekit-sitl copter --home=20.6207591,-103.3991668,30,0 &
     # screen -dm -S jmavsim JMAVSim.sh start &
-    screen -dm -S simvehicle SimVehicle.sh start &
+    screen -dm -S SimVehicle.sh start &
     sleep 10
 
     # =========================================================================
