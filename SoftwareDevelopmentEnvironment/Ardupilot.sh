@@ -7,7 +7,6 @@ set -x
 # =============================================================================
 
 export DIRECTORY_SOURCE=$HOME/src/
-export DIRECTORY_ARDUPILOT=$DIRECTORY_SOURCE/ardupilot/
 
 # =============================================================================
 # Functions
@@ -34,7 +33,7 @@ source $HOME/.bashrc
 
 cd $DIRECTORY_SOURCE
 git clone git://github.com/ArduPilot/ardupilot.git
-cd $DIRECTORY_ARDUPILOT
+cd ardupilot
 git submodule update --init --recursive
 
 export PATH=$PATH:$DIRECTORY_SOURCE/ardupilot/Tools/autotest
