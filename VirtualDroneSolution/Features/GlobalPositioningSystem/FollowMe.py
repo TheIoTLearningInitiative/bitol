@@ -22,9 +22,9 @@ import time
 import sys
 
 #Set up option parsing to get connection string
-import argparse  
+import argparse
 parser = argparse.ArgumentParser(description='Tracks GPS position of your computer (Linux only).')
-parser.add_argument('--connect', 
+parser.add_argument('--connect',
                    help="vehicle connection target string. If not specified, SITL automatically started and used.")
 args = parser.parse_args()
 
@@ -52,34 +52,33 @@ def arm_and_takeoff(aTargetAltitude):
         print(" Waiting for vehicle to initialise...")
         time.sleep(1)
 
-        
     print("Arming motors")
     # Copter should arm in GUIDED mode
     vehicle.mode = VehicleMode("GUIDED")
     vehicle.armed = True
     vehicle.airspeed = 10
 
-    while not vehicle.armed:      
+    while not vehicle.armed:
         print(" Waiting for arming...")
         time.sleep(1)
 
     print("Taking off!")
     vehicle.simple_takeoff(aTargetAltitude) # Take off to target altitude
 
-    # Wait until the vehicle reaches a safe height before processing the goto (otherwise the command 
+    # Wait until the vehicle reaches a safe height before processing the goto (otherwise the command
     #  after Vehicle.simple_takeoff will execute immediately).
     while True:
-        print(" Altitude: ", vehicle.location.global_relative_frame.alt)      
+        print(" Altitude: ", vehicle.location.global_relative_frame.alt)
         if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.95: #Trigger just below target alt.
             print("Reached target altitude")
             break
         time.sleep(1)
 
 try:
-  
+
     #Arm and take off to altitude of 5 meters
     arm_and_takeoff(5)
-    
+
     cmds = vehicle.commands
     cmds.clear()
     cmds.upload()
@@ -91,11 +90,11 @@ try:
     gpsd = gps.gps(mode=gps.WATCH_ENABLE)
 
     while True:
-    
+
         if vehicle.mode.name != "GUIDED":
             print("User has changed flight modes - aborting follow-me")
-            break    
-            
+            break
+
         # Read the GPS state from the laptop
         next(gpsd)
 
@@ -111,7 +110,7 @@ try:
             # Send a new target every two seconds
             # For a complete implementation of follow me you'd want adjust this delay
             time.sleep(2)
-            
+
 except socket.error:
     print("Error: gpsd service does not seem to be running, plug in USB GPS or run run-fake-gps.sh")
     sys.exit(1)
