@@ -37,6 +37,7 @@ then
     cd $DIRECTORY_SOURCE
 else
     mkdir $DIRECTORY_SOURCE
+    cd $DIRECTORY_SOURCE
 fi
 
 git clone git://github.com/ArduPilot/ardupilot.git
