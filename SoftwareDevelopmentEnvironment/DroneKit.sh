@@ -23,6 +23,7 @@ sudo apt install -y build-essential python-pip python-dev
 sudo apt install -y python-cherrypy3
 sudo apt install -y python-matplotlib
 sudo apt install -y python-gps gpsd gpsd-clients
+sudo apt install -y python-pip
 
 sudo pip install pip --upgrade
 sudo pip install sphinx monotonic future nose mock sphinx-3dr-theme
