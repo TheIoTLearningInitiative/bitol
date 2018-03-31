@@ -12,7 +12,7 @@ RUN groupadd user && \
     #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN apt-get update && \
-    apt install -y sudo
+    apt install -y sudo && \
     apt install -y build-essential python-pip python-dev && \
     apt install -y python-cherrypy3 && \
     apt install -y python-matplotlib && \
