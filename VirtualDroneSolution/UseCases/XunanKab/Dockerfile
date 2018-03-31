@@ -9,7 +9,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
-    ( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
+    #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
+    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN apt-get update && \
     apt install -y build-essential python-pip python-dev && \
     apt install -y python-cherrypy3 && \
