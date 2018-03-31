@@ -24,6 +24,7 @@ sudo apt install -y python-cherrypy3
 sudo apt install -y python-matplotlib
 sudo apt install -y python-gps gpsd gpsd-clients
 
+sudo pip install pip --upgrade
 sudo pip install sphinx monotonic future nose mock sphinx-3dr-theme
 sudo pip install pymavlink
 sudo pip install dronekit
