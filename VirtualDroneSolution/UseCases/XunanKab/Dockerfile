@@ -9,15 +9,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt install -y sudo && \
-    apt install -y build-essential python-pip python-dev && \
-    apt install -y python-cherrypy3 && \
-    apt install -y python-matplotlib && \
-    apt install -y python-pip && \
+    apt install -y python-pip python-dev && \
     rm -rf /var/lib/apt/lists/*
     
 RUN pip install pip --upgrade && \
-    pip install sphinx monotonic future nose mock sphinx-3dr-theme && \
-    pip install pymavlink && \
     pip install dronekit && \
     pip install dronekit-sitl -UI
 
