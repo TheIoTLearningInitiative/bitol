@@ -67,7 +67,6 @@ def get_current_mission(vehicle):
         n_WP += 1 
         
     return n_WP, missionList
-    
 
 def add_last_waypoint_to_mission(
         vehicle,
@@ -107,7 +106,6 @@ mode      = 'GROUND'
 print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14551')
 #vehicle = connect('tcp:127.0.0.1:5762', wait_ready=True)
-
 
 while True:
     
@@ -153,4 +151,5 @@ while True:
         if vehicle.location.global_relative_frame.alt < 1:
             print ("Switch to GROUND mode, waiting for new missions")
             mode = 'GROUND'
+    
     time.sleep(0.5)
