@@ -45,6 +45,7 @@ WORKDIR /home/user
 ADD main.sh /home/user/
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
+CMD chown -R user:user /home/user/ardupilot
 VOLUME /home/user/ardupilot
 
 CMD ["/home/user/main.sh"]
