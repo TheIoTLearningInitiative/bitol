@@ -39,10 +39,10 @@ ADD --chown=1000:1000 main.sh /home/user/
 RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
-USER user
-
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
 	echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL && \
+
+USER user
 
 #RUN git clone git://github.com/ArduPilot/ardupilot.git && \
 #    cd /home/user/ardupilot && \
