@@ -22,7 +22,6 @@ parser.add_argument('--connect',
 args = parser.parse_args()
 
 connection_string = args.connect
-connection_string = "127.0.0.1:14551"
 sitl = None
 
 #Start SITL if no connection string specified
