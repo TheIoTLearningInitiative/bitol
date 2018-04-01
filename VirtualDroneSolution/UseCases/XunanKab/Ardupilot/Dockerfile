@@ -39,4 +39,6 @@ RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     PATH=/usr/lib/ccache:$PATH && \
     sim_vehicle.py -v ArduCopter
 
+# Script
+
 CMD ["/bin/bash"]
