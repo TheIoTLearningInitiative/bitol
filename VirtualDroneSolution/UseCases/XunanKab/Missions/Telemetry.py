@@ -12,7 +12,7 @@ parser.add_argument('--id')
 args = parser.parse_args()
 
 connection_string = args.connect
-vehicleid = args.id
+vehicleid = float(args.id)
 
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
