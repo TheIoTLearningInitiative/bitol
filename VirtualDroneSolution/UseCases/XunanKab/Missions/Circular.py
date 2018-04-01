@@ -233,11 +233,11 @@ def add_angles(ang1, ang2):
 # Main
 # =============================================================================
 
-gnd_speed = 10 # [m/s]
-radius    = 10
+gnd_speed = 8 # [m/s]
+radius    = 80
 max_lat_speed = 4
 k_err_vel   = 0.2
-n_turns     = 4
+n_turns     = 3
 direction   = 1 # 1 for cw, -1 ccw
 
 mode      = 'GROUND'
@@ -260,7 +260,8 @@ while True:
         vehicle.commands.next = 1
         vehicle.flush()
         # Calculate the time for n_turns
-        time_flight = 2.0*math.pi*radius/gnd_speed*n_turns
+        # time_flight = 2.0*math.pi*radius/gnd_speed*n_turns
+        time_flight = 4.0*math.pi*radius/gnd_speed*n_turns
         time0 = time.time()
         print ("Switch mode to MISSION")
         
@@ -276,7 +277,7 @@ while True:
         try:
             print "bearing  %.0f  dist = %.0f"%(bearing*180.0/3.14, dist_2_wp)
             heading = add_angles(bearing,-direction*0.5*math.pi)
-            #print heading*180.0/3.14
+            # print heading*180.0/3.14
             condition_yaw(heading*180/3.14)
             v_x     = gnd_speed
             v_y     = -direction*k_err_vel*(radius - dist_2_wp)
