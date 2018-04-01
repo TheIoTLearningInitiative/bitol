@@ -43,6 +43,7 @@ WORKDIR /home/user
 #    sim_vehicle.py -v ArduCopter
 
 ADD main.sh /home/user/
+RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/
 VOLUME /home/user/ardupilot
 
