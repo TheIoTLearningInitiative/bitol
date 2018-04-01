@@ -9,9 +9,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV PATH=$PATH:$PATH/ardupilot/Tools/autotest
 ENV PATH=/usr/lib/ccache:$PATH
-ENV LATITUDE=20.6546009
-ENV LONGITUDE=-103.3915602
-ENV ALTTITUDE=10
 
 RUN apt-get update && \
     apt-get install -y sudo && \
@@ -54,8 +51,13 @@ USER user
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
+ENV VEHICLEID=1
+ENV LATITUDE=20.6546009
+ENV LONGITUDE=-103.3915602
+ENV ALTITUDE=10
+
 ENTRYPOINT ["/home/user/main.sh"]
-CMD ["1", $LATITUDE, $LONGITUDE]
+CMD [$VEHICLEID, $LATITUDE, $LONGITUDE, $ALTITUDE]
 #ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
 #ENV SPEEDUP 1
 #ENTRYPOINT . $ENVIRONMENTAL && \
