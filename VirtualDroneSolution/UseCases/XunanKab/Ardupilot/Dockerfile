@@ -34,7 +34,7 @@ EXPOSE 10000-10001
 EXPOSE 14550-14559
 
 ADD --chown=1000:1000 main.sh /home/user/
-RUN /bin/bash -c 'chmod +x main.sh'
+RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
