@@ -28,5 +28,5 @@ PATH=/usr/lib/ccache:$PATH
 
 cd $HOME/ardupilot/
 
-echo SYSID_THISMAV=$1 | tee -a $ARDUPILOT/Tools/autotest/default_params/plane.parm
+echo SYSID_THISMAV=$VEHICLEID | tee -a $ARDUPILOT/Tools/autotest/default_params/plane.parm
 screen sim_vehicle.py -v ArduCopter -l $LATITUDE,$LONGITUDE,$ALTTITUDE,0
