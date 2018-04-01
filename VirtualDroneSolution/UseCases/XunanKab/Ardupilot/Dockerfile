@@ -25,13 +25,13 @@ RUN apt-get update && \
 RUN pip install pip --upgrade && \
     pip install future pymavlink MAVProxy
 
-EXPOSE 14550
-EXPOSE 14551
-
 RUN groupadd user && \
     useradd -u 1000 -g user -s /bin/bash -d /home/user -m user && \
     #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+EXPOSE 10000-10001
+EXPOSE 14550-14559
 
 #RUN git clone git://github.com/ArduPilot/ardupilot.git && \
 #    cd /home/user/ardupilot && \
