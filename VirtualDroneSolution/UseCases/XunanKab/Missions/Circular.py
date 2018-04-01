@@ -1,18 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-Circular Trajectory Tracking
+Thanks Tiziano Fiorenzani for teaching us!
+https://github.com/tizianofiorenzani
 
-The system waits for a valid mission to be uploaded. It needs only one (the first) waypoint.
-
+Circular Trajectory Tracking. The system waits for a valid mission to be uploaded. 
+It needs only one (the first) waypoint.
 The drone takes off and then performs a circular trajectory around the way point. It
 keeps constant forward velocity, while the lateral velocity is calculated in order to
 keep the drone at the same distance from the waypoint. The heading is calculated for
-maintaining a 90 degrees angle respect to the bearing
-
-This is a simple script, but it shows how to setup a simple trajectory tracking algorithm
+maintaining a 90 degrees angle respect to the bearing. This is a simple script, 
+but it shows how to setup a simple trajectory tracking algorithm
 that might be used for later applications
-
 """
-
 
 import time
 import math
