@@ -7,7 +7,7 @@ ENV USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV PATH=$PATH:$HOME/ardupilot/Tools/autotest
+ENV PATH=$PATH:$PATH/ardupilot/Tools/autotest
 ENV PATH=/usr/lib/ccache:$PATH
 ENV LATITUDE=20.6546009
 ENV LONGITUDE=-103.3915602
