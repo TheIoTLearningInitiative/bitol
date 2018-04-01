@@ -64,7 +64,7 @@ def arm_and_takeoff(tgt_altitude):
             
 arm_and_takeoff(10)
 
-vehicle.airspeed = 5
+vehicle.airspeed = 15
 waypoint = LocationGlobalRelative(lattitude, longitude, 10)
 vehicle.simple_goto(waypoint)
 time.sleep(30)
