@@ -14,6 +14,15 @@
     <script>
 
 var fs = require('fs');
+global.data = undefined
+
+global.locates = [
+      ['Drone One', 20.654544, -103.3930971, 4],
+      ['Drone Two', 20.654444, -103.3930071, 5],
+      ['Drone Three', 20.654344, -103.3930171, 3],
+      ['Drone Four', 20.654244, -103.3930271, 2],
+      ['Drone Five', 20.654144, -103.3930371, 1]
+    ];
 
 try {  
     var data = fs.readFileSync('file.txt', 'utf8');
@@ -41,7 +50,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 
 var marker, i;
 
-for (i = 0; i < locations.length; i++) {  
+for (i = 0; i < locates.length; i++) {  
    marker = new google.maps.Marker({
      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
      map: map
