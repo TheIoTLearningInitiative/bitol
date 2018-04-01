@@ -16,6 +16,7 @@ ENV ALTTITUDE=10
 RUN apt-get update && \
     apt-get install -y sudo && \
     apt-get install -y git && \
+    apt-get install -y screen && \
     apt-get install -y python-matplotlib python-serial python-wxgtk3.0 python-wxtools python-lxml && \
     apt-get install -y python-scipy python-opencv ccache gawk git python-pip python-pexpect && \
     apt-get install -y python-pip && \
