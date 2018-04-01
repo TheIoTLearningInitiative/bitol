@@ -25,24 +25,11 @@ var locations = [
     ];
     
 var map = new google.maps.Map(document.getElementById('map'), { 
-			zoom: 4,
+      zoom: 15,
       center: uluru
     }); 
 
-//var map = new google.maps.Map(document.getElementById('map'), {
-//      zoom: 10,
-//      center: new google.maps.LatLng(-33.92, 151.25),
-//      mapTypeId: google.maps.MapTypeId.ROADMAP
-//    });
-
-//var infowindow = new google.maps.InfoWindow();
-
- 
-//var marker = new google.maps.Marker({ 
-//			position: uluru, map: map }
-//    ); }
- 
- var marker, i;
+var marker, i;
 
 for (i = 0; i < locations.length; i++) {  
    marker = new google.maps.Marker({
