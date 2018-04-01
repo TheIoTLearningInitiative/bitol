@@ -39,11 +39,8 @@ RUN groupadd user && \
 #    PATH=/usr/lib/ccache:$PATH && \
 #    sim_vehicle.py -v ArduCopter
 
-#CMD /bin/bash -c 'chown -R user:user /home/user/main.sh'
-
 ADD --chown=1000:1000 main.sh /home/user/
 RUN mkdir /home/user/ardupilot/
-#CMD chown -R user:user /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
 USER user
