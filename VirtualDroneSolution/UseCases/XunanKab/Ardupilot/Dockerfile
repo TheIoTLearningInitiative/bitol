@@ -4,8 +4,6 @@ MAINTAINER Abraham Arce <xe1gyq@gmail.com>
 
 ENV TIMEZONE America/Mexico_City
 ENV ENVIRONMENTAL /etc/profile
-ENV USER root
-
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -36,7 +34,7 @@ EXPOSE 10000-10001
 EXPOSE 14550-14559
 
 ADD --chown=1000:1000 main.sh /home/user/
-CMD chmod +x main.sh
+RUN chmod +x main.sh
 RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
