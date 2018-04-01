@@ -133,12 +133,14 @@ print " GPS: %s" % vehicle.gps_0
 print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
 # Change to AUTO mode
-PX4setMode(MAV_MODE_AUTO)
-time.sleep(1)
+#PX4setMode(MAV_MODE_AUTO)
+#time.sleep(1)
 
-# Load commands
+arm_and_takeoff(5)
+
 cmds = vehicle.commands
 cmds.clear()
+cmds.upload()
 
 home = vehicle.location.global_relative_frame
 
