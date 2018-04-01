@@ -11,9 +11,30 @@ As soon as a valid mission is available, we takeoff in GUIDED mode and then we s
 to AUTO. When the mission is completed we command to co back to home and land
 """
 
+# =============================================================================
+# Libraries
+# =============================================================================
+
 import time
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
+
+# =============================================================================
+# Init
+# =============================================================================
+
+parser = argparse.ArgumentParser(description='commands')
+parser.add_argument('--connect')
+args = parser.parse_args()
+
+connection_string = args.connect
+
+print("Connection to the vehicle on %s" % connection_string)
+vehicle = connect(connection_string, wait_ready=True)
+
+# =============================================================================
+# Functions
+# =============================================================================
 
 def arm_and_takeoff(altitude):
 
@@ -105,12 +126,12 @@ def ChangeMode(vehicle, mode):
         time.sleep(0.5)
     return True
 
+# =============================================================================
+# Main
+# =============================================================================
+
 gnd_speed = 10 # [m/s]
 mode      = 'GROUND'
-
-print('Connecting...')
-vehicle = connect('udp:127.0.0.1:14551')
-#vehicle = connect('tcp:127.0.0.1:5762', wait_ready=True)
 
 while True:
     
