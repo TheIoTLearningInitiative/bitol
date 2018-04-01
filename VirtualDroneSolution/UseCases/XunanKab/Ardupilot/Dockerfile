@@ -35,12 +35,12 @@ RUN groupadd user && \
 USER user
 WORKDIR /home/user
 
-RUN git clone git://github.com/ArduPilot/ardupilot.git && \
-    cd /home/user/ardupilot && \
-    git submodule update --init --recursive && \
-    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
-    PATH=/usr/lib/ccache:$PATH && \
-    sim_vehicle.py -v ArduCopter
+#RUN git clone git://github.com/ArduPilot/ardupilot.git && \
+#    cd /home/user/ardupilot && \
+#    git submodule update --init --recursive && \
+#    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
+#    PATH=/usr/lib/ccache:$PATH && \
+#    sim_vehicle.py -v ArduCopter
 
 ADD main.sh /home/user/
 
