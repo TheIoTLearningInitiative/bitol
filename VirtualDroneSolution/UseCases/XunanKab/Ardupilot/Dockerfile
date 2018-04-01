@@ -55,7 +55,7 @@ WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
 ENTRYPOINT ["/home/user/main.sh"]
-CMD ["1"]
+CMD ["1", $LATITUDE, $LONGITUDE]
 #ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
 #ENV SPEEDUP 1
 #ENTRYPOINT . $ENVIRONMENTAL && \
