@@ -9,13 +9,6 @@
 ARDUPILOT=$HOME/ardupilot
 ENVIRONMENTAL=/etc/profile
 
-echo $VEHICLEID
-echo $LATITUDE
-echo $LONGITUDE
-echo $ALTITUDE
-
-sleep 5
-
 VEHICLEID=$1
 LATITUDE=$2
 LONGITUDE=$3
