@@ -55,11 +55,12 @@ USER user
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
-#CMD ["/home/user/main.sh"]
-ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
-ENV SPEEDUP 1
-ENTRYPOINT . $ENVIRONMENTAL && \
-           sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
+CMD ["/home/user/main.sh"]
+#ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
+#ENV SPEEDUP 1
+#ENTRYPOINT . $ENVIRONMENTAL && \
+           #sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
+	   #sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
 
 #SYS_ID=$1
 #GCS_HOST=$2
