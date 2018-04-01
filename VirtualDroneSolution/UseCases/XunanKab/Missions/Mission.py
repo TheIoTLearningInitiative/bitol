@@ -33,7 +33,7 @@ def arm_and_takeoff(altitude):
 
    while True:
       v_alt = vehicle.location.global_relative_frame.alt
-      print(">> Altitude = %.1f m"%v_alt)
+      print(">> Altitude = %.1f m" % v_alt)
       if v_alt >= altitude - 1.0:
           print("Target altitude reached")
           break
@@ -82,8 +82,13 @@ def add_last_waypoint_to_mission(
     for cmd in cmds:
         missionlist.append(cmd)
 
-    wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
-                           wp_Last_Latitude, wp_Last_Longitude, wp_Last_Altitude)
+    wpLastObject = Command( 0, 0, 0, 
+                           mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
+                           mavutil.mavlink.MAV_CMD_NAV_WAYPOINT,
+                           0, 0, 0, 0, 0, 0,
+                           wp_Last_Latitude, 
+                           wp_Last_Longitude, 
+                           wp_Last_Altitude)
     missionlist.append(wpLastObject)
 
     cmds.clear()
@@ -96,8 +101,8 @@ def add_last_waypoint_to_mission(
 
 def ChangeMode(vehicle, mode):
     while vehicle.mode != VehicleMode(mode):
-            vehicle.mode = VehicleMode(mode)
-            time.sleep(0.5)
+        vehicle.mode = VehicleMode(mode)
+        time.sleep(0.5)
     return True
 
 gnd_speed = 10 # [m/s]
@@ -113,7 +118,7 @@ while True:
         n_WP, missionList = get_current_mission(vehicle)
         time.sleep(2)
         if n_WP > 0:
-            print ("A valid mission has been uploaded: takeoff!")
+            print ("A valid mission has been uploaded: Takeoff!")
             mode = 'TAKEOFF'
             
     elif mode == 'TAKEOFF':
@@ -121,6 +126,7 @@ while True:
         add_last_waypoint_to_mission(vehicle, vehicle.location.global_relative_frame.lat, 
                                        vehicle.location.global_relative_frame.lon, 
                                        vehicle.location.global_relative_frame.alt)
+        
         print("Home waypoint added to the mission")
         time.sleep(1)
         arm_and_takeoff(10)
