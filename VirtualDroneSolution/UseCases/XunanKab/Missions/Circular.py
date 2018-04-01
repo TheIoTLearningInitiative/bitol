@@ -15,15 +15,37 @@ but it shows how to setup a simple trajectory tracking algorithm
 that might be used for later applications
 """
 
-import time
+# =============================================================================
+# Libraries
+# =============================================================================
+
 import math
+import time
+
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
 
-#--------------------------------------------------
-#-------------- FUNCTIONS  
-#--------------------------------------------------
-#-- Define arm and takeoff
+# =============================================================================
+# Main
+# =============================================================================
+
+parser = argparse.ArgumentParser(description='commands')
+parser.add_argument('--connect')
+parser.add_argument('--lat')
+parser.add_argument('--long')
+args = parser.parse_args()
+
+connection_string = args.connect
+lattitude = float(args.lat)
+longitude = float(args.long)
+
+print("Connection to the vehicle on %s" % connection_string)
+vehicle = connect(connection_string, wait_ready=True)
+
+# =============================================================================
+# Functions
+# =============================================================================
+
 def arm_and_takeoff(altitude):
 
    while not vehicle.is_armable:
@@ -46,8 +68,7 @@ def arm_and_takeoff(altitude):
           print("Target altitude reached")
           break
       time.sleep(1)
-
- #-- Define the function for sending mavlink velocity command in body frame
+      
 def set_velocity_body(vehicle, vx, vy, vz):
     """ Remember: vz is positive downward!!!
     http://ardupilot.org/dev/docs/copter-commands-in-guided-mode.html
@@ -58,8 +79,6 @@ def set_velocity_body(vehicle, vx, vy, vz):
     bit 1: x,  bit 2: y,  bit 3: z, 
     bit 4: vx, bit 5: vy, bit 6: vz, 
     bit 7: ax, bit 8: ay, bit 9:
-    
-    
     """
     msg = vehicle.message_factory.set_position_target_local_ned_encode(
             0,
@@ -72,12 +91,8 @@ def set_velocity_body(vehicle, vx, vy, vz):
             0, 0)
     vehicle.send_mavlink(msg)
     vehicle.flush()
-    
 
 def clear_mission(vehicle):
-    """
-    Clear the current mission.
-    """
     cmds = vehicle.commands
     vehicle.commands.clear()
     vehicle.flush()
@@ -85,18 +100,15 @@ def clear_mission(vehicle):
     # After clearing the mission you MUST re-download the mission from the vehicle
     # before vehicle.commands can be used again
     # (see https://github.com/dronekit/dronekit-python/issues/230)
+    
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready()
 
 def download_mission(vehicle):
-    """
-    Download the current mission from the vehicle.
-    """
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready() # wait until download is complete.
-    
 
 def get_current_mission(vehicle):
     """
@@ -104,11 +116,9 @@ def get_current_mission(vehicle):
     
     Input: 
         vehicle
-        
     Return:
         n_wp, wpList
     """
-
     print "Downloading mission"
     download_mission(vehicle)
     missionList = []
@@ -116,16 +126,13 @@ def get_current_mission(vehicle):
     for wp in vehicle.commands:
         missionList.append(wp)
         n_WP += 1 
-        
     return n_WP, missionList
-    
 
 def ChangeMode(vehicle, mode):
     while vehicle.mode != VehicleMode(mode):
             vehicle.mode = VehicleMode(mode)
             time.sleep(0.5)
     return True
-
 
 def get_distance_metres(aLocation1, aLocation2):
     """
@@ -138,8 +145,6 @@ def get_distance_metres(aLocation1, aLocation2):
     dlat = aLocation2.lat - aLocation1.lat
     dlong = aLocation2.lon - aLocation1.lon
     return math.sqrt((dlat*dlat) + (dlong*dlong)) * 1.113195e5
-
-
 
 def distance_to_current_waypoint(vehicle):
     """
@@ -178,7 +183,6 @@ def get_bearing(my_location, tgt_location):
     
     return math.atan2(dlong,dlat)
 
-
 def condition_yaw(heading, relative=False):
     """
     Send MAV_CMD_CONDITION_YAW message to point vehicle at a specified heading (in degrees).
@@ -210,7 +214,6 @@ def condition_yaw(heading, relative=False):
     # send command to vehicle
     vehicle.send_mavlink(msg)
 
-
 def saturate(value, minimum, maximum):
     if value > maximum: value = maximum
     if value < minimum: value = minimum
@@ -225,10 +228,10 @@ def add_angles(ang1, ang2):
         ang += 2.0*math.pi
     return ang
 
-#--------------------------------------------------
-#-------------- INITIALIZE  
-#--------------------------------------------------      
-#-- Setup the commanded flying speed
+# =============================================================================
+# Main
+# =============================================================================
+
 gnd_speed = 4 # [m/s]
 radius    = 20
 max_lat_speed = 4
@@ -238,26 +241,6 @@ direction   = 1 # 1 for cw, -1 ccw
 
 mode      = 'GROUND'
 
-#--------------------------------------------------
-#-------------- CONNECTION  
-#--------------------------------------------------    
-
-parser = argparse.ArgumentParser(description='commands')
-parser.add_argument('--connect')
-parser.add_argument('--lat')
-parser.add_argument('--long')
-args = parser.parse_args()
-
-connection_string = args.connect
-lattitude = float(args.lat)
-longitude = float(args.long)
-
-print("Connection to the vehicle on %s" % connection_string)
-vehicle = connect(connection_string, wait_ready=True)
-
-#--------------------------------------------------
-#-------------- MAIN FUNCTION  
-#--------------------------------------------------    
 while True:
     
     if mode == 'GROUND':
@@ -270,29 +253,21 @@ while True:
             
     elif mode == 'TAKEOFF':
         time.sleep(1)
-        #-- Takeoff
         arm_and_takeoff(5)
-        
-      
-        #-- Change mode, set the ground speed
         vehicle.groundspeed = gnd_speed
         mode = 'MISSION'
         vehicle.commands.next = 1
-        
         vehicle.flush()
-
-        #-- Calculate the time for n_turns
+        # Calculate the time for n_turns
         time_flight = 2.0*math.pi*radius/gnd_speed*n_turns
         time0 = time.time()
-
-        print ("Swiitch mode to MISSION")
+        print ("Switch mode to MISSION")
         
     elif mode == 'MISSION':
-        #-- We command the velocity in order to maintain the vehicle on track
-        #- vx = constant
-        #- vy = proportional to off track error
-        #- heading = along the path tangent
-        
+        # We command the velocity in order to maintain the vehicle on track
+        # vx = constant
+        # vy = proportional to off track error
+        # heading = along the path tangent
         my_location = vehicle.location.global_relative_frame
         bearing     = bearing_to_current_waypoint(vehicle)
         dist_2_wp   = distance_to_current_waypoint(vehicle)
@@ -302,26 +277,23 @@ while True:
             heading = add_angles(bearing,-direction*0.5*math.pi)
             #print heading*180.0/3.14
             condition_yaw(heading*180/3.14)
-            
             v_x     = gnd_speed
             v_y     = -direction*k_err_vel*(radius - dist_2_wp)
             v_y     = saturate(v_y, -max_lat_speed, max_lat_speed)
             print "v_x = %.1f  v_y = %.1f"%(v_x, v_y)
             set_velocity_body(vehicle, v_x, v_y, 0.0)
-            
         except Exception as e:
             print e
-
 
         if time.time() > time0 + time_flight: 
             ChangeMode(vehicle, 'RTL')    
             clear_mission(vehicle)        
             mode = 'BACK'
-            print (">> time to head Home: switch to BACK")
+            print ("Time to head Home: Switch to BACK mode")
             
     elif mode == "BACK":
         if vehicle.location.global_relative_frame.alt < 1:
-            print (">> Switch to GROUND mode, waiting for new missions")
+            print ("Switch to GROUND mode, waiting for new missions")
             mode = 'GROUND'
     
     time.sleep(0.5)
