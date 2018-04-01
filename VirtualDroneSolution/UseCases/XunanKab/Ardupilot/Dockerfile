@@ -42,8 +42,9 @@ WORKDIR /home/user
 #    PATH=/usr/lib/ccache:$PATH && \
 #    sim_vehicle.py -v ArduCopter
 
-ADD main.sh /home/user/
-CMD chown -R user:user /home/user/main.sh
+COPY main.sh /home/user/
+#CMD chown -R user:user /home/user/main.sh
+#CMD /bin/bash -c 'chmod +x file'
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
 VOLUME /home/user/ardupilot
