@@ -46,6 +46,9 @@ COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
 USER user
 
+RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> /etc/profile && \
+	echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile && \
+
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
