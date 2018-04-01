@@ -195,4 +195,4 @@ while True:
         if vehicle.location.global_relative_frame.alt < 1:
             print ("Switch to GROUND mode, waiting for new missions")
             mode = 'GROUND'
-   time.sleep(0.5)
+    time.sleep(0.5)
