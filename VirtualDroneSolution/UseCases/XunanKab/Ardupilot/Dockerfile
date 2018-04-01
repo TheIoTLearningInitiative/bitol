@@ -9,6 +9,9 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV PATH=$PATH:$HOME/ardupilot/Tools/autotest
 ENV PATH=/usr/lib/ccache:$PATH
+ENV LATITUDE=20.6546009
+ENV LONGITUDE=-103.3915602
+ENV ALTTITUDE=10
 
 RUN apt-get update && \
     apt-get install -y sudo && \
@@ -39,6 +42,6 @@ RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     PATH=/usr/lib/ccache:$PATH && \
     sim_vehicle.py -v ArduCopter
 
-# Script
+ADD main.sh /home/user/
 
-CMD ["/bin/bash"]
+CMD ["/home/user/main.sh"]
