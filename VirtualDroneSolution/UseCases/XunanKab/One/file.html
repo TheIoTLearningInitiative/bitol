@@ -12,9 +12,16 @@
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
-function initMap() {
 
 var fs = require('fs');
+
+fs.readFile('file.txt', 'utf8', function(err, data) {  
+    if (err) throw err;
+    console.log(data);
+});
+      
+function initMap() {
+
 var uluru = {lat: 20.654544, lng: -103.3930971}; 
 
 var locations = [
