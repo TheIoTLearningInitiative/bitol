@@ -44,4 +44,3 @@ time.sleep(1)
 print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
 
 vehicle.close()
-sitl.stop()
