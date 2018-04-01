@@ -21,11 +21,13 @@ parser = argparse.ArgumentParser(description='commands')
 parser.add_argument('--connect')
 parser.add_argument('--lat')
 parser.add_argument('--long')
+parser.add_argument('--alt')
 args = parser.parse_args()
 
 connection_string = args.connect
-lattitude = float(args.lat)
+latitude = float(args.lat)
 longitude = float(args.long)
+altitude = float(args.alt)
 
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
@@ -65,7 +67,7 @@ def arm_and_takeoff(tgt_altitude):
 arm_and_takeoff(10)
 
 vehicle.airspeed = 15
-waypoint = LocationGlobalRelative(lattitude, longitude, 10)
+waypoint = LocationGlobalRelative(latitude, longitude, altitude)
 vehicle.simple_goto(waypoint)
 time.sleep(30)
 
