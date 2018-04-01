@@ -36,6 +36,7 @@ EXPOSE 10000-10001
 EXPOSE 14550-14559
 
 ADD --chown=1000:1000 main.sh /home/user/
+CMD chmod 755 main.sh
 RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
@@ -55,7 +56,7 @@ USER user
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
-CMD ["/home/user/main.sh", "2"]
+CMD ["/home/user/main.sh"]
 #ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
 #ENV SPEEDUP 1
 #ENTRYPOINT . $ENVIRONMENTAL && \
