@@ -50,7 +50,9 @@ print('Autopilot Version: %s' % vehicle.version)
 print("Vehicle ID Old: %d" % vehicle.parameters['SYSID_THISMAV']) 
 vehicle.parameters['SYSID_THISMAV'] = vehicleid
 time.sleep(1)
-print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV']) 
+print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV'])
+
+time.sleep(1)
 
 print('Supports set attitude from companion: %s' % vehicle.capabilities.set_attitude_target_local_ned)
 print('Position: %s' % vehicle.location.global_relative_frame)
