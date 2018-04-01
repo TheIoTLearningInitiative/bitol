@@ -241,11 +241,19 @@ mode      = 'GROUND'
 #--------------------------------------------------
 #-------------- CONNECTION  
 #--------------------------------------------------    
-#-- Connect to the vehicle
-print('Connecting...')
-vehicle = connect('udp:127.0.0.1:14551')
-#vehicle = connect('tcp:127.0.0.1:5762', wait_ready=True)
 
+parser = argparse.ArgumentParser(description='commands')
+parser.add_argument('--connect')
+parser.add_argument('--lat')
+parser.add_argument('--long')
+args = parser.parse_args()
+
+connection_string = args.connect
+lattitude = float(args.lat)
+longitude = float(args.long)
+
+print("Connection to the vehicle on %s" % connection_string)
+vehicle = connect(connection_string, wait_ready=True)
 
 #--------------------------------------------------
 #-------------- MAIN FUNCTION  
