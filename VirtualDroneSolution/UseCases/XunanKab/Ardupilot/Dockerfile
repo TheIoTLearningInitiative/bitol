@@ -33,13 +33,6 @@ RUN groupadd user && \
 EXPOSE 10000-10001
 EXPOSE 14550-14559
 
-#RUN git clone git://github.com/ArduPilot/ardupilot.git && \
-#    cd /home/user/ardupilot && \
-#    git submodule update --init --recursive && \
-#    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
-#    PATH=/usr/lib/ccache:$PATH && \
-#    sim_vehicle.py -v ArduCopter
-
 ADD --chown=1000:1000 main.sh /home/user/
 RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
@@ -48,6 +41,14 @@ USER user
 
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> /etc/profile && \
 	echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile && \
+
+#RUN git clone git://github.com/ArduPilot/ardupilot.git && \
+#    cd /home/user/ardupilot && \
+#    git submodule update --init --recursive && \
+#    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
+#    PATH=/usr/lib/ccache:$PATH && \
+#    sim_vehicle.py -v ArduCopter
+#    . /etc/profile && sim_vehicle.py -w
 
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
