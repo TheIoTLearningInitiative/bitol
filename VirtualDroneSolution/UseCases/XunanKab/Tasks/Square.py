@@ -23,9 +23,6 @@ from pymavlink import mavutil
 # Init
 # =============================================================================
 
-MAV_MODE_AUTO   = 4
-# https://github.com/PX4/Firmware/blob/master/Tools/mavlink_px4.py
-
 parser = argparse.ArgumentParser(description='commands')
 parser.add_argument('--connect')
 parser.add_argument('--lat')
@@ -78,12 +75,6 @@ def arm_and_takeoff(aTargetAltitude):
             break
         time.sleep(1)
 
-def PX4setMode(mavMode):
-    vehicle._master.mav.command_long_send(vehicle._master.target_system, vehicle._master.target_component,
-                                               mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0,
-                                               mavMode,
-                                               0, 0, 0, 0, 0, 0)
-
 def get_location_offset_meters(original_location, dNorth, dEast, alt):
     """
     Returns a LocationGlobal object containing the latitude/longitude `dNorth` and `dEast` metres from the
@@ -104,9 +95,9 @@ def get_location_offset_meters(original_location, dNorth, dEast, alt):
     newlon = original_location.lon + (dLon * 180/math.pi)
     return LocationGlobal(newlat, newlon,original_location.alt+alt)
 
-################################################################################################
+# =============================================================================
 # Listeners
-################################################################################################
+# =============================================================================
 
 home_position_set = False
 
@@ -116,25 +107,9 @@ def listener(self, name, home_position):
     global home_position_set
     home_position_set = True
 
-################################################################################################
-# Start mission example
-################################################################################################
-
-# wait for a home position lock
-#while home_position_set:
-#    print "Waiting for home position..."
-#    time.sleep(1)
-
-# Display basic vehicle state
-print " Type: %s" % vehicle._vehicle_type
-print " Armed: %s" % vehicle.armed
-print " System status: %s" % vehicle.system_status.state
-print " GPS: %s" % vehicle.gps_0
-print " Alt: %s" % vehicle.location.global_relative_frame.alt
-
-# Change to AUTO mode
-#PX4setMode(MAV_MODE_AUTO)
-#time.sleep(1)
+# =============================================================================
+# Main
+# =============================================================================
 
 cmds = vehicle.commands
 cmds.clear()
@@ -148,22 +123,22 @@ cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavl
 cmds.add(cmd)
 
 # move 10 meters north
-wp = get_location_offset_meters(wp, 30, 0, 0);
+wp = get_location_offset_meters(wp, 80, 0, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters east
-wp = get_location_offset_meters(wp, 0, 30, 0);
+wp = get_location_offset_meters(wp, 0, 80, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters south
-wp = get_location_offset_meters(wp, -30, 0, 0);
+wp = get_location_offset_meters(wp, -80, 0, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters west
-wp = get_location_offset_meters(wp, 0, -30, 0);
+wp = get_location_offset_meters(wp, 0, -80, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
@@ -180,6 +155,7 @@ arm_and_takeoff(5)
 time.sleep(2)
 
 # Arm vehicle
+vehicle.airspeed = 30
 vehicle.mode = VehicleMode("AUTO")
 
 # monitor mission execution
