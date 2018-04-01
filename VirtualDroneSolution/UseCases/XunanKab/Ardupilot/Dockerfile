@@ -43,9 +43,9 @@ WORKDIR /home/user
 #    sim_vehicle.py -v ArduCopter
 
 ADD main.sh /home/user/
+CMD chown -R user:user /home/user/main
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
-CMD chown -R user:user /home/user/ardupilot
 VOLUME /home/user/ardupilot
 
 CMD ["/home/user/main.sh"]
