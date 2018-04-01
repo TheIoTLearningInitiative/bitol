@@ -40,7 +40,7 @@ RUN mkdir /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
-	echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL && \
+    echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL
 
 USER user
 
@@ -55,4 +55,22 @@ USER user
 WORKDIR /home/user
 #VOLUME /home/user/ardupilot
 
-CMD ["/home/user/main.sh"]
+#CMD ["/home/user/main.sh"]
+ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
+ENV SPEEDUP 1
+ENTRYPOINT . $ENVIRONMENTAL && \
+           sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
+
+#SYS_ID=$1
+#GCS_HOST=$2
+#GCS_PORT=$3
+#SCRIPTS_DIR=$(cd $(dirname $(which $0)); pwd)
+# docker run --rm -it 
+#            -v $SCRIPTS_DIR:/external 
+#	     -e "SIM_OPTIONS=--out=udpout:$GCS_HOST:$GCS_PORT 
+#	     -m 
+#	     --target-system=$SYS_ID" 
+#	     --entrypoint "/external/entryPoint.sh" 
+#	     gmyoungbloodparc/ardupilot-sitl 
+#	     $SYS_ID
+	   
