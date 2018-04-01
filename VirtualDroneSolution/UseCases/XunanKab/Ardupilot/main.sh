@@ -6,10 +6,10 @@
 # Variables
 # =============================================================================
 
-ARDUPILOT = $HOME/ardupilot
-ENVIRONMENTAL = /etc/profile
+ARDUPILOT=$HOME/ardupilot
+ENVIRONMENTAL=/etc/profile
 
-VEHICLEID = $1
+VEHICLEID=$1
 
 # =============================================================================
 # Functions
