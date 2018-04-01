@@ -32,9 +32,6 @@ RUN groupadd user && \
     #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-USER user
-WORKDIR /home/user
-
 #RUN git clone git://github.com/ArduPilot/ardupilot.git && \
 #    cd /home/user/ardupilot && \
 #    git submodule update --init --recursive && \
@@ -42,11 +39,18 @@ WORKDIR /home/user
 #    PATH=/usr/lib/ccache:$PATH && \
 #    sim_vehicle.py -v ArduCopter
 
+#CMD /bin/bash -c 'chown -R user:user /home/user/main.sh'
+
 COPY main.sh /home/user/
-#CMD chown -R user:user /home/user/main.sh
-CMD /bin/bash -c 'chown -R user:user /home/user/main.sh'
+CMD chown -R user:user /home/user/main.sh
+
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
+CMD chown -R user:user /home/user/ardupilot
+
+USER user
+
+WORKDIR /home/user
 VOLUME /home/user/ardupilot
 
 CMD ["/home/user/main.sh"]
