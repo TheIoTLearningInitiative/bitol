@@ -8,9 +8,11 @@ from dronekit import connect, VehicleMode
 
 parser = argparse.ArgumentParser(description='commands')
 parser.add_argument('--connect')
+parser.add_argument('--id')
 args = parser.parse_args()
 
 connection_string = args.connect
+vehicleid = args.id
 
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
@@ -36,11 +38,10 @@ vehicle.add_attribute_listener('attitude', attitude_callback)
 time.sleep(5)
 vehicle.remove_attribute_listener('attitude', attitude_callback) #(.remove)
 
-print("Maximum Throttle: %d"%vehicle.parameters['THR_MIN']) 
-
-vehicle.parameters['THR_MIN'] = 50
+print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
+vehicle.parameters['SYSID_THISMAV'] = vehicleid
 time.sleep(1)
-print("Maximum Throttle: %d"%vehicle.parameters['THR_MIN'])
+print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
 
 vehicle.close()
 sitl.stop()
