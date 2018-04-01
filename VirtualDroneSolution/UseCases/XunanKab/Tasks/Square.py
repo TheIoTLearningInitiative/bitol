@@ -180,6 +180,7 @@ time.sleep(2)
 
 # Arm vehicle
 vehicle.armed = True
+vehicle.mode = VehicleMode("GUIDED")
 
 # monitor mission execution
 nextwaypoint = vehicle.commands.next
