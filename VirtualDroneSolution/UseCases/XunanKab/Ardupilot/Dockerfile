@@ -41,8 +41,7 @@ RUN groupadd user && \
 
 #CMD /bin/bash -c 'chown -R user:user /home/user/main.sh'
 
-COPY main.sh /home/user/
-CMD chown -R user:user /home/user/main.sh
+ADD --chown=user:user main.sh /home/user/
 
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
