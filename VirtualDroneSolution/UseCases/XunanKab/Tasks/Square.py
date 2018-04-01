@@ -16,7 +16,7 @@ import math
 import sys
 import time
 
-from dronekit import connect, Command, LocationGlobal
+from dronekit import connect, Command, LocationGlobal, VehicleMode
 from pymavlink import mavutil
 
 # =============================================================================
