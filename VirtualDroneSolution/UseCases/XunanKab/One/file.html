@@ -25,7 +25,7 @@ global.locates = [
     ];
 
 try {  
-    var global data = fs.readFileSync('file.txt', 'utf8');
+    global.data = fs.readFileSync('file.txt', 'utf8');
     console.log(data);    
 } catch(e) {
     console.log('Error:', e.stack);
