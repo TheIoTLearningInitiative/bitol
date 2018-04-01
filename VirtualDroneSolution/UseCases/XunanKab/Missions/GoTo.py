@@ -15,8 +15,8 @@ parser.add_argument('--long')
 args = parser.parse_args()
 
 connection_string = args.connect
-lattitude = args.lat
-longitude = args.long
+lattitude = float(args.lat)
+longitude = float(args.long)
 
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
