@@ -50,7 +50,7 @@ vehicle = connect(connection_string, wait_ready=True)
 def arm_and_takeoff(altitude):
 
    while not vehicle.is_armable:
-      print("waiting to be armable")
+      print("Waiting to be armable")
       time.sleep(1)
 
    print("Arming motors")
@@ -85,10 +85,10 @@ def set_velocity_body(vehicle, vx, vy, vz):
             0,
             0, 0,
             mavutil.mavlink.MAV_FRAME_BODY_NED,
-            0b0000111111000111, #-- BITMASK -> Consider only the velocities
-            0, 0, 0,        #-- POSITION
-            vx, vy, vz,     #-- VELOCITY
-            0, 0, 0,        #-- ACCELERATIONS
+            0b0000111111000111, # Bitmask -> Consider only the velocities
+            0, 0, 0,            # Position
+            vx, vy, vz,         # Velocity
+            0, 0, 0,            # Accelerations
             0, 0)
     vehicle.send_mavlink(msg)
     vehicle.flush()
@@ -233,8 +233,8 @@ def add_angles(ang1, ang2):
 # Main
 # =============================================================================
 
-gnd_speed = 4 # [m/s]
-radius    = 20
+gnd_speed = 10 # [m/s]
+radius    = 5
 max_lat_speed = 4
 k_err_vel   = 0.2
 n_turns     = 2
