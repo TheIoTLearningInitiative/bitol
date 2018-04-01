@@ -136,8 +136,6 @@ print " Alt: %s" % vehicle.location.global_relative_frame.alt
 #PX4setMode(MAV_MODE_AUTO)
 #time.sleep(1)
 
-arm_and_takeoff(5)
-
 cmds = vehicle.commands
 cmds.clear()
 cmds.upload()
@@ -176,11 +174,13 @@ cmds.add(cmd)
 
 # Upload mission
 cmds.upload()
+
+time.sleep(2)
+arm_and_takeoff(5)
 time.sleep(2)
 
 # Arm vehicle
-vehicle.armed = True
-vehicle.mode = VehicleMode("GUIDED")
+vehicle.mode = VehicleMode("AUTO")
 
 # monitor mission execution
 nextwaypoint = vehicle.commands.next
