@@ -228,11 +228,11 @@ def add_angles(ang1, ang2):
 #-------------- INITIALIZE  
 #--------------------------------------------------      
 #-- Setup the commanded flying speed
-gnd_speed = 8 # [m/s]
-radius    = 80
+gnd_speed = 4 # [m/s]
+radius    = 20
 max_lat_speed = 4
 k_err_vel   = 0.2
-n_turns     = 3
+n_turns     = 2
 direction   = 1 # 1 for cw, -1 ccw
 
 mode      = 'GROUND'
