@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import argparse
 import time
 
 from dronekit import connect, VehicleMode
 
-import argparse
 parser = argparse.ArgumentParser(description='commands')
 parser.add_argument('--connect')
 args = parser.parse_args()
