@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dronekit import connect, VehicleMode
 import time
 
-import dronekit_sitl
+from dronekit import connect, VehicleMode
 
-sitl = dronekit_sitl.start_default()   #(sitl.start)
-connection_string = sitl.connection_string()
+import argparse
+parser = argparse.ArgumentParser(description='commands')
+parser.add_argument('--connect')
+args = parser.parse_args()
 
+connection_string = args.connect
+
+print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
 
 vehicle.wait_ready('autopilot_version')
