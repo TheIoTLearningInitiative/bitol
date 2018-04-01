@@ -13,61 +13,73 @@
     <div id="map"></div>
     <script>
 
-var fs = require('fs');
-global.data = undefined
+	var fs = require('fs');
+        var readline = require('readline');
+	var http = require("http");
+	var configFile = 'file.txt';
+	global.MyData = [];
+	global.locates = [
+	      ['Drone One', 20.654544, -103.3930971, 4],
+	      ['Drone Two', 20.654444, -103.3930071, 5],
+	      ['Drone Three', 20.654344, -103.3930171, 3],
+	      ['Drone Four', 20.654244, -103.3930271, 2],
+	      ['Drone Five', 20.654144, -103.3930371, 1]
+	    ];
 
-global.locates = [
-      ['Drone One', 20.654544, -103.3930971, 4],
-      ['Drone Two', 20.654444, -103.3930071, 5],
-      ['Drone Three', 20.654344, -103.3930171, 3],
-      ['Drone Four', 20.654244, -103.3930271, 2],
-      ['Drone Five', 20.654144, -103.3930371, 1]
-    ];
+	function readConfig(file){
+	  return fs.readFileSync(file, 'utf8');
+	}
 
-try {  
-    global.data = fs.readFileSync('file.txt', 'utf8');
-    console.log(data);    
-} catch(e) {
-    console.log('Error:', e.stack);
-}
-      
-function initMap() {
+	rl = readline.createInterface({
+  	  input: fs.createReadStream('file.txt'),
+	  crlfDelay: Infinity
+	});
 
-var uluru = {lat: 20.654544, lng: -103.3930971}; 
+	rl.on('line', (line) => {
+	  const splitString = line.split(",");
+	  global.MyData.push(splitString);
+	  console.log(global.MyData);
+	});
 
-var locations = [
-      ['Drone One', 20.654544, -103.3930971, 4],
-      ['Drone Two', 20.654444, -103.3930071, 5],
-      ['Drone Three', 20.654344, -103.3930171, 3],
-      ['Drone Four', 20.654244, -103.3930271, 2],
-      ['Drone Five', 20.654144, -103.3930371, 1]
-    ];
+	function initMap(rl) {
+
+	  var uluru = {lat: 20.654544, lng: -103.3930971};
+	  //var locs = global.MyData
+
+	  var locations = [
+	      ['Drone One', 20.654544, -103.3930971, 4],
+	      ['Drone Two', 20.654444, -103.3930071, 5],
+	      ['Drone Three', 20.654344, -103.3930171, 3],
+	      ['Drone Four', 20.654244, -103.3930271, 2],
+	      ['Drone Five', 20.654144, -103.3930371, 1]
+	    ];
     
-var map = new google.maps.Map(document.getElementById('map'), { 
-      zoom: 15,
-      center: uluru
-    }); 
+	  var map = new google.maps.Map(document.getElementById('map'), { 
+	    zoom: 15,
+    	    center: uluru
+  	  }); 
 
-var marker, i;
 
-for (i = 0; i < global.locates.length; i++) {  
-   marker = new google.maps.Marker({
-     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-     map: map
-   });
+	  var marker, i;
 
-google.maps.event.addListener(marker, 'click', (function(marker, i) {
-  return function() {
-    infowindow.setContent(locations[i][0]);
-    infowindow.open(map, marker);
-    }
-  })(marker, i));
-}
+	  for (i = 0; i < locations.length; i++) {  
+   	    marker = new google.maps.Marker({
+	      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+              map: map
+	  });
 
-}
+	  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	    return function() {
+	      infowindow.setContent(locations[i][0]);
+	      infowindow.open(map, marker);
+	    }
+	  })(marker, i));
+        }
+      }
+
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-n6ULAl5FmnPKhKvhSDFjRE1kd0ZA24k&callback=initMap">
     </script>
   </body>
 </html>
