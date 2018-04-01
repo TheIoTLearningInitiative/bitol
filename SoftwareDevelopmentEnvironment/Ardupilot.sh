@@ -6,7 +6,7 @@ set -x
 # Variables
 # =============================================================================
 
-export DIRECTORY_SOURCE=$HOME/src/
+export DIRECTORY_SOURCE=$HOME
 
 # =============================================================================
 # Functions
@@ -32,14 +32,6 @@ export PATH=/usr/lib/ccache:$PATH
 EOM
 
 source $HOME/.bashrc
-
-if [ -d "$DIRECTORY_SOURCE" ]
-then
-    cd $DIRECTORY_SOURCE
-else
-    mkdir $DIRECTORY_SOURCE
-    cd $DIRECTORY_SOURCE
-fi
 
 git clone git://github.com/ArduPilot/ardupilot.git
 cd ardupilot
