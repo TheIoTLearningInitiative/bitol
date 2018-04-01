@@ -37,6 +37,9 @@ connection_string = args.connect
 
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
+vehicle.wait_ready('autopilot_version')
+print('Autopilot Version: %s' % vehicle.version)
+print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
 
 # =============================================================================
 # Functions
@@ -118,9 +121,9 @@ def listener(self, name, home_position):
 ################################################################################################
 
 # wait for a home position lock
-while home_position_set:
-    print "Waiting for home position..."
-    time.sleep(1)
+#while home_position_set:
+#    print "Waiting for home position..."
+#    time.sleep(1)
 
 # Display basic vehicle state
 print " Type: %s" % vehicle._vehicle_type
