@@ -148,27 +148,27 @@ cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavl
 cmds.add(cmd)
 
 # move 10 meters north
-wp = get_location_offset_meters(wp, 10, 0, 0);
+wp = get_location_offset_meters(wp, 30, 0, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters east
-wp = get_location_offset_meters(wp, 0, 10, 0);
+wp = get_location_offset_meters(wp, 0, 30, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters south
-wp = get_location_offset_meters(wp, -10, 0, 0);
+wp = get_location_offset_meters(wp, -30, 0, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # move 10 meters west
-wp = get_location_offset_meters(wp, 0, -10, 0);
+wp = get_location_offset_meters(wp, 0, -30, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
 # land
-wp = get_location_offset_meters(home, 0, 0, 10);
+wp = get_location_offset_meters(home, 0, 0, 0);
 cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_LAND, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
 cmds.add(cmd)
 
