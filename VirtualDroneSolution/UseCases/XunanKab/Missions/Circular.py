@@ -234,10 +234,10 @@ def add_angles(ang1, ang2):
 # =============================================================================
 
 gnd_speed = 10 # [m/s]
-radius    = 5
+radius    = 10
 max_lat_speed = 4
 k_err_vel   = 0.2
-n_turns     = 2
+n_turns     = 4
 direction   = 1 # 1 for cw, -1 ccw
 
 mode      = 'GROUND'
