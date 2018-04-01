@@ -20,7 +20,6 @@ EXPOSE 5760
 
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
-    #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER user
