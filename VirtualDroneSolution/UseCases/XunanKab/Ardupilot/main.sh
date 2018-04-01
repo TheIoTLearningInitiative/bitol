@@ -9,7 +9,15 @@
 ARDUPILOT=$HOME/ardupilot
 ENVIRONMENTAL=/etc/profile
 
+echo $VEHICLEID
+echo $LATITUDE
+echo $LONGITUDE
+echo $ALTITUDE
+
 VEHICLEID=$1
+LATITUDE=$2
+LONGITUDE=$3
+ALTITUDE=$4
 
 # =============================================================================
 # Functions
@@ -28,4 +36,4 @@ PATH=/usr/lib/ccache:$PATH
 
 cd $HOME/ardupilot/
 echo "SYSID_THISMAV=${VEHICLEID}" | tee -a $ARDUPILOT/Tools/autotest/default_params/copter.parm
-screen sim_vehicle.py -v ArduCopter -l $LATITUDE,$LONGITUDE,$ALTTITUDE,0
+screen sim_vehicle.py -v ArduCopter -l $LATITUDE,$LONGITUDE,$ALTITUDE,0
