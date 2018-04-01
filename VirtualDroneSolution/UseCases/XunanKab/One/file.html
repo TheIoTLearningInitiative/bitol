@@ -14,7 +14,7 @@
     <script>
 
 var fs = require('fs');
-var global.data = undefined
+global.data = undefined
 
 var global.locates = [
       ['Drone One', 20.654544, -103.3930971, 4],
@@ -50,7 +50,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 
 var marker, i;
 
-for (i = 0; i < global.locates.length; i++) {  
+for (i = 0; i < locations.length; i++) {  
    marker = new google.maps.Marker({
      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
      map: map
