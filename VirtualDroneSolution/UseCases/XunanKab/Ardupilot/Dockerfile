@@ -43,7 +43,7 @@ WORKDIR /home/user
 #    sim_vehicle.py -v ArduCopter
 
 COPY main.sh /home/user/
-#CMD chown -R user:user /home/user/main.sh
+CMD chown -R user:user /home/user/main.sh
 #CMD /bin/bash -c 'chmod +x file'
 RUN mkdir /home/user/ardupilot
 ADD ardupilot /home/user/ardupilot
