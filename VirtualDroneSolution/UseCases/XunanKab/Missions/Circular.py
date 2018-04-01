@@ -233,8 +233,8 @@ def add_angles(ang1, ang2):
 # Main
 # =============================================================================
 
-gnd_speed = 8 # [m/s]
-radius    = 80
+gnd_speed = 10 # [m/s]
+radius    = 10
 max_lat_speed = 4
 k_err_vel   = 0.2
 n_turns     = 3
