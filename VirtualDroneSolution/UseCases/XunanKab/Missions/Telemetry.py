@@ -35,7 +35,7 @@ vehicleid = float(args.id)
 print("Connection to the vehicle on %s" % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
 vehicle.wait_ready('autopilot_version')
-print('Autopilot version: %s' % vehicle.version)
+print('Autopilot Version: %s' % vehicle.version)
 
 # =============================================================================
 # Functions
@@ -47,10 +47,10 @@ print('Autopilot version: %s' % vehicle.version)
 # Main
 # =============================================================================
 
-print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
+print("Vehicle ID Old: %d" % vehicle.parameters['SYSID_THISMAV']) 
 vehicle.parameters['SYSID_THISMAV'] = vehicleid
 time.sleep(1)
-print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
+print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV']) 
 
 print('Supports set attitude from companion: %s' % vehicle.capabilities.set_attitude_target_local_ned)
 print('Position: %s' % vehicle.location.global_relative_frame)
