@@ -41,7 +41,7 @@ vehicle = connect(connection_string, wait_ready=True)
 def arm_and_takeoff(altitude):
 
    while not vehicle.is_armable:
-      print("waiting to be armable")
+      print("Waiting to be armable")
       time.sleep(1)
 
    print("Arming motors")
@@ -51,14 +51,14 @@ def arm_and_takeoff(altitude):
    while not vehicle.armed: 
       time.sleep(1)
 
-   print("Taking Off")
+   print("Taking off")
    vehicle.simple_takeoff(altitude)
 
    while True:
       v_alt = vehicle.location.global_relative_frame.alt
-      print(">> Altitude = %.1f m" % v_alt)
+      print("Altitude = %.1f m" % v_alt)
       if v_alt >= altitude - 1.0:
-          print("Target altitude reached")
+          print("Target altitude reached!")
           break
       time.sleep(1)
 
@@ -70,6 +70,7 @@ def clear_mission(vehicle):
     # After clearing the mission you MUST re-download the mission from the vehicle
     # before vehicle.commands can be used again
     # (see https://github.com/dronekit/dronekit-python/issues/230)
+    
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready()
@@ -77,7 +78,7 @@ def clear_mission(vehicle):
 def download_mission(vehicle):
     cmds = vehicle.commands
     cmds.download()
-    cmds.wait_ready() # wait until download is complete.
+    cmds.wait_ready()
     
 
 def get_current_mission(vehicle):
@@ -159,16 +160,17 @@ while True:
         
         vehicle.groundspeed = gnd_speed
         mode = 'MISSION'
-        print ("Swiitch mode to MISSION")
+        print ("Switch mode to MISSION")
         
     elif mode == 'MISSION':
+        
         #-- vehicle.commands.cout is the total number of waypoints
         #-- vehicle.commands.next is the waypoint the vehicle is going to
         #-- once next == cout, we just go home
         
         print ("Current WP: %d of %d "%(vehicle.commands.next, vehicle.commands.count))
         if vehicle.commands.next == vehicle.commands.count:
-            print ("Final waypoint reached: go back home")
+            print ("Final waypoint reached: Go back home!")
 
             clear_mission(vehicle)
             print ("Mission deleted")
