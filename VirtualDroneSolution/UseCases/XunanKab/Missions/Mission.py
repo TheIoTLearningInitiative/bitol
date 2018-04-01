@@ -15,7 +15,9 @@ to AUTO. When the mission is completed we command to co back to home and land
 # Libraries
 # =============================================================================
 
+import argparse
 import time
+
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
 
