@@ -3,7 +3,9 @@ FROM ubuntu:16.04
 MAINTAINER Abraham Arce <xe1gyq@gmail.com>
 
 ENV TIMEZONE America/Mexico_City
+ENV ENVIRONMENTAL /etc/profile
 ENV USER root
+
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -39,8 +41,8 @@ COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
 USER user
 
-RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> /etc/profile && \
-	echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile && \
+RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
+	echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL && \
 
 #RUN git clone git://github.com/ArduPilot/ardupilot.git && \
 #    cd /home/user/ardupilot && \
