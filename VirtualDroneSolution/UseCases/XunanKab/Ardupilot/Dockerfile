@@ -43,12 +43,12 @@ RUN groupadd user && \
 
 ADD --chown=1000:1000 main.sh /home/user/
 RUN mkdir /home/user/ardupilot/
-CMD chown -R user:user /home/user/ardupilot/
+#CMD chown -R user:user /home/user/ardupilot/
 COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
 
 USER user
 
 WORKDIR /home/user
-VOLUME /home/user/ardupilot
+#VOLUME /home/user/ardupilot
 
 CMD ["/home/user/main.sh"]
