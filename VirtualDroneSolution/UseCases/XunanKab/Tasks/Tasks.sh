@@ -16,7 +16,6 @@ while [  $COUNTER -lt 5 ]; do
         python Triangle.py --connect=tcp:172.17.0.3:5763 &
         python Square.py --connect=tcp:172.17.0.4:5763 &
     elif [ "$TASK" = "follow" ]; then
-    fi
         python Square.py --connect=tcp:172.17.0.2:5763 &
         sleep 5
         python Square.py --connect=tcp:172.17.0.3:5763 &
