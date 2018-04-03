@@ -24,7 +24,6 @@ RUN pip install pip --upgrade && \
 
 RUN groupadd user && \
     useradd -u 1000 -g user -s /bin/bash -d /home/user -m user && \
-    #( umask 226 && echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/50_user )
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 EXPOSE 10000-10001
@@ -49,7 +48,6 @@ USER user
 #    . /etc/profile && sim_vehicle.py -w
 
 WORKDIR /home/user
-#VOLUME /home/user/ardupilot
 
 ENV VEHICLEID=1
 ENV LATITUDE=20.6546009
@@ -58,22 +56,3 @@ ENV ALTITUDE=10
 
 ENTRYPOINT ["/home/user/main.sh"]
 CMD [$VEHICLEID, $LATITUDE, $LONGITUDE, $ALTITUDE]
-#ENV SIM_OPTIONS "--out=udpout:docker.for.mac.localhost:14559"
-#ENV SPEEDUP 1
-#ENTRYPOINT . $ENVIRONMENTAL && \
-           #sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
-	   #sim_vehicle.py --speedup=$SPEEDUP $SIM_OPTIONS
-
-#SYS_ID=$1
-#GCS_HOST=$2
-#GCS_PORT=$3
-#SCRIPTS_DIR=$(cd $(dirname $(which $0)); pwd)
-# docker run --rm -it 
-#            -v $SCRIPTS_DIR:/external 
-#	     -e "SIM_OPTIONS=--out=udpout:$GCS_HOST:$GCS_PORT 
-#	     -m 
-#	     --target-system=$SYS_ID" 
-#	     --entrypoint "/external/entryPoint.sh" 
-#	     gmyoungbloodparc/ardupilot-sitl 
-#	     $SYS_ID
-	   
