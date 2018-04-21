@@ -8,6 +8,7 @@ set -x
 
 export DIRECTORY_BITOL=$HOME/Bitol/
 export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL/SoftwareDevelopmentEnvironment/
+sh_c='sudo -E sh -c'
 
 # =============================================================================
 # Functions
@@ -25,18 +26,18 @@ echo "Software Development Environment :: Started"
 
 cd $HOME
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get autoremove -y
+$sh_c apt-get update -y
+$sh_c apt-get upgrade -y
+$sh_c apt-get autoremove -y
 
-sudo apt install -y tree
-sudo apt install -y jstest-gtk
+$sh_c apt install -y tree
+$sh_c apt install -y jstest-gtk
 
-sudo apt install -y git
-sudo apt install -y nmap
-sudo apt install -y screen
+$sh_c apt install -y git
+$sh_c apt install -y nmap
+$sh_c apt install -y screen
 
-sudo -H pip install --upgrade pip
+$sh_c pip install --upgrade pip
 
 if [ -d "$DIRECTORY_BITOL" ]
 then
