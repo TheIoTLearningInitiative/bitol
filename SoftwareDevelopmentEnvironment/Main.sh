@@ -36,6 +36,8 @@ sudo apt install -y git
 sudo apt install -y nmap
 sudo apt install -y screen
 
+sudo -H pip install --upgrade pip
+
 if [ -d "$DIRECTORY_BITOL" ]
 then
     cd $DIRECTORY_BITOL
