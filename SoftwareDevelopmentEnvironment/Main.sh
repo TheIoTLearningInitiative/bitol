@@ -54,6 +54,8 @@ fi
 
 cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
 
+exit 0
+
 bash OpenCV.sh
 bash PX4.sh
 bash MAVLink.sh
