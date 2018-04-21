@@ -18,6 +18,6 @@ set -x
 # Main
 # =============================================================================
 
-sudo pip install --upgrade future pymavlink MAVProxy
+sudo -H pip install --upgrade future pymavlink MAVProxy
 
 # End of File
