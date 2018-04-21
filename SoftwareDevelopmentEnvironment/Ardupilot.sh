@@ -22,7 +22,7 @@ sudo apt-get update -y
 sudo apt-get install -y python-matplotlib python-serial python-wxgtk3.0 python-wxtools python-lxml
 sudo apt-get install -y python-scipy python-opencv ccache gawk git python-pip python-pexpect
 sudo apt-get install -y python-pip
-sudo pip install future pymavlink MAVProxy
+sudo -H pip install future pymavlink MAVProxy
 
 cat << EOM >> $HOME/.bashrc
 
