@@ -2,7 +2,7 @@ apk update
 apk add --no-cache git libtool automake autoconf expat-dev gcc make cmake g++ python py-lxml py-pip ccache gawk freetype-dev libpng-dev python-dev gfortran ca-certificates openssl linux-headers
 
 pip install pip --upgrade 
-pip install pyserial scipy future 
+pip install pyserial future 
 
 git clone git://github.com/ArduPilot/ardupilot.git
 cd ardupilot
