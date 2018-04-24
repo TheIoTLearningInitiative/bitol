@@ -30,7 +30,6 @@ rm -rf .git/objects/pack
 
 apk del build-base cmake automake autoconf ccache openssl ca-certificates gawk
 rm -rf /var/cache/apk/*
-rm -rf /tmp/opencv*
 rm -rf /root/.ccache
 rm -rf /root/.config
 rm -rf /root/.ash_history
