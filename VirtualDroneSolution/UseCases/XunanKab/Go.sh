@@ -1,3 +1,11 @@
+cd ardupilot/ArduPlane
+sed -i 's/feenableexcept(exceptions);/\/\/feenableexcept(exceptions);/' /ardupilot/libraries/AP_HAL_SITL/Scheduler.cpp
+sed -i 's/int old = fedisableexcept(FE_OVERFLOW);/int old = 1;/' /ardupilot/libraries/AP_Math/matrix_alg.cpp
+sed -i 's/if (old >= 0 && feenableexcept(old) < 0)/if (0)/' /ardupilot/libraries/AP_Math/matrix_alg.cpp
+sed -i "s/#include <sys\/types.h>/#include <sys\/types.h>\n\n#define TCGETS2 _IOR('T', 0x2A, struct termios2)\n#define TCSETS2 _IOW('T', 0x2B, struct termios2)/" /ardupilot/libraries/AP_HAL_SITL/UART_utils.cpp
+
+exit 0
+
 apk update
 apk add --no-cache git libtool automake autoconf expat-dev gcc make cmake g++ python py-lxml py-pip ccache gawk freetype-dev libpng-dev python-dev gfortran ca-certificates openssl linux-headers
 
