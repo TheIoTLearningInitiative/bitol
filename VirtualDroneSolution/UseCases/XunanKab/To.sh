@@ -17,7 +17,7 @@
 # =============================================================================
 
 apk update
-apk add --no-cache python py-pip python-dev
+apk add --no-cache gcc python py-pip python-dev
 
 pip install pip --upgrade
 pip install sphinx monotonic future nose mock sphinx-3dr-theme
