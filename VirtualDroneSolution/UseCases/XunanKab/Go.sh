@@ -16,29 +16,29 @@ apk update && apk add --no-cache\
 	freetype-dev \
 	libpng-dev \
 	python-dev \
-	lapack-dev \
+	#lapack-dev \
 	gfortran \
 	ca-certificates \
 	openssl \
 	linux-headers
 
-pip install pip matplotlib \
-	pyserial \
-	scipy \
-	pexpect \
-	future 
+#pip install pip matplotlib \
+#	pyserial \
+#	scipy \
+#	pexpect \
+#	future 
 
-update-ca-certificates && \
-	cd /tmp && \
-	wget -O opencv-2.4.13.4.tar.gz https://github.com/opencv/opencv/archive/2.4.13.4.tar.gz && \
-	tar -xzf opencv-2.4.13.4.tar.gz &&\
-	cd /tmp/opencv-2.4.13.4 && \
-	mkdir build && \
-	cd build && \
-	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_FFMPEG=NO -D WITH_IPP=NO -D WITH_OPENEXR=NO .. && \
-	make VERBOSE=1 && \
-	make && \
-	make install 
+#update-ca-certificates && \
+#	cd /tmp && \
+#	wget -O opencv-2.4.13.4.tar.gz https://github.com/opencv/opencv/archive/2.4.13.4.tar.gz && \
+#	tar -xzf opencv-2.4.13.4.tar.gz &&\
+#	cd /tmp/opencv-2.4.13.4 && \
+#	mkdir build && \
+#	cd build && \
+#	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_FFMPEG=NO -D WITH_IPP=NO -D WITH_OPENEXR=NO .. && \
+#	make VERBOSE=1 && \
+#	make && \
+#	make install 
 
 cd
 git clone git://github.com/ArduPilot/ardupilot.git
