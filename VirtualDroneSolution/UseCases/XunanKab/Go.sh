@@ -16,7 +16,6 @@ apk update && apk add --no-cache\
 	freetype-dev \
 	libpng-dev \
 	python-dev \
-	#lapack-dev \
 	gfortran \
 	ca-certificates \
 	openssl \
