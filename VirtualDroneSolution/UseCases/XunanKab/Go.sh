@@ -14,7 +14,7 @@ sed -i 's/, int,/, unsigned int,/' /usr/include/assert.h
 
 pip install pymavlink MAVProxy
 
-echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> /etc/profile
+echo 'export PATH=$PATH:~/ardupilot/Tools/autotest' >> /etc/profile
 echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile
 echo 'export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH' >> /etc/profile
 
