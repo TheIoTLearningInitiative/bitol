@@ -9,17 +9,11 @@ cd ardupilot
 git submodule update --init --recursive;
 cd
 
-git clone git://github.com/tridge/jsbsim.git
-cd jsbsim 
-./autogen.sh --enable-libraries && make
-rm -rf .git
 ln -s /usr/include/locale.h /usr/include/xlocale.h
 sed -i 's/, int,/, unsigned int,/' /usr/include/assert.h
-cd
 
 pip install pymavlink MAVProxy
 
-echo 'export PATH=$PATH:/jsbsim/src' >> /etc/profile
 echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> /etc/profile
 echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile
 echo 'export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH' >> /etc/profile
