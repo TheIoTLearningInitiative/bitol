@@ -1,25 +1,5 @@
-apk update && apk add --no-cache\
-	git \
-	libtool \ 
-	automake \
-	autoconf \
-	expat-dev \
-	gcc \
-	make \
-	cmake \
-	g++ \
-	python \
-	py-lxml \
-	py-pip \
-	ccache \
-	gawk \
-	freetype-dev \
-	libpng-dev \
-	python-dev \
-	gfortran \
-	ca-certificates \
-	openssl \
-	linux-headers
+apk update
+apk add --no-cache git libtool automake autoconf expat-dev gcc make cmake g++ python py-lxml py-pip ccache gawk freetype-dev libpng-dev python-dev gfortran ca-certificates openssl linux-headers
 
 #pip install pip matplotlib \
 #	pyserial \
