@@ -33,4 +33,11 @@ cd dronekit-python
 python setup.py build
 python setup.py install
 
+apk del build-base cmake automake autoconf ccache openssl ca-certificates gawk
+rm -rf /var/cache/apk/*
+rm -rf /root/.ccache
+rm -rf /root/.config
+rm -rf /root/.ash_history
+rm -rf /root/.tilecache
+
 # End of File
