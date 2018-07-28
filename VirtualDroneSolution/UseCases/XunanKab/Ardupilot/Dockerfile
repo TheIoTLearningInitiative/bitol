@@ -19,7 +19,7 @@ RUN apt-get update && \
     apt-get install -y python-pip && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install pip --upgrade && \
+RUN pip install pip && \
     pip install future pymavlink MAVProxy
 
 RUN groupadd user && \
@@ -29,15 +29,17 @@ RUN groupadd user && \
 EXPOSE 10000-10001
 EXPOSE 14550-14559
 
-ADD --chown=1000:1000 main.sh /home/user/
-RUN /bin/bash -c 'chmod +x /home/user/main.sh'
-RUN mkdir /home/user/ardupilot/
-COPY --chown=1000:1000 ardupilot/ /home/user/ardupilot/
-
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
     echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL
 
 USER user
+
+WORKDIR /home/user
+
+ADD --chown=1000:1000 main.sh /home/user/
+RUN /bin/bash -c 'chmod +x /home/user/main.sh'
+RUN mkdir /home/user/ardupilot/
+#COPY --chown=1000:1000 /home/user/ardupilot/ /home/user/ardupilot/
 
 RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     cd /home/user/ardupilot && \
@@ -46,8 +48,6 @@ RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     PATH=/usr/lib/ccache:$PATH && \
     sim_vehicle.py -v ArduCopter && \
     . /etc/profile && sim_vehicle.py -w
-
-WORKDIR /home/user
 
 ENV VEHICLEID=1
 ENV LATITUDE=20.6546009
