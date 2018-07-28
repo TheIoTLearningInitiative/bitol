@@ -11,8 +11,8 @@ RUN apt-get update && \
     apt install -y sudo && \
     apt install -y python-pip python-dev && \
     rm -rf /var/lib/apt/lists/*
-    
-RUN pip install pip --upgrade && \
+
+RUN pip install pip && \
     pip install dronekit && \
     pip install dronekit-sitl -UI
 
