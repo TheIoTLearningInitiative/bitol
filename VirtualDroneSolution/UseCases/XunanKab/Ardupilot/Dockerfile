@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get install -y python-scipy python-opencv ccache gawk git python-pip python-pexpect && \
     apt-get install -y python-pip && \
     rm -rf /var/lib/apt/lists/*
-    
+
 RUN pip install pip --upgrade && \
     pip install future pymavlink MAVProxy
 
@@ -39,13 +39,13 @@ RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
 
 USER user
 
-#RUN git clone git://github.com/ArduPilot/ardupilot.git && \
-#    cd /home/user/ardupilot && \
-#    git submodule update --init --recursive && \
-#    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
-#    PATH=/usr/lib/ccache:$PATH && \
-#    sim_vehicle.py -v ArduCopter
-#    . /etc/profile && sim_vehicle.py -w
+RUN git clone git://github.com/ArduPilot/ardupilot.git && \
+    cd /home/user/ardupilot && \
+    git submodule update --init --recursive && \
+    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
+    PATH=/usr/lib/ccache:$PATH && \
+    sim_vehicle.py -v ArduCopter
+    . /etc/profile && sim_vehicle.py -w
 
 WORKDIR /home/user
 
