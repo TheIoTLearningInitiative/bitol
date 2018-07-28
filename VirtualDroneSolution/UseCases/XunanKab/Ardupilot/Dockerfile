@@ -44,7 +44,7 @@ RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     git submodule update --init --recursive && \
     PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
     PATH=/usr/lib/ccache:$PATH && \
-    sim_vehicle.py -v ArduCopter
+    sim_vehicle.py -v ArduCopter && \
     . /etc/profile && sim_vehicle.py -w
 
 WORKDIR /home/user
