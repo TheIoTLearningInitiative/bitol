@@ -39,20 +39,7 @@ WORKDIR /home/user
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 RUN mkdir /home/user/ardupilot/
-#COPY --chown=1000:1000 /home/user/ardupilot/ /home/user/ardupilot/
 
 RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     cd /home/user/ardupilot && \
-    git submodule update --init --recursive && \
-    PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
-    PATH=/usr/lib/ccache:$PATH && \
-    sim_vehicle.py -v ArduCopter && \
-    . /etc/profile && sim_vehicle.py -w
-
-ENV VEHICLEID=1
-ENV LATITUDE=20.6546009
-ENV LONGITUDE=-103.3915602
-ENV ALTITUDE=10
-
-ENTRYPOINT ["/home/user/main.sh"]
-CMD [$VEHICLEID, $LATITUDE, $LONGITUDE, $ALTITUDE]
+    git submodule update --init --recursive
