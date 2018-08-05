@@ -30,14 +30,14 @@ if not connection_string:
 # Connect to the Vehicle
 print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
- 
+
 print " Type: %s" % vehicle._vehicle_type
 print " Armed: %s" % vehicle.armed
 print " System status: %s" % vehicle.system_status.state
 print " GPS: %s" % vehicle.gps_0
 print " Alt: %s" % vehicle.location.global_relative_frame.alt
- 
-def arm_and_takeoff(aTargetAltitude):
+
+def arm_and_wait(aTargetTime):
     """
     Arms vehicle and fly to aTargetAltitude.
     """
@@ -58,36 +58,18 @@ def arm_and_takeoff(aTargetAltitude):
         print(" Waiting for arming...")
         time.sleep(1)
 
-    print("Taking off!")
-    vehicle.simple_takeoff(aTargetAltitude)  # Take off to target altitude
+    print("Wait!")
+    time.sleep(5)
 
-    # Wait until the vehicle reaches a safe height before processing the goto
-    #  (otherwise the command after Vehicle.simple_takeoff will execute
-    #   immediately).
-    while True:
-        print(" Altitude: ", vehicle.location.global_relative_frame.alt)
-        # Break and return from function just below target altitude.
-        if vehicle.location.global_relative_frame.alt >= aTargetAltitude * 0.95:
-            print("Reached target altitude")
-            break
-        time.sleep(1)
- 
 cmds = vehicle.commands
 cmds.clear()
 cmds.upload()
 
 # Initialize the takeoff sequence to 20m
-arm_and_takeoff(20)
- 
-print("Take off complete")
- 
-# Hover for 10 seconds
-time.sleep(10)
- 
-print("Now let's land")
-#vehicle.mode = VehicleMode("LAND")
-vehicle.mode = VehicleMode("RTL")
- 
+arm_and_wait(5)
+
+print("Arm and wait complete")
+
 # Close vehicle object
 vehicle.close()
 
