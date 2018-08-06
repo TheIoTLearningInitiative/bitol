@@ -59,7 +59,7 @@ def arm_and_wait(aTargetTime):
         time.sleep(1)
 
     print("Wait!")
-    time.sleep(5)
+    time.sleep(aTargetTime)
 
 cmds = vehicle.commands
 cmds.clear()
