@@ -83,7 +83,7 @@ if __name__ == '__main__':
     vehicle.simple_goto(waypoint)
     time.sleep(30)
 
-    vehicle.parameters['RTL_ALT'] = 5
+    vehicle.parameters['RTL_ALT'] = altitude
     vehicle.mode = VehicleMode("RTL")
 
     while vehicle.armed:

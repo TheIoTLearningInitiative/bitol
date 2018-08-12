@@ -1,301 +1,193 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
-Thanks Tiziano Fiorenzani for teaching us!
-https://github.com/tizianofiorenzani
+simple_goto.py: GUIDED mode "simple goto" example (Copter Only)
 
-Circular Trajectory Tracking. The system waits for a valid mission to be uploaded. 
-It needs only one (the first) waypoint.
-The drone takes off and then performs a circular trajectory around the way point. It
-keeps constant forward velocity, while the lateral velocity is calculated in order to
-keep the drone at the same distance from the waypoint. The heading is calculated for
-maintaining a 90 degrees angle respect to the bearing. This is a simple script, 
-but it shows how to setup a simple trajectory tracking algorithm
-that might be used for later applications
+The example demonstrates how to arm and takeoff in Copter and how to navigate to 
+points using Vehicle.commands.goto.
+
+Full documentation is provided at http://python.dronekit.io/examples/simple_goto.html
 """
+
 
 # =============================================================================
 # Libraries
 # =============================================================================
 
 import argparse
-import math
 import time
-
+import math
+import sys
+from droneapi.lib import VehicleMode, Location, Command
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
-
-# =============================================================================
-# Main
-# =============================================================================
-
-parser = argparse.ArgumentParser(description='commands')
-parser.add_argument('--connect')
-parser.add_argument('--lat')
-parser.add_argument('--long')
-args = parser.parse_args()
-
-connection_string = args.connect
-lattitude = float(args.lat)
-longitude = float(args.long)
-
-print("Connection to the vehicle on %s" % connection_string)
-vehicle = connect(connection_string, wait_ready=True)
 
 # =============================================================================
 # Functions
 # =============================================================================
 
-def arm_and_takeoff(altitude):
-
-   while not vehicle.is_armable:
-      print("Waiting to be armable")
-      time.sleep(1)
-
-   print("Arming motors")
-   vehicle.mode = VehicleMode("GUIDED")
-   vehicle.armed = True
-
-   while not vehicle.armed: time.sleep(1)
-
-   print("Taking Off")
-   vehicle.simple_takeoff(altitude)
-
-   while True:
-      v_alt = vehicle.location.global_relative_frame.alt
-      print(">> Altitude = %.1f m"%v_alt)
-      if v_alt >= altitude - 1.0:
-          print("Target altitude reached")
-          break
-      time.sleep(1)
-      
-def set_velocity_body(vehicle, vx, vy, vz):
-    """ Remember: vz is positive downward!!!
-    http://ardupilot.org/dev/docs/copter-commands-in-guided-mode.html
-    
-    Bitmask to indicate which dimensions should be ignored by the vehicle 
-    (a value of 0b0000000000000000 or 0b0000001000000000 indicates that 
-    none of the setpoint dimensions should be ignored). Mapping: 
-    bit 1: x,  bit 2: y,  bit 3: z, 
-    bit 4: vx, bit 5: vy, bit 6: vz, 
-    bit 7: ax, bit 8: ay, bit 9:
+def arm_and_takeoff(tgt_altitude):
     """
-    msg = vehicle.message_factory.set_position_target_local_ned_encode(
-            0,
-            0, 0,
-            mavutil.mavlink.MAV_FRAME_BODY_NED,
-            0b0000111111000111, # Bitmask -> Consider only the velocities
-            0, 0, 0,            # Position
-            vx, vy, vz,         # Velocity
-            0, 0, 0,            # Accelerations
-            0, 0)
-    vehicle.send_mavlink(msg)
+    Arms vehicle and fly to aTargetAltitude.
+    """
+
+    print "Basic pre-arm checks"
+    # Don't let the user try to fly autopilot is booting
+    if vehicle.mode.name == "INITIALISING":
+        print "Waiting for vehicle to initialise"
+        time.sleep(1)
+    while vehicle.gps_0.fix_type < 2:
+        print "Waiting for GPS...:", vehicle.gps_0.fix_type
+        time.sleep(1)
+
+    print "Arming motors"
+    # Copter should arm in GUIDED mode
+    vehicle.mode    = VehicleMode("GUIDED")
+    vehicle.armed   = True
     vehicle.flush()
 
-def clear_mission(vehicle):
-    cmds = vehicle.commands
-    vehicle.commands.clear()
-    vehicle.flush()
+    while not vehicle.armed:
+        print " Waiting for arming..."
+        time.sleep(1)
 
-    # After clearing the mission you MUST re-download the mission from the vehicle
-    # before vehicle.commands can be used again
-    # (see https://github.com/dronekit/dronekit-python/issues/230)
-    
-    cmds = vehicle.commands
-    cmds.download()
-    cmds.wait_ready()
+    print "Taking off!"
+    #vehicle.commands.takeoff(aTargetAltitude) # Take off to target altitude
+    vehicle.simple_takeoff(tgt_altitude)
+    #vehicle.flush()
+    # Wait until the vehicle reaches a safe height before processing the goto (otherwise the command 
+    #  after Vehicle.commands.takeoff will execute immediately).
+    #while not api.exit:
+    #    print " Altitude: ", vehicle.location.alt
+    #    if vehicle.location.alt>=aTargetAltitude*0.95: #Just below target, in case of undershoot.
+    #        print "Reached target altitude"
+    #        break;
+    #    time.sleep(1)
 
-def download_mission(vehicle):
-    cmds = vehicle.commands
-    cmds.download()
-    cmds.wait_ready() # wait until download is complete.
+    while True:
+        altitude = vehicle.location.global_relative_frame.alt
+        if altitude >= tgt_altitude -1:
+            print("Altitude reached")
+            break
+        time.sleep(1)
 
-def get_current_mission(vehicle):
-    """
-    Downloads the mission and returns the wp list and number of WP 
-    
-    Input: 
-        vehicle
-    Return:
-        n_wp, wpList
-    """
-    print "Downloading mission"
-    download_mission(vehicle)
-    missionList = []
-    n_WP        = 0
-    for wp in vehicle.commands:
-        missionList.append(wp)
-        n_WP += 1 
-    return n_WP, missionList
 
-def ChangeMode(vehicle, mode):
-    while vehicle.mode != VehicleMode(mode):
-            vehicle.mode = VehicleMode(mode)
-            time.sleep(0.5)
-    return True
+def goto(vehicle, lat, long, alt):
+    print "Going to %s,%s" % (lat, long)
+    point = LocationGlobalRelative(lat, long, alt)
+    vehicle.simple_goto(point)
+    #vehicle.flush()
+    time.sleep(1)
+    while True:
+        print vehicle.location.global_relative_frame
+        print "Long: %s, Lang: %s" % (vehicle.location.global_relative_frame.lon, vehicle.location.global_relative_frame.lat)
+        dist = math.sqrt(math.pow(math.fabs(vehicle.location.global_relative_frame.lon - long), 2) + math.pow(math.fabs(vehicle.location.global_relative_frame.lat - lat), 2))
+        print "Distance to point: %s" % dist
+        #if dist <= 0.00005:
+        #    print "Point reached"
+        #    break;
+        time.sleep(1)
 
-def get_distance_metres(aLocation1, aLocation2):
-    """
-    Returns the ground distance in metres between two LocationGlobal objects.
-
-    This method is an approximation, and will not be accurate over large distances and close to the 
-    earth's poles. It comes from the ArduPilot test code: 
-    https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py
-    """
-    dlat = aLocation2.lat - aLocation1.lat
-    dlong = aLocation2.lon - aLocation1.lon
-    return math.sqrt((dlat*dlat) + (dlong*dlong)) * 1.113195e5
-
-def distance_to_current_waypoint(vehicle):
-    """
-    Gets distance in metres to the current waypoint. 
-    It returns None for the first waypoint (Home location).
-    """
-    nextwaypoint = vehicle.commands.next
-    if nextwaypoint==0:
-        return None
-    missionitem=vehicle.commands[nextwaypoint-1] #commands are zero indexed
-    lat = missionitem.x
-    lon = missionitem.y
-    alt = missionitem.z
-    targetWaypointLocation = LocationGlobalRelative(lat,lon,alt)
-    distancetopoint = get_distance_metres(vehicle.location.global_frame, targetWaypointLocation)
-    return distancetopoint
-
-def bearing_to_current_waypoint(vehicle):
-    nextwaypoint = vehicle.commands.next
-    if nextwaypoint==0:
-        return None
-    missionitem=vehicle.commands[nextwaypoint-1] #commands are zero indexed
-    lat = missionitem.x
-    lon = missionitem.y
-    alt = missionitem.z
-    targetWaypointLocation = LocationGlobalRelative(lat,lon,alt)
-    bearing = get_bearing(vehicle.location.global_relative_frame, targetWaypointLocation)
-    return bearing
-
-def get_bearing(my_location, tgt_location):
-    """
-    Aproximation of the bearing for medium latitudes and sort distances
-    """
-    dlat = tgt_location.lat - my_location.lat
-    dlong = tgt_location.lon - my_location.lon
-    
-    return math.atan2(dlong,dlat)
-
-def condition_yaw(heading, relative=False):
-    """
-    Send MAV_CMD_CONDITION_YAW message to point vehicle at a specified heading (in degrees).
-
-    This method sets an absolute heading by default, but you can set the `relative` parameter
-    to `True` to set yaw relative to the current yaw heading.
-
-    By default the yaw of the vehicle will follow the direction of travel. After setting 
-    the yaw using this function there is no way to return to the default yaw "follow direction 
-    of travel" behaviour (https://github.com/diydrones/ardupilot/issues/2427)
-
-    For more information see: 
-    http://copter.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_condition_yaw
-    """
-    if relative:
-        is_relative = 1 #yaw relative to direction of travel
-    else:
-        is_relative = 0 #yaw is an absolute angle
-    # create the CONDITION_YAW command using command_long_encode()
-    msg = vehicle.message_factory.command_long_encode(
-        0, 0,       # target system, target component
-        mavutil.mavlink.MAV_CMD_CONDITION_YAW, #command
-        0,          #confirmation
-        heading,    # param 1, yaw in degrees
-        0,          # param 2, yaw speed deg/s
-        1,          # param 3, direction -1 ccw, 1 cw
-        is_relative, # param 4, relative offset 1, absolute angle 0
-        0, 0, 0)    # param 5 ~ 7 not used
-    # send command to vehicle
+def takePic(lat, lon, alt):
+    dist = math.sqrt(math.pow(math.fabs(vehicle.location.lon - lon), 2) + math.pow(math.fabs(vehicle.location.lat - lat), 2))
+    heading = -math.degrees(2 * math.acos((vehicle.location.lat - center_pos.lat) / dist))
+    print "Pointing nose heading %s (towards %s,%s)" % (heading, lat, lon)
+    msg = vehicle.message_factory.mission_item_encode(0, 0, 0,
+        mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
+        mavutil.mavlink.MAV_CMD_CONDITION_YAW,
+        2,
+        0,
+        heading,
+        0,
+        1,
+        0,
+        0, 0, 0)
     vehicle.send_mavlink(msg)
+    #cmd = Command(0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
+    #    mavutil.mavlink.MAV_CMD_DO_SET_ROI, 0, 0, 3, 0, 0, 0, lat, lon, alt)
+    #vehicle.commands.clear()
+    #vehicle.commands.add(cmd)
+    vehicle.flush()
+    time.sleep(6)
 
-def saturate(value, minimum, maximum):
-    if value > maximum: value = maximum
-    if value < minimum: value = minimum
-    return value
 
-def add_angles(ang1, ang2):
-    ang = ang1 + ang2
-    if ang > 2.0*math.pi:
-        ang -= math.pi
-    
-    elif ang < -0.0:
-        ang += 2.0*math.pi
-    return ang
+def launch():
+    print "Waiting for location..."
+    while vehicle.location.global_frame.lat == 0:
+        time.sleep(0.1)
+    home_coords = [vehicle.location.global_frame.lat,
+                   vehicle.location.global_frame.lon]
+    print home_coords
+    #while not vehicle.is_armable:
+    #        time.sleep(.1)
 
 # =============================================================================
 # Main
 # =============================================================================
 
-gnd_speed = 10 # [m/s]
-radius    = 10
-max_lat_speed = 4
-k_err_vel   = 0.2
-n_turns     = 3
-direction   = 1 # 1 for cw, -1 ccw
+if __name__ == '__main__':
 
-mode      = 'GROUND'
+    parser = argparse.ArgumentParser(description='commands')
+    parser.add_argument('--connect')
+    parser.add_argument('--id')
+    parser.add_argument('--lat')
+    parser.add_argument('--long')
+    parser.add_argument('--alt')
+    args = parser.parse_args()
 
-while True:
-    
-    if mode == 'GROUND':
-        #--- Wait until a valid mission has been uploaded
-        n_WP, missionList = get_current_mission(vehicle)
-        time.sleep(2)
-        if n_WP > 0:
-            print ("A valid mission has been uploaded: takeoff!")
-            mode = 'TAKEOFF'
-            
-    elif mode == 'TAKEOFF':
+    connection_string = args.connect
+    vehicleid = float(args.id)
+    latitude = float(args.lat)
+    longitude = float(args.long)
+    altitude = float(args.alt)
+
+    print("Connection to the vehicle on %s" % connection_string)
+    vehicle = connect(connection_string, wait_ready=True)
+    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+
+    while not vehicle.home_location:
+        cmds = vehicle.commands
+        cmds.download()
+        cmds.wait_ready()
+        if not vehicle.home_location:
+            print " Waiting for home location ..."
+    print "Home location: %s" % vehicle.home_location
+
+    arm_and_takeoff(altitude)
+
+    radius = 1.0
+    observations = 5
+    radians_pr_observation = 2 * math.pi / observations
+    center_pos = Location(latitude,longitude)
+    altitude = altitude
+
+    launch()
+
+    #vehicle.gimbal.target_location(vehicle.home_location)
+
+    time.sleep(1)
+
+    print center_pos.lat, center_pos.lon, altitude
+
+    # experiment with LOITER mode
+    #goto(center_pos.lat, center_pos.lon, altitude)
+    #time.sleep(5)
+    #vehicle.parameters["WP_LOITER_RAD"] = 10
+    #vehicle.mode = VehicleMode("LOITER")
+    #vehicle.flush()
+    #time.sleep(30)
+
+    # fly in a circle around center_pos
+    for i in range(1, observations):
+        point = Location(center_pos.lat + radius * math.cos(radians_pr_observation*i), center_pos.lon + radius * 2 * math.sin(radians_pr_observation*i))
+        print "P%s: %s, %s" % (i, point.lat, point.lon)
+        goto(vehicle, point.lat, point.lon, altitude)
+        #takePic(center_pos.lat, center_pos.lon, altitude)
+
+    print "Returning to Launch"
+    vehicle.mode    = VehicleMode("RTL")
+    vehicle.flush()
+
+    while vehicle.armed:
+        print(" Waiting for disarming...")
         time.sleep(1)
-        arm_and_takeoff(5)
-        vehicle.groundspeed = gnd_speed
-        mode = 'MISSION'
-        vehicle.commands.next = 1
-        vehicle.flush()
-        # Calculate the time for n_turns
-        # time_flight = 2.0*math.pi*radius/gnd_speed*n_turns
-        time_flight = 4.0*math.pi*radius/gnd_speed*n_turns
-        time0 = time.time()
-        print ("Switch mode to MISSION")
-        
-    elif mode == 'MISSION':
-        # We command the velocity in order to maintain the vehicle on track
-        # vx = constant
-        # vy = proportional to off track error
-        # heading = along the path tangent
-        my_location = vehicle.location.global_relative_frame
-        bearing     = bearing_to_current_waypoint(vehicle)
-        dist_2_wp   = distance_to_current_waypoint(vehicle)
-        
-        try:
-            print "bearing  %.0f  dist = %.0f"%(bearing*180.0/3.14, dist_2_wp)
-            heading = add_angles(bearing,-direction*0.5*math.pi)
-            # print heading*180.0/3.14
-            condition_yaw(heading*180/3.14)
-            v_x     = gnd_speed
-            v_y     = -direction*k_err_vel*(radius - dist_2_wp)
-            v_y     = saturate(v_y, -max_lat_speed, max_lat_speed)
-            print "v_x = %.1f  v_y = %.1f"%(v_x, v_y)
-            set_velocity_body(vehicle, v_x, v_y, 0.0)
-        except Exception as e:
-            print e
 
-        if time.time() > time0 + time_flight: 
-            ChangeMode(vehicle, 'RTL')    
-            clear_mission(vehicle)        
-            mode = 'BACK'
-            print ("Time to head Home: Switch to BACK mode")
-            
-    elif mode == "BACK":
-        if vehicle.location.global_relative_frame.alt < 1:
-            print ("Switch to GROUND mode, waiting for new missions")
-            mode = 'GROUND'
-    
-    time.sleep(0.5)
+    vehicle.close()
+
