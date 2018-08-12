@@ -20,7 +20,10 @@ from dronekit import connect, VehicleMode, LocationGlobalRelative
 def arm_and_takeoff(tgt_altitude):
     print("Arming motors")
 
+    print("Basic pre-arm checks")
+    # Don't try to arm until autopilot is ready
     while not vehicle.is_armable:
+        print(" Waiting for vehicle to initialise...")
         time.sleep(1)
 
     while vehicle.gps_0.fix_type < 2:
