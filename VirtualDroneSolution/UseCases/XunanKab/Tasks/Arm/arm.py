@@ -19,10 +19,7 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
 # Functions
 # =============================================================================
 
-def attitude_callback(self, attr_name, value):
-    print(vehicle.attitude)
-
-def arm_and_takeoff(aTargetTime):
+def arm_and_wait(aTargetTime):
     """
     Arms vehicle and fly to aTargetAltitude.
     """
@@ -33,27 +30,18 @@ def arm_and_takeoff(aTargetTime):
     #    print(" Waiting for vehicle to initialise...")
     #    time.sleep(1)
 
-    while vehicle.gps_0.fix_type < 2:
-        print "Waiting for GPS...:", vehicle.gps_0.fix_type
-        time.sleep(1)
-
-    vehicle.mode = VehicleMode("GUIDED")
+    print("Arming motors")
+    # Copter should arm in GUIDED mode
+    vehicle.mode = VehicleMode("STABILIZE")
     vehicle.armed = True
 
+    # Confirm vehicle armed before attempting to take off
     while not vehicle.armed:
         print(" Waiting for arming...")
         time.sleep(1)
 
-    print("Takeoff")
-    vehicle.simple_takeoff(tgt_altitude)
-
-    while True:
-        altitude = vehicle.location.global_relative_frame.alt
-        if altitude >= tgt_altitude -1:
-            print("Altitude reached")
-            break
-
-        time.sleep(1)
+    print("Wait!")
+    time.sleep(5)
 
 # =============================================================================
 # Main
@@ -89,18 +77,14 @@ if __name__ == '__main__':
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
-    vehicle.add_attribute_listener('attitude', attitude_callback)
-
     cmds = vehicle.commands
     cmds.clear()
     cmds.upload()
 
     # Initialize the takeoff sequence to 20m
-    arm_and_takeoff(5)
+    arm_and_wait(5)
 
     print("Arm and wait complete")
-
-    vehicle.remove_attribute_listener('attitude', attitude_callback)
 
     # Close vehicle object
     vehicle.close()
