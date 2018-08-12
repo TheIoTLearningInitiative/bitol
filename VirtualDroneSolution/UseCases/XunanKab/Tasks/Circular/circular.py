@@ -61,11 +61,11 @@ def set_velocity_body(vehicle, vx, vy, vz):
     """ Remember: vz is positive downward!!!
     http://ardupilot.org/dev/docs/copter-commands-in-guided-mode.html
 
-    Bitmask to indicate which dimensions should be ignored by the vehicle 
-    (a value of 0b0000000000000000 or 0b0000001000000000 indicates that 
-    none of the setpoint dimensions should be ignored). Mapping: 
-    bit 1: x,  bit 2: y,  bit 3: z, 
-    bit 4: vx, bit 5: vy, bit 6: vz, 
+    Bitmask to indicate which dimensions should be ignored by the vehicle
+    (a value of 0b0000000000000000 or 0b0000001000000000 indicates that
+    none of the setpoint dimensions should be ignored). Mapping:
+    bit 1: x,  bit 2: y,  bit 3: z,
+    bit 4: vx, bit 5: vy, bit 6: vz,
     bit 7: ax, bit 8: ay, bit 9:
     """
     msg = vehicle.message_factory.set_position_target_local_ned_encode(
@@ -242,11 +242,11 @@ if __name__ == '__main__':
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV'])
 
-    gnd_speed = 1 # [m/s]
-    radius    = 5
+    gnd_speed = 3 # [m/s]
+    radius    = 3
     max_lat_speed = 1
     k_err_vel   = 0.2
-    n_turns     = 1
+    n_turns     = 5
     direction   = 1 # 1 for cw, -1 ccw
 
     mode = 'GROUND'
@@ -293,6 +293,10 @@ if __name__ == '__main__':
             except Exception as e:
                 print e
 
+            #while vehicle.mode.name=='GUIDED':  #Wait until mode has changed
+            #    print " Waiting for mode change ..."
+            #    print vehicle.mode.name
+            #    time.sleep(1)
             if time.time() > time0 + time_flight:
                 ChangeMode(vehicle, 'RTL')
                 clear_mission(vehicle)
@@ -300,8 +304,8 @@ if __name__ == '__main__':
                 print ("Time to head Home: Switch to BACK mode")
         elif mode == "BACK":
             if vehicle.location.global_relative_frame.alt < 1:
-                #print ("Switch to GROUND mode, waiting for new missions")
-                #mode = 'GROUND'
+                print ("Switch to GROUND mode, waiting for new missions")
+                mode = 'GROUND'
                 continue
         time.sleep(0.5)
 
