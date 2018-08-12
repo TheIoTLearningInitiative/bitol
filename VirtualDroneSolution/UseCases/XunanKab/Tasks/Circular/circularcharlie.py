@@ -76,13 +76,13 @@ def goto(vehicle, lat, long, alt):
     #vehicle.flush()
     time.sleep(1)
     while True:
-        print vehicle.location.global_relative_frame
-        print "Long: %s, Lang: %s" % (vehicle.location.global_relative_frame.lon, vehicle.location.global_relative_frame.lat)
-        dist = math.sqrt(math.pow(math.fabs(vehicle.location.global_relative_frame.lon - long), 2) + math.pow(math.fabs(vehicle.location.global_relative_frame.lat - lat), 2))
+        print "GPS Long: %s, GPS Lat: %s" % (vehicle.location.global_relative_frame.lon, vehicle.location.global_relative_frame.lat)
+        print "GPS Long: %s, GPS Lat: %s" % (point.lon, point.lat)
+        dist = math.sqrt(math.pow(math.fabs(vehicle.location.global_relative_frame.lon - point.lon), 2) + math.pow(math.fabs(vehicle.location.global_relative_frame.lat - point.lat), 2))
         print "Distance to point: %s" % dist
-        #if dist <= 0.00005:
-        #    print "Point reached"
-        #    break;
+        if dist <= 0.00005:
+            print "Point reached"
+            break;
         time.sleep(1)
 
 def takePic(lat, lon, alt):
@@ -152,7 +152,7 @@ if __name__ == '__main__':
 
     arm_and_takeoff(altitude)
 
-    radius = 1.0
+    radius = 0.0001
     observations = 5
     radians_pr_observation = 2 * math.pi / observations
     center_pos = Location(latitude,longitude)
