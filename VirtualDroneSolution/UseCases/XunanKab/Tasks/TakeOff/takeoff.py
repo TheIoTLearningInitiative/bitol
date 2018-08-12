@@ -93,13 +93,25 @@ if __name__ == '__main__':
 
     vehicle.add_attribute_listener('attitude', attitude_callback)
 
-    cmds = vehicle.commands
-    cmds.clear()
-    cmds.upload()
+    # Get Vehicle Home location - will be `None` until first set by autopilot
+    while not vehicle.home_location:
+        cmds = vehicle.commands
+        cmds.download()
+        cmds.wait_ready()
+        if not vehicle.home_location:
+            print " Waiting for home location ..."
+
+    # We have a home location.
+    print "Home location: %s" % vehicle.home_location
 
     # Initialize the takeoff sequence
     arm_and_takeoff(altitude)
+    time.sleep(5)
     vehicle.mode = VehicleMode("LAND")
+
+    while vehicle.armed:
+        print(" Waiting for disarming...")
+        time.sleep(1)
 
     vehicle.remove_attribute_listener('attitude', attitude_callback)
 

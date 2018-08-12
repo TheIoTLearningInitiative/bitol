@@ -66,8 +66,16 @@ if __name__ == '__main__':
 
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
-
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
+
+    while not vehicle.home_location:
+        cmds = vehicle.commands
+        cmds.download()
+        cmds.wait_ready()
+        if not vehicle.home_location:
+            print " Waiting for home location ..."
+    print "Home location: %s" % vehicle.home_location
+
     arm_and_takeoff(altitude)
 
     vehicle.airspeed = 15
@@ -77,5 +85,9 @@ if __name__ == '__main__':
 
     vehicle.parameters['RTL_ALT'] = 5
     vehicle.mode = VehicleMode("RTL")
-    time.sleep(20)
+
+    while vehicle.armed:
+        print(" Waiting for disarming...")
+        time.sleep(1)
+
     vehicle.close()
