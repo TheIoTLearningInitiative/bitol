@@ -56,9 +56,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Commands vehicle using vehicle.simple_goto.')
     parser.add_argument('--connect',
                         help="Vehicle connection target string. If not specified, SITL automatically started and used.")
+    parser.add_argument('--id')
     args = parser.parse_args()
 
     connection_string = args.connect
+    vehicleid = float(args.id)
     sitl = None
 
     # Start SITL if no connection string specified
@@ -71,6 +73,7 @@ if __name__ == '__main__':
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
+    vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print " Type: %s" % vehicle._vehicle_type
     print " Armed: %s" % vehicle.armed
     print " System status: %s" % vehicle.system_status.state

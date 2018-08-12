@@ -9,6 +9,9 @@ set -x
 IPADDRESS=$1
 PORT=$2
 VEHICLEID=$3
+LATITUDE=$4
+LONGITUDE=$5
+ALTITUDE=$6
 
 # =============================================================================
 # Functions

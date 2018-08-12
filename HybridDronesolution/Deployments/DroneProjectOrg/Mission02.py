@@ -53,12 +53,14 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='commands')
     parser.add_argument('--connect')
+    parser.add_argument('--id')
     parser.add_argument('--lat')
     parser.add_argument('--long')
     parser.add_argument('--alt')
     args = parser.parse_args()
 
     connection_string = args.connect
+    vehicleid = float(args.id)
     latitude = float(args.lat)
     longitude = float(args.long)
     altitude = float(args.alt)
@@ -66,13 +68,15 @@ if __name__ == '__main__':
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
-    arm_and_takeoff(10)
+    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    arm_and_takeoff(altitude)
 
     vehicle.airspeed = 15
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     vehicle.simple_goto(waypoint)
     time.sleep(30)
 
+    vehicle.parameters['RTL_ALT'] = 5
     vehicle.mode = VehicleMode("RTL")
     time.sleep(20)
     vehicle.close()

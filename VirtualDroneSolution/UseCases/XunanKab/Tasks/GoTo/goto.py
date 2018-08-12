@@ -63,19 +63,20 @@ if __name__ == '__main__':
     vehicleid = float(args.id)
     latitude = float(args.lat)
     longitude = float(args.long)
-    altitude = str(args.alt)
+    altitude = float(args.alt)
 
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
-    arm_and_takeoff(10)
+    arm_and_takeoff(altitude)
 
     vehicle.airspeed = 15
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     vehicle.simple_goto(waypoint)
     time.sleep(30)
 
+    vehicle.parameters['RTL_ALT'] = 5
     vehicle.mode = VehicleMode("RTL")
     time.sleep(20)
     vehicle.close()
