@@ -84,7 +84,9 @@ if __name__ == '__main__':
     # Initialize the takeoff sequence to 20m
     arm_and_wait(5)
 
-    print("Arm and wait complete")
+    while vehicle.armed:
+        print(" Waiting for disarming...")
+        time.sleep(1)
 
     # Close vehicle object
     vehicle.close()

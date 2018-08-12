@@ -8,7 +8,7 @@
 ################################################################################################
 
 # =============================================================================
-# Variables
+# Libraries
 # =============================================================================
 
 import argparse
@@ -18,25 +18,6 @@ import time
 
 from dronekit import connect, Command, LocationGlobal, VehicleMode
 from pymavlink import mavutil
-
-# =============================================================================
-# Init
-# =============================================================================
-
-parser = argparse.ArgumentParser(description='commands')
-parser.add_argument('--connect')
-parser.add_argument('--lat')
-parser.add_argument('--long')
-parser.add_argument('--alt')
-args = parser.parse_args()
-
-connection_string = args.connect
-
-print("Connection to the vehicle on %s" % connection_string)
-vehicle = connect(connection_string, wait_ready=True)
-vehicle.wait_ready('autopilot_version')
-print('Autopilot Version: %s' % vehicle.version)
-print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV']) 
 
 # =============================================================================
 # Functions
@@ -102,79 +83,107 @@ def get_location_offset_meters(original_location, dNorth, dEast, alt):
 home_position_set = False
 
 #Create a message listener for home position fix
-@vehicle.on_message('HOME_POSITION')
-def listener(self, name, home_position):
-    global home_position_set
-    home_position_set = True
+#@vehicle.on_message('HOME_POSITION')
+#def listener(self, name, home_position):
+#    global home_position_set
+#    home_position_set = True
 
 # =============================================================================
 # Main
 # =============================================================================
 
-cmds = vehicle.commands
-cmds.clear()
-cmds.upload()
+# =============================================================================
+# Main
+# =============================================================================
 
-home = vehicle.location.global_relative_frame
+if __name__ == '__main__':
 
-# takeoff to 10 meters
-wp = get_location_offset_meters(home, 0, 0, 10);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
+    parser = argparse.ArgumentParser(description='commands')
+    parser.add_argument('--connect')
+    parser.add_argument('--id')
+    parser.add_argument('--lat')
+    parser.add_argument('--long')
+    parser.add_argument('--alt')
+    args = parser.parse_args()
 
-# move 10 meters north
-wp = get_location_offset_meters(wp, 80, 0, 0);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
+    connection_string = args.connect
+    vehicleid = float(args.id)
+    latitude = float(args.lat)
+    longitude = float(args.long)
+    altitude = float(args.alt)
 
-# move 10 meters east
-wp = get_location_offset_meters(wp, 0, 80, 0);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
 
-# move 10 meters south
-wp = get_location_offset_meters(wp, -80, 0, 0);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
+    print("Connection to the vehicle on %s" % connection_string)
+    vehicle = connect(connection_string, wait_ready=True)
+    vehicle.wait_ready('autopilot_version')
+    print('Autopilot Version: %s' % vehicle.version)
+    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV'])
 
-# move 10 meters west
-wp = get_location_offset_meters(wp, 0, -80, 0);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
+    cmds = vehicle.commands
+    cmds.clear()
+    cmds.upload()
 
-# land
-wp = get_location_offset_meters(home, 0, 0, 0);
-cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_LAND, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-cmds.add(cmd)
+    home = vehicle.location.global_relative_frame
 
-# Upload mission
-cmds.upload()
+    # takeoff to 10 meters
+    wp = get_location_offset_meters(home, 0, 0, 10);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
 
-time.sleep(2)
-arm_and_takeoff(5)
-time.sleep(2)
+    # move 10 meters north
+    wp = get_location_offset_meters(wp, 5, 0, 0);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
 
-# Arm vehicle
-vehicle.airspeed = 30
-vehicle.mode = VehicleMode("AUTO")
+    # move 10 meters east
+    wp = get_location_offset_meters(wp, 0, 5, 0);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
 
-# monitor mission execution
-nextwaypoint = vehicle.commands.next
-while nextwaypoint < len(vehicle.commands):
-    if vehicle.commands.next > nextwaypoint:
-        display_seq = vehicle.commands.next+1
-        print "Moving to waypoint %s" % display_seq
-        nextwaypoint = vehicle.commands.next
+    # move 10 meters south
+    wp = get_location_offset_meters(wp, -5, 0, 0);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
+
+    # move 10 meters west
+    wp = get_location_offset_meters(wp, 0, -5, 0);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
+
+    # land
+    wp = get_location_offset_meters(home, 0, 0, 0);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_LAND, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
+
+    # Upload mission
+    cmds.upload()
+
+    time.sleep(2)
+    arm_and_takeoff(altitude)
+    time.sleep(2)
+
+    # Arm vehicle
+    vehicle.airspeed = 1
+    vehicle.mode = VehicleMode("AUTO")
+
+    # monitor mission execution
+    nextwaypoint = vehicle.commands.next
+    while nextwaypoint < len(vehicle.commands):
+        if vehicle.commands.next > nextwaypoint:
+            display_seq = vehicle.commands.next+1
+            print "Moving to waypoint %s" % display_seq
+            nextwaypoint = vehicle.commands.next
+        time.sleep(1)
+
+    # wait for the vehicle to land
+    while vehicle.commands.next > 0:
+        time.sleep(1)
+
+    # Disarm vehicle
+    vehicle.armed = False
     time.sleep(1)
 
-# wait for the vehicle to land
-while vehicle.commands.next > 0:
+    # Close vehicle object before exiting script
+    vehicle.close()
     time.sleep(1)
-
-# Disarm vehicle
-vehicle.armed = False
-time.sleep(1)
-
-# Close vehicle object before exiting script
-vehicle.close()
-time.sleep(1)
