@@ -9,6 +9,7 @@ set -x
 IPADDRESS=$1
 PORT=$2
 VEHICLEID=$3
+ALTITUDE=$4
 
 # =============================================================================
 # Functions
@@ -21,4 +22,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python takeoff.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python takeoff.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} --alt=${ALTITUDE}

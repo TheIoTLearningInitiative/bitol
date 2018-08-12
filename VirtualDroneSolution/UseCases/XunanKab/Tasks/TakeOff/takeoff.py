@@ -22,7 +22,7 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
 def attitude_callback(self, attr_name, value):
     print(vehicle.attitude)
 
-def arm_and_takeoff(aTargetTime):
+def arm_and_takeoff(tgt_altitude):
     """
     Arms vehicle and fly to aTargetAltitude.
     """
@@ -66,10 +66,12 @@ if __name__ == '__main__':
     parser.add_argument('--connect',
                         help="Vehicle connection target string. If not specified, SITL automatically started and used.")
     parser.add_argument('--id')
+    parser.add_argument('--alt')
     args = parser.parse_args()
 
     connection_string = args.connect
     vehicleid = float(args.id)
+    altitude = float(args.alt)
     sitl = None
 
     # Start SITL if no connection string specified
@@ -95,10 +97,10 @@ if __name__ == '__main__':
     cmds.clear()
     cmds.upload()
 
-    # Initialize the takeoff sequence to 20m
-    arm_and_takeoff(5)
+    # Initialize the takeoff sequence
+    arm_and_takeoff(altitude)
 
-    print("Arm and wait complete")
+    print("Arm and takeoff complete")
 
     vehicle.remove_attribute_listener('attitude', attitude_callback)
 
