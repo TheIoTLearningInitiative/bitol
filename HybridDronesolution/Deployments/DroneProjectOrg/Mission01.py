@@ -11,31 +11,8 @@ from pymavlink import mavutil
 
 from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlobalRelative
 
-# Set up option parsing to get connection string
-import argparse
-parser = argparse.ArgumentParser(description='Commands vehicle using vehicle.simple_goto.')
-parser.add_argument('--connect',
-                    help="Vehicle connection target string. If not specified, SITL automatically started and used.")
-args = parser.parse_args()
-
-connection_string = args.connect
-sitl = None
-
-# Start SITL if no connection string specified
-if not connection_string:
-    import dronekit_sitl
-    sitl = dronekit_sitl.start_default()
-    connection_string = sitl.connection_string()
-
-# Connect to the Vehicle
-print('Connecting to vehicle on: %s' % connection_string)
-vehicle = connect(connection_string, wait_ready=True)
-
-print " Type: %s" % vehicle._vehicle_type
-print " Armed: %s" % vehicle.armed
-print " System status: %s" % vehicle.system_status.state
-print " GPS: %s" % vehicle.gps_0
-print " Alt: %s" % vehicle.location.global_relative_frame.alt
+def attitude_callback(self, attr_name, value):
+    print(vehicle.attitude)
 
 def arm_and_wait(aTargetTime):
     """
@@ -44,9 +21,9 @@ def arm_and_wait(aTargetTime):
 
     print("Basic pre-arm checks")
     # Don't try to arm until autopilot is ready
-    while not vehicle.is_armable:
-        print(" Waiting for vehicle to initialise...")
-        time.sleep(1)
+    #while not vehicle.is_armable:
+    #    print(" Waiting for vehicle to initialise...")
+    #    time.sleep(1)
 
     print("Arming motors")
     # Copter should arm in GUIDED mode
@@ -61,18 +38,49 @@ def arm_and_wait(aTargetTime):
     print("Wait!")
     time.sleep(5)
 
-cmds = vehicle.commands
-cmds.clear()
-cmds.upload()
+if __name__ == '__main__':
 
-# Initialize the takeoff sequence to 20m
-arm_and_wait(5)
+    # Set up option parsing to get connection string
+    parser = argparse.ArgumentParser(description='Commands vehicle using vehicle.simple_goto.')
+    parser.add_argument('--connect',
+                        help="Vehicle connection target string. If not specified, SITL automatically started and used.")
+    args = parser.parse_args()
 
-print("Arm and wait complete")
+    connection_string = args.connect
+    sitl = None
 
-# Close vehicle object
-vehicle.close()
+    # Start SITL if no connection string specified
+    if not connection_string:
+        import dronekit_sitl
+        sitl = dronekit_sitl.start_default()
+        connection_string = sitl.connection_string()
 
-# Shut down simulator if it was started.
-if sitl:
-    sitl.stop()
+    # Connect to the Vehicle
+    print('Connecting to vehicle on: %s' % connection_string)
+    vehicle = connect(connection_string, wait_ready=True)
+
+    print " Type: %s" % vehicle._vehicle_type
+    print " Armed: %s" % vehicle.armed
+    print " System status: %s" % vehicle.system_status.state
+    print " GPS: %s" % vehicle.gps_0
+    print " Alt: %s" % vehicle.location.global_relative_frame.alt
+
+    vehicle.add_attribute_listener('attitude', attitude_callback)
+
+    cmds = vehicle.commands
+    cmds.clear()
+    cmds.upload()
+
+    # Initialize the takeoff sequence to 20m
+    arm_and_wait(5)
+
+    print("Arm and wait complete")
+
+    vehicle.remove_attribute_listener('attitude', attitude_callback)
+
+    # Close vehicle object
+    vehicle.close()
+
+    # Shut down simulator if it was started.
+    if sitl:
+        sitl.stop()
