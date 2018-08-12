@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# =============================================================================
+# Libraries
+# =============================================================================
+
 import argparse
 import math
 import sys
@@ -10,6 +14,10 @@ from dronekit import connect, VehicleMode, LocationGlobalRelative
 from pymavlink import mavutil
 
 from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlobalRelative
+
+# =============================================================================
+# Functions
+# =============================================================================
 
 def attitude_callback(self, attr_name, value):
     print(vehicle.attitude)
@@ -37,6 +45,10 @@ def arm_and_wait(aTargetTime):
 
     print("Wait!")
     time.sleep(5)
+
+# =============================================================================
+# Main
+# =============================================================================
 
 if __name__ == '__main__':
 
