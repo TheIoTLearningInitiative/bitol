@@ -23,15 +23,14 @@ def arm_and_takeoff(tgt_altitude):
     while not vehicle.is_armable:
         time.sleep(1)
 
+    while vehicle.gps_0.fix_type < 2:
+        print "Waiting for GPS...:", vehicle.gps_0.fix_type
+        time.sleep(1)
+
     vehicle.mode = VehicleMode("GUIDED")
     vehicle.armed = True
 
     while not vehicle.armed:
-        time.sleep(1)
-
-
-    while vehicle.gps_0.fix_type < 2:
-        print "Waiting for GPS...:", vehicle.gps_0.fix_type
         time.sleep(1)
 
     print("Takeoff")
