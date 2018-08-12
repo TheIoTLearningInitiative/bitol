@@ -18,4 +18,4 @@ RUN cd /home/user/ardupilot && \
     git submodule update --init --recursive && \
     PATH=$PATH:$HOME/ardupilot/Tools/autotest && \
     PATH=/usr/lib/ccache:$PATH && \
-    sim_vehicle.py -v ArduCopter
+    sim_vehicle.py -v ArduCopter &
