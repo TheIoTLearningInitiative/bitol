@@ -1,50 +1,20 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
 
 # =============================================================================
 # Libraries
 # =============================================================================
 
+# Set up option parsing to get connection string
 import argparse
-import math
-import sys
-import time
 
-from dronekit import connect, VehicleMode, LocationGlobalRelative
-from pymavlink import mavutil
-
-from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlobalRelative
+# Import DroneKit-Python
+from dronekit import connect, VehicleMode
 
 # =============================================================================
 # Functions
 # =============================================================================
 
-def attitude_callback(self, attr_name, value):
-    print(vehicle.attitude)
-
-def arm_and_wait(aTargetTime):
-    """
-    Arms vehicle and fly to aTargetAltitude.
-    """
-
-    print("Basic pre-arm checks")
-    # Don't try to arm until autopilot is ready
-    #while not vehicle.is_armable:
-    #    print(" Waiting for vehicle to initialise...")
-    #    time.sleep(1)
-
-    print("Arming motors")
-    # Copter should arm in GUIDED mode
-    vehicle.mode = VehicleMode("STABILIZE")
-    vehicle.armed = True
-
-    # Confirm vehicle armed before attempting to take off
-    while not vehicle.armed:
-        print(" Waiting for arming...")
-        time.sleep(1)
-
-    print("Wait!")
-    time.sleep(5)
+# None
 
 # =============================================================================
 # Main
@@ -52,10 +22,9 @@ def arm_and_wait(aTargetTime):
 
 if __name__ == '__main__':
 
-    # Set up option parsing to get connection string
-    parser = argparse.ArgumentParser(description='Commands vehicle using vehicle.simple_goto.')
+    parser = argparse.ArgumentParser(description='Print out vehicle state information. Connects to SITL on local PC by default.')
     parser.add_argument('--connect',
-                        help="Vehicle connection target string. If not specified, SITL automatically started and used.")
+                       help="vehicle connection target string. If not specified, SITL automatically started and used.")
     parser.add_argument('--id')
     args = parser.parse_args()
 
@@ -69,33 +38,38 @@ if __name__ == '__main__':
         sitl = dronekit_sitl.start_default()
         connection_string = sitl.connection_string()
 
-    # Connect to the Vehicle
-    print('Connecting to vehicle on: %s' % connection_string)
+    # Connect to the Vehicle.
+    #   Set `wait_ready=True` to ensure default attributes are populated before `connect()` returns.
+    print "\nConnecting to vehicle on: %s" % connection_string
     vehicle = connect(connection_string, wait_ready=True)
 
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
-    print " Type: %s" % vehicle._vehicle_type
-    print " Armed: %s" % vehicle.armed
-    print " System status: %s" % vehicle.system_status.state
+    # Get some vehicle attributes (state)
+    print "Get some vehicle attribute values:"
+    print " Autopilot Firmware version: %s" % vehicle.version
+    #print " Autopilot capabilities (supports ftp): %s" % vehicle.capabilities.ftp
+    print " Global Location: %s" % vehicle.location.global_frame
+    print " Global Location (relative altitude): %s" % vehicle.location.global_relative_frame
+    print " Local Location: %s" % vehicle.location.local_frame
+    print " Attitude: %s" % vehicle.attitude
+    print " Velocity: %s" % vehicle.velocity
     print " GPS: %s" % vehicle.gps_0
-    print " Alt: %s" % vehicle.location.global_relative_frame.alt
+    print " Groundspeed: %s" % vehicle.groundspeed
+    print " Airspeed: %s" % vehicle.airspeed
+    print " Gimbal status: %s" % vehicle.gimbal
+    print " Battery: %s" % vehicle.battery
+    print " EKF OK?: %s" % vehicle.ekf_ok
+    print " Last Heartbeat: %s" % vehicle.last_heartbeat
+    print " Rangefinder: %s" % vehicle.rangefinder
+    print " Rangefinder distance: %s" % vehicle.rangefinder.distance
+    print " Rangefinder voltage: %s" % vehicle.rangefinder.voltage
+    print " Heading: %s" % vehicle.heading
+    print " Armed: %s" % vehicle.armed
+    print " Is Armable?: %s" % vehicle.is_armable
+    print " System status: %s" % vehicle.system_status.state
+    print " Mode: %s" % vehicle.mode.name
 
-    vehicle.add_attribute_listener('attitude', attitude_callback)
-
-    cmds = vehicle.commands
-    cmds.clear()
-    cmds.upload()
-
-    # Initialize the takeoff sequence to 20m
-    arm_and_wait(5)
-
-    print("Arm and wait complete")
-
-    vehicle.remove_attribute_listener('attitude', attitude_callback)
-
-    # Close vehicle object
+    # Close vehicle object before exiting script
     vehicle.close()
 
-    # Shut down simulator if it was started.
-    if sitl:
-        sitl.stop()
+    print("Completed")
