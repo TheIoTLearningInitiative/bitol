@@ -35,9 +35,6 @@ RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
 USER user
 
 WORKDIR /home/user
-
-ADD --chown=1000:1000 main.sh /home/user/
-RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 RUN mkdir /home/user/ardupilot/
 
 RUN git clone git://github.com/ArduPilot/ardupilot.git && \
