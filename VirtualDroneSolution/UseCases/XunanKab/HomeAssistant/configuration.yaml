@@ -11,7 +11,19 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: UTC
   # Customization file
-  customize: !include customize.yaml
+  #customize: !include customize.yaml
+  customize:
+
+    binary_sensor.quintana_roo_connectivity:
+      friendly_name: Quintana Roo
+
+    sensor.quintana_roo_battery:
+      friendly_name: Baterry
+      icon: mdi:battery
+
+    sensor.quintana_roo_heading:
+      friendly_name: Heading
+      icon: mdi:compass
 
 # Show links to resources in log and frontend
 introduction:
@@ -66,7 +78,7 @@ tts:
 # Cloud
 cloud:
 
-group: !include groups.yaml
+#group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
@@ -74,16 +86,45 @@ script: !include scripts.yaml
 mqtt:
   broker: iot.eclipse.org
 
+binary_sensor:
+  - platform: mqtt
+    state_topic: "xunankab/quintanaroo/connectivity"
+    name: "Quintana Roo Connectivity"
+    device_class: connectivity
+
 sensor:
   - platform: mqtt
     state_topic: "xunankab/quintanaroo/battery"
-    name: "Battery Drone"
+    name: "Quintana Roo Battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
+    value_template: '{{ value_json.battery }}'
     device_class: battery
   - platform: mqtt
     state_topic: "xunankab/quintanaroo/heading"
-    name: "Heading Drone"
-    unit_of_measurement: "%"
+    name: "Quintana Roo Heading"
     value_template: '{{ value_json.heading }}'
-    device_class: battery
+
+group:
+
+  default_view:
+    view: yes
+    name: Command Center
+    entities:
+      - group.xunankablands
+
+  quintanaroolands:
+    view: yes
+    name: Quintana Roo
+    entities:
+      - group.quintanaroosensors
+
+  xunankablands:
+    name: XunanKab
+    entities:
+      - binary_sensor.quintana_roo_connectivity
+
+  quintanaroosensors:
+    name: Sensors
+    entities:
+      - sensor.quintana_roo_battery
+      - sensor.quintana_roo_heading

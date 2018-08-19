@@ -14,6 +14,7 @@ import time
 import paho.mqtt.client as paho
 
 from dronekit import connect, VehicleMode, LocationGlobalRelative
+from ppretty import ppretty
 from pymavlink import mavutil
 
 from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlobalRelative
@@ -25,12 +26,12 @@ from threading import Thread
 # =============================================================================
 
 def battery_callback(self, attr_name, value):
-    print(vehicle.battery)
-    print(str(vehicle.battery))
+    payload = {}
+    payload["battery"] = vehicle.battery.voltage
     client = paho.Client()
     client.connect("iot.eclipse.org", 1883, 60)
     topic = "xunankab/quintanaroo/battery"
-    #client.publish(topic, payload=json.dumps(vehicle.battery))
+    client.publish(topic, payload=json.dumps(payload))
 
 def heading_callback(self, attr_name, value):
     payload = {}
