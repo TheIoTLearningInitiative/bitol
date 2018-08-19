@@ -70,7 +70,7 @@ def clear_mission(vehicle):
     # After clearing the mission you MUST re-download the mission from the vehicle
     # before vehicle.commands can be used again
     # (see https://github.com/dronekit/dronekit-python/issues/230)
-    
+
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready()
@@ -79,7 +79,6 @@ def download_mission(vehicle):
     cmds = vehicle.commands
     cmds.download()
     cmds.wait_ready()
-    
 
 def get_current_mission(vehicle):
     download_mission(vehicle)
@@ -87,8 +86,7 @@ def get_current_mission(vehicle):
     n_WP        = 0
     for wp in vehicle.commands:
         missionList.append(wp)
-        n_WP += 1 
-        
+        n_WP += 1
     return n_WP, missionList
 
 def add_last_waypoint_to_mission(
@@ -109,8 +107,8 @@ def add_last_waypoint_to_mission(
                            mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
                            mavutil.mavlink.MAV_CMD_NAV_WAYPOINT,
                            0, 0, 0, 0, 0, 0,
-                           wp_Last_Latitude, 
-                           wp_Last_Longitude, 
+                           wp_Last_Latitude,
+                           wp_Last_Longitude,
                            wp_Last_Altitude)
     missionlist.append(wpLastObject)
 
@@ -119,8 +117,8 @@ def add_last_waypoint_to_mission(
     for cmd in missionlist:
         cmds.add(cmd)
     cmds.upload()
-    
-    return (cmds.count)    
+
+    return (cmds.count)
 
 def ChangeMode(vehicle, mode):
     while vehicle.mode != VehicleMode(mode):
@@ -136,50 +134,49 @@ gnd_speed = 10 # [m/s]
 mode      = 'GROUND'
 
 while True:
-    
+
     if mode == 'GROUND':
         n_WP, missionList = get_current_mission(vehicle)
         time.sleep(2)
         if n_WP > 0:
             print ("A valid mission has been uploaded: Takeoff!")
             mode = 'TAKEOFF'
-            
+
     elif mode == 'TAKEOFF':
-       
-        add_last_waypoint_to_mission(vehicle, vehicle.location.global_relative_frame.lat, 
-                                       vehicle.location.global_relative_frame.lon, 
+
+        add_last_waypoint_to_mission(vehicle, vehicle.location.global_relative_frame.lat,
+                                       vehicle.location.global_relative_frame.lon,
                                        vehicle.location.global_relative_frame.alt)
-        
         print("Home waypoint added to the mission")
         time.sleep(1)
         arm_and_takeoff(10)
-        
+
         print("Changing to AUTO")
         ChangeMode(vehicle,"AUTO")
-        
+
         vehicle.groundspeed = gnd_speed
         mode = 'MISSION'
         print ("Switch mode to MISSION")
-        
+
     elif mode == 'MISSION':
-        
+
         #-- vehicle.commands.cout is the total number of waypoints
         #-- vehicle.commands.next is the waypoint the vehicle is going to
         #-- once next == cout, we just go home
-        
+
         print ("Current WP: %d of %d "%(vehicle.commands.next, vehicle.commands.count))
         if vehicle.commands.next == vehicle.commands.count:
             print ("Final waypoint reached: Go back home!")
 
             clear_mission(vehicle)
             print ("Mission deleted")
-            
+
             ChangeMode(vehicle,"RTL")
             mode = "BACK"
-            
+
     elif mode == "BACK":
         if vehicle.location.global_relative_frame.alt < 1:
             print ("Switch to GROUND mode, waiting for new missions")
             mode = 'GROUND'
-    
+
     time.sleep(0.5)
