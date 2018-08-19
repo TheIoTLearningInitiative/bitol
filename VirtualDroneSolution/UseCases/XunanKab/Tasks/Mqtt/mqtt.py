@@ -34,9 +34,7 @@ def battery_callback(self, attr_name, value):
 
 def heading_callback(self, attr_name, value):
     payload = {}
-    print(vehicle.heading)
     payload["heading"] = vehicle.heading
-    print payload
     client = paho.Client()
     client.connect("iot.eclipse.org", 1883, 60)
     topic = "xunankab/quintanaroo/heading"
@@ -79,7 +77,7 @@ if __name__ == '__main__':
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
-    #vehicle.add_attribute_listener('battery', battery_callback)
+    vehicle.add_attribute_listener('battery', battery_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
     #vehicle.add_attribute_listener('*', wildcard_callback)
 
