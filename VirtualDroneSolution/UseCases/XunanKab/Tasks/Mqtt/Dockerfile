@@ -6,7 +6,7 @@ ENV TIMEZONE America/Mexico_City
 ENV ENVIRONMENTAL /etc/profile
 
 
-RUN pip install paho-mqtt
+RUN pip install paho-mqtt ppretty
 
 USER user
 WORKDIR /home/user

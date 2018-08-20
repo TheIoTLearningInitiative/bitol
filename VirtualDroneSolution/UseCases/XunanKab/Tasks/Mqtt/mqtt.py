@@ -25,6 +25,17 @@ from threading import Thread
 # Functions
 # =============================================================================
 
+def system_status_callback(self, attr_name, value):
+    payload = {}
+    if vehicle.system_status.state == "ACTIVE":
+        payload["status"] = "ON"
+    else:
+        payload["status"] = "OFF"
+    client = paho.Client()
+    client.connect("iot.eclipse.org", 1883, 60)
+    topic = "xunankab/quintanaroo/status"
+    client.publish(topic, payload=json.dumps(payload))
+
 def battery_callback(self, attr_name, value):
     payload = {}
     payload["battery"] = vehicle.battery.voltage
@@ -78,15 +89,17 @@ if __name__ == '__main__':
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
+    vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
     #vehicle.add_attribute_listener('*', wildcard_callback)
 
     time.sleep(5)
 
+    vehicle.remove_attribute_listener('heading', heading_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
+    vehicle.remove_attribute_listener('system_status', system_status_callback)
     #vehicle.remove_attribute_listener('*', wildcard_callback)
-
 
     # Close vehicle object
     vehicle.close()
