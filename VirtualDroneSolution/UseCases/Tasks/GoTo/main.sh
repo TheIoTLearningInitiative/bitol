@@ -12,6 +12,7 @@ VEHICLEID=$3
 LATITUDE=$4
 LONGITUDE=$5
 ALTITUDE=$6
+SPEED=$7
 
 # =============================================================================
 # Functions
@@ -25,4 +26,5 @@ ALTITUDE=$6
 
 cd $HOME/
 python goto.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
-               --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} 
+               --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} \
+               --speed=${SPEED}
