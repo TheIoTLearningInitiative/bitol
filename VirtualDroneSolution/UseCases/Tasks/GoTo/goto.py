@@ -92,7 +92,11 @@ if __name__ == '__main__':
 
     arm_and_takeoff(altitude)
 
-    vehicle.airspeed = 15
+    # Get the set of commands from the vehicle
+    cmds = vehicle.commands
+    cmds.download()
+    cmds.wait_ready()
+
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
     print "Distance to waypoint: ", distancetowaypoint
@@ -105,9 +109,9 @@ if __name__ == '__main__':
         if remainingdistance <= 1:
             break
 
-    print "\nSet Vehicle.mode = STABILIZE (currently: %s)" % vehicle.mode.name 
-    vehicle.mode = VehicleMode("STABILIZE")
-    while not vehicle.mode.name=='STABILIZE':
+    print "\nSet Vehicle.mode = GUIDED (currently: %s)" % vehicle.mode.name 
+    vehicle.mode = VehicleMode("GUIDED")
+    while not vehicle.mode.name=='GUIDED':
         print " Waiting for mode change ..."
 
     vehicle.close()
