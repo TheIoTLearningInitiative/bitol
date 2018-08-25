@@ -27,6 +27,8 @@ pip install sphinx monotonic future nose mock sphinx-3dr-theme
 pip install pymavlink
 pip install dronekit
 pip install dronekit-sitl -UI
+pip install paho-mqtt
+pip install ppretty
 
 git clone https://github.com/dronekit/dronekit-python.git
 cd dronekit-python
