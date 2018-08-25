@@ -19,41 +19,7 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
 # Functions
 # =============================================================================
 
-def attitude_callback(self, attr_name, value):
-    print(vehicle.attitude)
-
-def arm_and_takeoff(tgt_altitude):
-    """
-    Arms vehicle and fly to aTargetAltitude.
-    """
-
-    print("Basic pre-arm checks")
-    # Don't try to arm until autopilot is ready
-    while not vehicle.is_armable:
-        print(" Waiting for vehicle to initialise...")
-        time.sleep(1)
-
-    while vehicle.gps_0.fix_type < 2:
-        print "Waiting for GPS...:", vehicle.gps_0.fix_type
-        time.sleep(1)
-
-    vehicle.mode = VehicleMode("GUIDED")
-    vehicle.armed = True
-
-    while not vehicle.armed:
-        print(" Waiting for arming...")
-        time.sleep(1)
-
-    print("Takeoff")
-    vehicle.simple_takeoff(tgt_altitude)
-
-    while True:
-        altitude = vehicle.location.global_relative_frame.alt
-        if altitude >= tgt_altitude -1:
-            print("Altitude reached")
-            break
-
-        time.sleep(1)
+# None
 
 # =============================================================================
 # Main
@@ -66,12 +32,10 @@ if __name__ == '__main__':
     parser.add_argument('--connect',
                         help="Vehicle connection target string. If not specified, SITL automatically started and used.")
     parser.add_argument('--id')
-    parser.add_argument('--alt')
     args = parser.parse_args()
 
     connection_string = args.connect
     vehicleid = float(args.id)
-    altitude = float(args.alt)
     sitl = None
 
     # Start SITL if no connection string specified
@@ -91,8 +55,6 @@ if __name__ == '__main__':
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
-    vehicle.add_attribute_listener('attitude', attitude_callback)
-
     # Get Vehicle Home location - will be `None` until first set by autopilot
     while not vehicle.home_location:
         cmds = vehicle.commands
@@ -104,10 +66,11 @@ if __name__ == '__main__':
     # We have a home location.
     print "Home location: %s" % vehicle.home_location
 
-    # Initialize the takeoff sequence
-    arm_and_takeoff(altitude)
+    vehicle.mode = VehicleMode("LAND")
 
-    vehicle.remove_attribute_listener('attitude', attitude_callback)
+    while vehicle.armed:
+        print(" Waiting for disarming...")
+        time.sleep(1)
 
     # Close vehicle object
     vehicle.close()
