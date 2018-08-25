@@ -89,6 +89,7 @@ if __name__ == '__main__':
     parser.add_argument('--lat')
     parser.add_argument('--long')
     parser.add_argument('--alt')
+    parser.add_argument('--speed')
     args = parser.parse_args()
 
     connection_string = args.connect
@@ -96,6 +97,7 @@ if __name__ == '__main__':
     latitude = float(args.lat)
     longitude = float(args.long)
     altitude = float(args.alt)
+    speed = float(args.speed)
 
     remainingdistance=0
 
@@ -130,6 +132,7 @@ if __name__ == '__main__':
     cmds.download()
     cmds.wait_ready()
 
+    vehicle.airspeed = speed
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
     print "Distance to waypoint: ", distancetowaypoint
