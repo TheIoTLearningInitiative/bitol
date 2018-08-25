@@ -12,7 +12,8 @@ import argparse
 import math
 import time
 
-from dronekit import connect, VehicleMode, LocationGlobalRelative
+from dronekit import connect, Command, VehicleMode, LocationGlobalRelative, LocationGlobal
+from pymavlink import mavutil
 
 # =============================================================================
 # Functions
@@ -56,6 +57,26 @@ def get_distance_metres(aLocation1, aLocation2):
     dlong = aLocation2.lon - aLocation1.lon
     return math.sqrt((dlat*dlat) + (dlong*dlong)) * 1.113195e5
 
+def get_location_offset_meters(original_location, dNorth, dEast, alt):
+    """
+    Returns a LocationGlobal object containing the latitude/longitude `dNorth` and `dEast` metres from the
+    specified `original_location`. The returned Location adds the entered `alt` value to the altitude of the `original_location`.
+    The function is useful when you want to move the vehicle around specifying locations relative to
+    the current vehicle position.
+    The algorithm is relatively accurate over small distances (10m within 1km) except close to the poles.
+    For more information see:
+    http://gis.stackexchange.com/questions/2951/algorithm-for-offsetting-a-latitude-longitude-by-some-amount-of-meters
+    """
+    earth_radius=6378137.0 #Radius of "spherical" earth
+    #Coordinate offsets in radians
+    dLat = dNorth/earth_radius
+    dLon = dEast/(earth_radius*math.cos(math.pi*original_location.lat/180))
+
+    #New position in decimal degrees
+    newlat = original_location.lat + (dLat * 180/math.pi)   
+    newlon = original_location.lon + (dLon * 180/math.pi)
+    return LocationGlobal(newlat, newlon,original_location.alt+alt)
+
 # =============================================================================
 # Main
 # =============================================================================
@@ -82,6 +103,7 @@ if __name__ == '__main__':
     vehicle = connect(connection_string, wait_ready=True)
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
 
+    #vehicle.home_location=vehicle.location.global_frame
     while not vehicle.home_location:
         cmds = vehicle.commands
         cmds.download()
@@ -89,6 +111,17 @@ if __name__ == '__main__':
         if not vehicle.home_location:
             print " Waiting for home location ..."
     print "Home location: %s" % vehicle.home_location
+
+    home = vehicle.location.global_relative_frame
+    print home
+
+    time.sleep(5)
+
+    # takeoff to 10 meters
+    wp = get_location_offset_meters(home, 0, 0, 10);
+    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    cmds.add(cmd)
+    cmds.upload
 
     arm_and_takeoff(altitude)
 

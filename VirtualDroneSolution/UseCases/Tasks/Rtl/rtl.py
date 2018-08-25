@@ -12,7 +12,8 @@ import argparse
 import math
 import time
 
-from dronekit import connect, VehicleMode, LocationGlobalRelative
+from dronekit import connect, Command, LocationGlobal, VehicleMode
+from pymavlink import mavutil
 
 # =============================================================================
 # Functions
@@ -72,27 +73,36 @@ if __name__ == '__main__':
     vehicleid = float(args.id)
     altitude = float(args.alt)
 
-    remainingdistance=0
-
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
 
+    cmds = vehicle.commands
+    print cmds
+
+    #vehicle.home_location=vehicle.location.global_frame
     #while not vehicle.home_location:
     #    cmds = vehicle.commands
     #    cmds.download()
     #    cmds.wait_ready()
     #    if not vehicle.home_location:
     #        print " Waiting for home location ..."
-    #print "Home location: %s" % vehicle.home_location
+    print "Home location: %s" % vehicle.home_location
+    time.sleep(5)
 
-    vehicle.airspeed = 15
-    arm_and_wait(altitude)
-    vehicle.parameters['RTL_ALT'] = altitude
+    #home = vehicle.location.global_relative_frame
+    #print home
+
+    print "\nSet Vehicle.mode = RTL (currently: %s)" % vehicle.mode.name
     vehicle.mode = VehicleMode("RTL")
+    while not vehicle.mode.name=='RTL':
+        print " Waiting for mode change ..."
 
-    while vehicle.armed:
-        print(" Waiting for disarming...")
-        time.sleep(1)
+    #vehicle.home_location=vehicle.location.global_frame
+    #print "Get new home location"
+    #cmds = vehicle.commands
+    #cmds.download()
+    #cmds.wait_ready()
+    #print " Home Location: %s" % vehicle.home_location
 
     vehicle.close()
