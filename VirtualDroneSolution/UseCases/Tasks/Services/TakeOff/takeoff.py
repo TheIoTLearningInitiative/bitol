@@ -107,13 +107,6 @@ if __name__ == '__main__':
     # Initialize the takeoff sequence
     arm_and_takeoff(altitude)
 
-    time.sleep(5)
-
-    vehicle.mode = VehicleMode("LAND")
-    while vehicle.armed:
-        print(" Waiting for disarming...")
-        time.sleep(1)
-
     vehicle.remove_attribute_listener('attitude', attitude_callback)
 
     # Close vehicle object
