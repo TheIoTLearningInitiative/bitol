@@ -89,6 +89,7 @@ if __name__ == '__main__':
     parser.add_argument('--lat')
     parser.add_argument('--long')
     parser.add_argument('--alt')
+    parser.add_argument('--speed')
     args = parser.parse_args()
 
     connection_string = args.connect
@@ -96,6 +97,7 @@ if __name__ == '__main__':
     latitude = float(args.lat)
     longitude = float(args.long)
     altitude = float(args.alt)
+    speed = float(args.speed)
 
     remainingdistance=0
 
@@ -129,7 +131,7 @@ if __name__ == '__main__':
     cmds.download()
     cmds.wait_ready()
 
-    vehicle.airspeed = 15
+    vehicle.airspeed = speed
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
     print "Distance to waypoint: ", distancetowaypoint
@@ -144,6 +146,7 @@ if __name__ == '__main__':
 
     print "\nSet Vehicle.mode = GUIDED (currently: %s)" % vehicle.mode.name 
     vehicle.parameters['RTL_ALT'] = altitude
+    vehicle.parameters['RTL_SPEED'] = speed
     vehicle.mode = VehicleMode("RTL")
     while not vehicle.mode.name=='RTL':
         print " Waiting for mode change ..."
