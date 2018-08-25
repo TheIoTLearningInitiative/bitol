@@ -72,6 +72,7 @@ if __name__ == '__main__':
     connection_string = args.connect
     vehicleid = float(args.id)
     altitude = float(args.alt)
+    speed = float(args.speed)
 
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
@@ -88,12 +89,12 @@ if __name__ == '__main__':
     #    if not vehicle.home_location:
     #        print " Waiting for home location ..."
     print "Home location: %s" % vehicle.home_location
+    print vehicle.location.global_relative_frame
     time.sleep(5)
 
-    #home = vehicle.location.global_relative_frame
-    #print home
-
     print "\nSet Vehicle.mode = RTL (currently: %s)" % vehicle.mode.name
+    vehicle.parameters['RTL_ALT'] = altitude
+    vehicle.parameters['RTL_SPEED'] = speed
     vehicle.mode = VehicleMode("RTL")
     while not vehicle.mode.name=='RTL':
         print " Waiting for mode change ..."
