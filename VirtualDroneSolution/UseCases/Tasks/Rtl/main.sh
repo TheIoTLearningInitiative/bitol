@@ -9,7 +9,8 @@ set -x
 IPADDRESS=$1
 PORT=$2
 VEHICLEID=$3
-ALTITUDE=$6
+ALTITUDE=$4
+SPEED=$5
 
 # =============================================================================
 # Functions
@@ -23,4 +24,4 @@ ALTITUDE=$6
 
 cd $HOME/
 python rtl.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
-              --alt=${ALTITUDE} 
+              --alt=${ALTITUDE} --speed=${SPEED}
