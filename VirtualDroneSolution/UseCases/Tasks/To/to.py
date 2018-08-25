@@ -132,7 +132,7 @@ if __name__ == '__main__':
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
     print "Distance to waypoint: ", distancetowaypoint
-    time.sleep(2)
+    time.sleep(10)
 
     vehicle.simple_goto(waypoint)
 
