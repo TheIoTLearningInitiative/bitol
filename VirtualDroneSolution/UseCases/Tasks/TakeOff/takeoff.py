@@ -19,8 +19,8 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
 # Functions
 # =============================================================================
 
-def attitude_callback(self, attr_name, value):
-    print(vehicle.attitude)
+def altitude_callback(self, attr_name, value):
+    print("Altitude: %s" % vehicle.location.global_relative_frame.alt)
 
 def arm_and_takeoff(tgt_altitude):
     """
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
-    vehicle.add_attribute_listener('attitude', attitude_callback)
+    vehicle.add_attribute_listener('location', altitude_callback)
 
     # Get Vehicle Home location - will be `None` until first set by autopilot
     while not vehicle.home_location:
@@ -114,7 +114,7 @@ if __name__ == '__main__':
         print(" Waiting for disarming...")
         time.sleep(1)
 
-    vehicle.remove_attribute_listener('attitude', attitude_callback)
+    vehicle.remove_attribute_listener('location', altitude_callback)
 
     # Close vehicle object
     vehicle.close()
