@@ -67,6 +67,7 @@ if __name__ == '__main__':
     parser.add_argument('--connect')
     parser.add_argument('--id')
     parser.add_argument('--alt')
+    parser.add_argument('--speed')
     args = parser.parse_args()
 
     connection_string = args.connect
