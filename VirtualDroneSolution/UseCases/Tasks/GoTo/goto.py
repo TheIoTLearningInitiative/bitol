@@ -9,6 +9,7 @@
 # =============================================================================
 
 import argparse
+import math
 import time
 
 from dronekit import connect, VehicleMode, LocationGlobalRelative
@@ -44,6 +45,17 @@ def arm_and_takeoff(tgt_altitude):
 
         time.sleep(1)
 
+def get_distance_metres(aLocation1, aLocation2):
+    """
+    Returns the ground distance in metres between two LocationGlobal objects.
+    This method is an approximation, and will not be accurate over large distances and close to the 
+    earth's poles. It comes from the ArduPilot test code: 
+    https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py
+    """
+    dlat = aLocation2.lat - aLocation1.lat
+    dlong = aLocation2.lon - aLocation1.lon
+    return math.sqrt((dlat*dlat) + (dlong*dlong)) * 1.113195e5
+
 # =============================================================================
 # Main
 # =============================================================================
@@ -64,6 +76,8 @@ if __name__ == '__main__':
     longitude = float(args.long)
     altitude = float(args.alt)
 
+    remainingdistance=0
+
     print("Connection to the vehicle on %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
     vehicle.parameters['SYSID_THISMAV'] = vehicleid
@@ -80,14 +94,20 @@ if __name__ == '__main__':
 
     vehicle.airspeed = 15
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
+    distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
+    print "Distance to waypoint: ", distancetowaypoint
+
     vehicle.simple_goto(waypoint)
-    time.sleep(30)
 
-    vehicle.parameters['RTL_ALT'] = altitude
-    vehicle.mode = VehicleMode("RTL")
+    while vehicle.mode.name=='GUIDED':
+        remainingdistance = get_distance_metres(vehicle.location.global_frame, waypoint)
+        print "Remaining distance to waypoint", remainingdistance
+        if remainingdistance <= 1:
+            break
 
-    while vehicle.armed:
-        print(" Waiting for disarming...")
-        time.sleep(1)
+    print "\nSet Vehicle.mode = STABILIZE (currently: %s)" % vehicle.mode.name 
+    vehicle.mode = VehicleMode("STABILIZE")
+    while not vehicle.mode.name=='STABILIZE':
+        print " Waiting for mode change ..."
 
     vehicle.close()
