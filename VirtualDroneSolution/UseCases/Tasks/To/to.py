@@ -119,18 +119,17 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    # takeoff to 10 meters
-    wp = get_location_offset_meters(home, 0, 0, 10);
+    wp = get_location_offset_meters(home, 0, 0, altitude);
     cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
     cmds.add(cmd)
     cmds.upload
 
-    arm_and_takeoff(altitude)
+    #arm_and_takeoff(altitude)
 
     # Get the set of commands from the vehicle
-    cmds = vehicle.commands
-    cmds.download()
-    cmds.wait_ready()
+    #cmds = vehicle.commands
+    #cmds.download()
+    #cmds.wait_ready()
 
     vehicle.airspeed = speed
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
