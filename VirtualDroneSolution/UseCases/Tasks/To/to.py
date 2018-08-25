@@ -121,7 +121,7 @@ if __name__ == '__main__':
     #cmds.add(cmd)
     #cmds.upload
 
-    arm_and_takeoff(altitude)
+    #arm_and_takeoff(altitude)
 
     # Get the set of commands from the vehicle
     #cmds = vehicle.commands
