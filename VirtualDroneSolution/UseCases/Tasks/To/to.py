@@ -119,10 +119,10 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    wp = get_location_offset_meters(home, 0, 0, altitude);
-    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-    cmds.add(cmd)
-    cmds.upload
+    #wp = get_location_offset_meters(home, 0, 0, altitude);
+    #cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    #cmds.add(cmd)
+    #cmds.upload
 
     #arm_and_takeoff(altitude)
 
@@ -135,6 +135,7 @@ if __name__ == '__main__':
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
     distancetowaypoint = get_distance_metres(vehicle.location.global_frame, waypoint)
     print "Distance to waypoint: ", distancetowaypoint
+    time.sleep(2)
 
     vehicle.simple_goto(waypoint)
 
