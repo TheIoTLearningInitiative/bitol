@@ -113,11 +113,8 @@ if __name__ == '__main__':
         if not vehicle.home_location:
             print " Waiting for home location ..."
     print "Home location: %s" % vehicle.home_location
-
-    home = vehicle.location.global_relative_frame
-    print home
-
-    time.sleep(5)
+    print vehicle.location.global_relative_frame
+    time.sleep(2)
 
     #wp = get_location_offset_meters(home, 0, 0, altitude);
     #cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
@@ -130,6 +127,12 @@ if __name__ == '__main__':
     #cmds = vehicle.commands
     #cmds.download()
     #cmds.wait_ready()
+
+    while True:
+        altitude = vehicle.location.global_relative_frame.alt
+        if altitude >= tgt_altitude -1:
+            print("Altitude reached")
+            break    
 
     vehicle.airspeed = speed
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
