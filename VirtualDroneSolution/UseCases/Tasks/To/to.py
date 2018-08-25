@@ -35,8 +35,8 @@ def arm_and_takeoff(tgt_altitude):
     while not vehicle.armed:
         time.sleep(1)
 
-    #print("Takeoff")
-    #vehicle.simple_takeoff(tgt_altitude)
+    print("Takeoff")
+    vehicle.simple_takeoff(tgt_altitude)
 
     while True:
         altitude = vehicle.location.global_relative_frame.alt
@@ -121,18 +121,12 @@ if __name__ == '__main__':
     #cmds.add(cmd)
     #cmds.upload
 
-    #arm_and_takeoff(altitude)
+    arm_and_takeoff(altitude)
 
     # Get the set of commands from the vehicle
     #cmds = vehicle.commands
     #cmds.download()
     #cmds.wait_ready()
-
-    while True:
-        altitude = vehicle.location.global_relative_frame.alt
-        if altitude >= tgt_altitude -1:
-            print("Altitude reached")
-            break    
 
     vehicle.airspeed = speed
     waypoint = LocationGlobalRelative(latitude, longitude, altitude)
