@@ -63,9 +63,11 @@ RUN  cmake \
     -D BUILD_opencv_python3=YES ..
 
 RUN make -j$(nproc) && make install && ldconfig
+RUN ln -s /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so \
+    /usr/local/lib/python3.5/dist-packages/cv2.so
 RUN pip install imutils
 
-RUN rm -rf opencv-$OPENCV_VERSION .zip opencv3.zip ~/opencv-3.4.2
+RUN rm -rf /opencv-$OPENCV_VERSION /opencv_contrib$OPENCV_VERSION.zip
 
 EXPOSE 5000
 
