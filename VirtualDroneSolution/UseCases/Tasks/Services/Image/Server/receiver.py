@@ -38,6 +38,7 @@ while(cap.isOpened()):
     ret, frame = cap.read()
     print("ret, frame")
 
+    cv2.imshow('real', frame)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     print("gray")
 
