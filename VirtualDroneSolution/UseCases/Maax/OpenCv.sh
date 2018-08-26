@@ -3,21 +3,23 @@
 OPENCV_VERSION=3.4.2
 apk add --update --no-cache \
     # Build dependencies
-    build-base clang clang-dev cmake pkgconf wget openblas openblas-dev \
+    clang clang-dev cmake pkgconf wget openblas openblas-dev \
     linux-headers \
     # Image IO packages
-    libjpeg-turbo libjpeg-turbo-dev \
+    libjpeg-turbo-dev \
     libpng libpng-dev \
     libwebp libwebp-dev \
     tiff tiff-dev \
     jasper-libs jasper-dev \
     openexr openexr-dev \
     # Video depepndencies
-    ffmpeg-libs ffmpeg-dev \
+    ffmpeg-dev \
     libavc1394 libavc1394-dev \
     gstreamer gstreamer-dev \
     gst-plugins-base gst-plugins-base-dev \
     libgphoto2 libgphoto2-dev
+
+# apk add --update --no-cache build-base libjpeg-turbo ffmpeg-libs
 
 apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
         --update --no-cache libtbb libtbb-dev
