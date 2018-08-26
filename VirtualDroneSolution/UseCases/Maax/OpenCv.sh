@@ -41,7 +41,6 @@ mkdir -vp /tmp/opencv-$OPENCV_VERSION/build
 cd /tmp/opencv-$OPENCV_VERSION/build
 
 cmake \
-    # Compiler params
     -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_C_COMPILER=/usr/bin/clang \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
@@ -67,8 +66,6 @@ cmake \
     -D PYTHON_EXECUTABLE=`which python3` \
     -D PYTHON3_EXECUTABLE=`which python3` \
     -D BUILD_opencv_python3=YES ..
-
-exit 0
 
 # Build
 make -j`grep -c '^processor' /proc/cpuinfo`
