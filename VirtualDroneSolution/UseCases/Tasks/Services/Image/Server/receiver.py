@@ -20,9 +20,13 @@ import cv2
 #cap = cv2.VideoCapture('udpsrc port=5000 caps=\"application/x-rtp, media=video, clock-rate=9000, encoding-name=JPEG, payload=26" ! rtpjpegdepay ! jpegdec ! xvimagesink sync=0') 
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, media=video, clock-rate=9000, encoding-name=JPEG ! rtpjpegdepay ! jpegdec ! appsink')
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! autovideosink')
-cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
+#cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
 #cap = cv2.VideoCapture('videotestsrc ! appsink')
 #cap = cv2.VideoCapture('autovideosrc ! autovideosink')
+
+# Working
+#cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
+cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
 #out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
 #                      'udpsink host=127.0.0.1 port=5000',
