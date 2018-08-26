@@ -9,13 +9,13 @@ framerate = 25.0
 #                      'tcpserversink host=127.0.0.1 port=5000 sync=false',
 #                      0, framerate, (640, 480))
 
-#out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
-#                      'udpsink host=127.0.0.1 port=5000',
-#                      0, framerate, (640, 480))
-
-out = cv2.VideoWriter('v4l2src ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
+out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
                       'udpsink host=127.0.0.1 port=5000',
-                       0, framerate, (640, 480))
+                      0, framerate, (640, 480))
+
+#out = cv2.VideoWriter('v4l2src ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
+#                      'udpsink host=127.0.0.1 port=5000',
+#                       0, framerate, (640, 480))
 
 
 while cap.isOpened():
