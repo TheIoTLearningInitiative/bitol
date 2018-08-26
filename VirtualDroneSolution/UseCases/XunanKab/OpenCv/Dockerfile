@@ -17,18 +17,25 @@ RUN apt-get update && apt-get install -y sudo build-essential cmake pkg-config l
     libatlas-base-dev gfortran wget unzip python-dev python-numpy \
     libtbb2 libtbb-dev libjpeg-dev libpng-dev libjasper-dev libdc1394-22-dev \
     libgtk-3-dev python2.7-dev python3.5-dev git python-pip python3-pip python3-testresources \
-    libcanberra-gtk-module nano \
-    gstreamer1.0-alsa gstreamer1.0-clutter-3.0 gstreamer1.0-doc \
-    gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps gstreamer1.0-plugins-base-dbg \
-    gstreamer1.0-plugins-base-doc gstreamer1.0-plugins-good gstreamer1.0-plugins-good-dbg \
-    gstreamer1.0-plugins-good-doc gstreamer1.0-pulseaudio gstreamer1.0-tools gstreamer1.0-x \
-    gstreamer1.0-clutter gstreamer1.0-crystalhd gstreamer1.0-dvswitch gstreamer1.0-espeak \
-    gstreamer1.0-fluendo-mp3 gstreamer1.0-libav gstreamer1.0-libav-dbg gstreamer1.0-nice \
-    gstreamer1.0-packagekit gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-dbg \
-    gstreamer1.0-plugins-bad-doc gstreamer1.0-plugins-bad-faad gstreamer1.0-plugins-bad-videoparsers \
-    gstreamer1.0-plugins-ugly gstreamer1.0-plugins-ugly-amr gstreamer1.0-plugins-ugly-dbg \
-    gstreamer1.0-plugins-ugly-doc gstreamer1.0-pocketsphinx gstreamer1.0-vaapi gstreamer1.0-vaapi-doc && \
+    libcanberra-gtk-module nano
+
+RUN apt-get install -y libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc \
+    gstreamer1.0-tools libgstreamer-plugins-base1.0-dev && \
     rm -rf /var/lib/apt/lists/*
+
+#    libgstreamer-plugins-base1.0-dev \
+#    gstreamer1.0-alsa gstreamer1.0-clutter-3.0 gstreamer1.0-doc \
+#    gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps gstreamer1.0-plugins-base-dbg \
+#    gstreamer1.0-plugins-base-doc gstreamer1.0-plugins-good gstreamer1.0-plugins-good-dbg \
+#    gstreamer1.0-plugins-good-doc gstreamer1.0-pulseaudio gstreamer1.0-tools gstreamer1.0-x \
+#    gstreamer1.0-clutter gstreamer1.0-crystalhd gstreamer1.0-dvswitch gstreamer1.0-espeak \
+#    gstreamer1.0-fluendo-mp3 gstreamer1.0-libav gstreamer1.0-libav-dbg gstreamer1.0-nice \
+#    gstreamer1.0-packagekit gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-dbg \
+#    gstreamer1.0-plugins-bad-doc gstreamer1.0-plugins-bad-faad gstreamer1.0-plugins-bad-videoparsers \
+#    gstreamer1.0-plugins-ugly gstreamer1.0-plugins-ugly-amr gstreamer1.0-plugins-ugly-dbg \
+#    gstreamer1.0-plugins-ugly-doc gstreamer1.0-pocketsphinx gstreamer1.0-vaapi gstreamer1.0-vaapi-doc && \
+#    rm -rf /var/lib/apt/lists/*
 
 RUN python -m pip install --upgrade pip && pip3 install numpy
 
@@ -64,24 +71,18 @@ RUN  cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_opencv_python2=NO \
     -D BUILD_opencv_python3=YES ..
 
-#RUN make -j4 && make install && ldconfig
+RUN make -j$(nproc) && make install && ldconfig
+RUN pip install imutils
+
 #RUN rm -rf opencv_contrib3.zip opencv3.zip ~/opencv-3.4.2
-#WORKDIR "/"
-#RUN git clone https://github.com/Reyes-fred/Xiaomin.git
-#WORKDIR /Xiaomin
-#RUN cd Setup/ && sh setup.sh
-#RUN pip install imutils
-#EXPOSE 5760
 
-#RUN groupadd user && \
-#    useradd -g user -s /bin/bash -d /home/user -m user && \
-#    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+EXPOSE 5000
 
-#USER user
-#WORKDIR /home/user
+RUN groupadd user && \
+    useradd -g user -s /bin/bash -d /home/user -m user && \
+    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-#CMD ["/bin/bash"]
+USER user
+WORKDIR /home/user
 
-
-
-
+CMD ["/bin/bash"]
