@@ -13,7 +13,7 @@ WORKDIR /
 
 RUN apt-get update && apt-get install -y sudo build-essential cmake pkg-config libjpeg8-dev \
     libtiff5-dev libjasper-dev libpng12-dev libavcodec-dev libavformat-dev \
-    libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
+    libswscale-dev libv4l-0 libv4l-dev libxvidcore-dev libx264-dev \
     libatlas-base-dev gfortran wget unzip python-dev python-numpy \
     libtbb2 libtbb-dev libjpeg-dev libpng-dev libjasper-dev libdc1394-22-dev \
     libgtk-3-dev python2.7-dev python3.5-dev git python-pip python3-pip python3-testresources \
@@ -38,20 +38,22 @@ RUN mkdir -p /opencv-$OPENCV_VERSION/build
 
 WORKDIR /opencv-$OPENCV_VERSION/build
 
-RUN  cmake -D CMAKE_BUILD_TYPE=RELEASE \
+RUN  cmake \
+    -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_PYTHON_SUPPORT=0N \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D INSTALL_C_EXAMPLES=OFF \
     -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib-$OPENCV_VERSION/modules \
     -D PYTHON3_EXECUTABLE=/usr/bin/python3.5 \
-    -D BUILD_EXAMPLES=ON \
-    -D BUILD_NEW_PYTHON_SUPPORT=ON \
-    -D WITH_V4L=ON \
-    -D WITH_TBB=ON \
-    -D WITH_FFMPEG=ON \
-    -D WITH_GPHOTO2=ON \
-    -D WITH_GSTREAMER=ON \
+    -D BUILD_EXAMPLES=NO \
+    -D BUILD_NEW_PYTHON_SUPPORT=YES \
+    -D WITH_LIBV4L=YES \
+    -D WITH_V4L=YES \
+    -D WITH_TBB=YES \
+    -D WITH_FFMPEG=YES \
+    -D WITH_GPHOTO2=YES \
+    -D WITH_GSTREAMER=YES \
     -D BUILD_DOCS=NO \
     -D BUILD_TESTS=NO \
     -D BUILD_PERF_TESTS=NO \
