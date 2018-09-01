@@ -26,34 +26,22 @@ from threading import Thread
 # =============================================================================
 
 def system_status_callback(self, attr_name, value):
-    payload = {}
     if vehicle.system_status.state == "ACTIVE":
         payload["status"] = "ON"
     else:
         payload["status"] = "OFF"
-    client = paho.Client()
-    client.connect("iot.eclipse.org", 1883, 60)
-    topic = "xunankab/quintanaroo/status"
-    client.publish(topic, payload=json.dumps(payload))
 
 def battery_callback(self, attr_name, value):
-    payload = {}
     payload["battery"] = vehicle.battery.voltage
-    client = paho.Client()
-    client.connect("iot.eclipse.org", 1883, 60)
-    topic = "xunankab/quintanaroo/battery"
-    client.publish(topic, payload=json.dumps(payload))
 
 def heading_callback(self, attr_name, value):
-    payload = {}
     payload["heading"] = vehicle.heading
-    client = paho.Client()
-    client.connect("iot.eclipse.org", 1883, 60)
-    topic = "xunankab/quintanaroo/heading"
-    client.publish(topic, json.dumps(payload))
 
 def wildcard_callback(self, attr_name, value):
     print " CALLBACK: (%s): %s" % (attr_name,value)
+    topic = "xunankab/quintanaroo"
+    client.publish(topic, payload=json.dumps(payload))
+
 
 # =============================================================================
 # Main
@@ -71,6 +59,11 @@ if __name__ == '__main__':
     connection_string = args.connect
     vehicleid = float(args.id)
     sitl = None
+
+    client = paho.Client()
+    client.connect("iot.eclipse.org", 1883, 60)
+
+    payload = {}
 
     # Start SITL if no connection string specified
     if not connection_string:
@@ -92,14 +85,14 @@ if __name__ == '__main__':
     vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
-    #vehicle.add_attribute_listener('*', wildcard_callback)
+    vehicle.add_attribute_listener('*', wildcard_callback)
 
-    time.sleep(5)
+    time.sleep(60)
 
     vehicle.remove_attribute_listener('heading', heading_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
     vehicle.remove_attribute_listener('system_status', system_status_callback)
-    #vehicle.remove_attribute_listener('*', wildcard_callback)
+    vehicle.remove_attribute_listener('*', wildcard_callback)
 
     # Close vehicle object
     vehicle.close()
