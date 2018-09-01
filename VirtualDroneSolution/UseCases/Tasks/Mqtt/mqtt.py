@@ -37,6 +37,9 @@ def battery_callback(self, attr_name, value):
 def heading_callback(self, attr_name, value):
     payload["heading"] = vehicle.heading
 
+def location_callback(self, attr_name, value):
+    payload["alt"] = vehicle.location.global_relative_frame.alt
+
 def wildcard_callback(self, attr_name, value):
     print " CALLBACK: (%s): %s" % (attr_name,value)
     topic = "xunankab/quintanaroo"
@@ -85,6 +88,7 @@ if __name__ == '__main__':
     vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
+    vehicle.add_attribute_listener('location', location_callback)
     vehicle.add_attribute_listener('*', wildcard_callback)
 
     time.sleep(60)
@@ -92,6 +96,7 @@ if __name__ == '__main__':
     vehicle.remove_attribute_listener('heading', heading_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
     vehicle.remove_attribute_listener('system_status', system_status_callback)
+    vehicle.remove_attribute_listener('global_relative_frame', global_relative_frame_callback)
     vehicle.remove_attribute_listener('*', wildcard_callback)
 
     # Close vehicle object
