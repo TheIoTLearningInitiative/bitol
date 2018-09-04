@@ -44,6 +44,7 @@ def wildcard_callback(self, attr_name, value):
     print " CALLBACK: (%s): %s" % (attr_name,value)
     topic = "xunankab/quintanaroo"
     client.publish(topic, payload=json.dumps(payload))
+    time.sleep(1)
 
 
 # =============================================================================

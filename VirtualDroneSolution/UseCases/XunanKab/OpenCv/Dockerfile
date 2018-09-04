@@ -24,7 +24,7 @@ RUN apt-get install -y libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-
     gstreamer1.0-tools libgstreamer-plugins-base1.0-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install --upgrade pip && pip3 install numpy
+RUN python3 -m pip install --upgrade pip && pip3 install numpy
 
 RUN wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && \
     unzip -q $OPENCV_VERSION.zip && \

@@ -3,11 +3,11 @@ import cv2
 framerate=25
 
 #cap = cv2.VideoCapture(0)
-#cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
-cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
+cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
+#cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
 out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
-                      'udpsink host=127.0.0.1 port=5600',
+                      'udpsink host=172.17.0.1 port=5600',
                       0, framerate, (640, 480))
 # Create the haar cascade
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -37,7 +37,7 @@ while(True):
 
 	# Display the resulting frame
 	out.write(frame)
-	cv2.imshow('frame', frame)
+	#cv2.imshow('frame', frame)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
