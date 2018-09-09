@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Abraham Arce <xe1gyq@gmail.com>
+MAINTAINER Alfredo Reyes "reyes-fred@hotmail.com"
 
 ARG OPENCV_VERSION=3.4.2
 
