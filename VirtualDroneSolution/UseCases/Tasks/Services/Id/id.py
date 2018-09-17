@@ -16,6 +16,7 @@ This script will introduce multiple things:
 # =============================================================================
 
 import argparse
+import re
 import time
 
 from dronekit import connect, VehicleMode
@@ -50,10 +51,11 @@ if __name__ == '__main__':
     vehicle.wait_ready('autopilot_version')
     print('Autopilot Version: %s' % vehicle.version)
 
-    print("Vehicle ID Old: %d" % vehicle.parameters['SYSID_THISMAV']) 
-    vehicle.parameters['SYSID_THISMAV'] = vehicleid
-    time.sleep(1)
-    print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV'])
-    time.sleep(1)
+    if re.search(r'PX4*', str(vehicle.version)):
+        print("Vehicle ID Old: %d" % vehicle.parameters['MAV_SYS_ID'])
+        vehicle.parameters['MAV_SYS_ID'] = vehicleid
+        time.sleep(1)
+        print("Vehicle ID New: %d" % vehicle.parameters['MAV_SYS_ID'])
+        time.sleep(1)
 
     vehicle.close()
