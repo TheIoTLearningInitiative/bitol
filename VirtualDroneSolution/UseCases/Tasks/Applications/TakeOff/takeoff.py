@@ -7,6 +7,7 @@
 
 import argparse
 import math
+import re
 import sys
 import time
 
@@ -84,7 +85,12 @@ if __name__ == '__main__':
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
-    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    #if re.search(r'PX4*', str(vehicle.version)):
+    #    print vehicle.parameters['MAV_SYS_ID']
+    #    time.sleep(5)
+    #    vehicle.parameters['MAV_SYS_ID'] = vehicleid
+    #else:
+    #    vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print " Type: %s" % vehicle._vehicle_type
     print " Armed: %s" % vehicle.armed
     print " System status: %s" % vehicle.system_status.state
@@ -94,12 +100,12 @@ if __name__ == '__main__':
     vehicle.add_attribute_listener('location', altitude_callback)
 
     # Get Vehicle Home location - will be `None` until first set by autopilot
-    while not vehicle.home_location:
-        cmds = vehicle.commands
-        cmds.download()
-        cmds.wait_ready()
-        if not vehicle.home_location:
-            print " Waiting for home location ..."
+    #while not vehicle.home_location:
+    #    cmds = vehicle.commands
+    #    cmds.download()
+    #    cmds.wait_ready()
+    #    if not vehicle.home_location:
+    #        print " Waiting for home location ..."
 
     # We have a home location.
     print "Home location: %s" % vehicle.home_location

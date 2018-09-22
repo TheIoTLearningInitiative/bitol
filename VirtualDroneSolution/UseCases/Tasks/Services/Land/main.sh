@@ -21,4 +21,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python land.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python land.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}

@@ -23,5 +23,5 @@ SPEED=$5
 # =============================================================================
 
 cd $HOME/
-python rtl.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python rtl.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
               --alt=${ALTITUDE} --speed=${SPEED}

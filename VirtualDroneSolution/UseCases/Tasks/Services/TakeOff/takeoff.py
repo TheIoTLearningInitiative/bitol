@@ -7,6 +7,7 @@
 
 import argparse
 import math
+import re
 import sys
 import time
 
@@ -84,7 +85,10 @@ if __name__ == '__main__':
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
-    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    if re.search(r'PX4*', str(vehicle.version)):
+        vehicle.parameters['MAV_SYS_ID'] = vehicleid
+    else:
+        vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print " Type: %s" % vehicle._vehicle_type
     print " Armed: %s" % vehicle.armed
     print " System status: %s" % vehicle.system_status.state

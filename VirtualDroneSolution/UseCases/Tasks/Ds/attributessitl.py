@@ -13,12 +13,75 @@ from pymavlink import mavutil, mavwp
 
 from dronekit import connect, VehicleMode, Command
 
+
+# =============================================================================
+# Objects
+# =============================================================================
+
+class VehicleStates(object):
+  hover = "HOVER"
+  flying = "FLYING"
+  takeoff = "TAKEOFF"
+  unknown = "UNKNOWN"
+  avoidance = "AVOIDANCE"
+  landing = "LANDING"
+  landed = "LANDED"
+
 # =============================================================================
 # Functions
 # =============================================================================
 
 def channels_callback(self, attr_name, value):
     print(vehicle.channels)
+
+def rangefinder_callback(self, attr_name, value):
+    print(vehicle.rangerfinder)
+
+
+class DroneAttitude():
+
+    def __init__(self):
+
+        self.vehicle = None
+        self.vehicle_initialized = False
+        self.vehicle_state = VehicleStates.unknown
+
+    def initialize(self)
+        if (not self.vehicle_initialized):
+            self.vehicle = dronekit.connect(self.USB, baud = self.BAUDRATE, wait_ready=True)
+
+    def takeoff(self, target_altitude):
+
+        self.vehicle_state = VehicleStates.takeoff
+
+        self.arm_drone()
+        self.switch_control()
+
+        initial_alt = self.vehicle.location.global_relative_frame.alt
+
+        while((self.vehicle.location.global_relative_frame.alt - initial_alt) < target_altitude):
+            self.set_angle_thrust(StandardAttitudes.level, StandardThrusts.takeoff)
+            sleep(self.STANDARD_SLEEP_TIME)
+
+        print('Reached target altitude:{0:.2f}m'.format(self.vehicle.location.global_relative_frame.alt))
+
+def hover(duration):
+
+        LOITER_HOVER_THROTTLE = 1500
+
+	vehicle.channels.overrides['3'] = LOITER_HOVER_THROTTLE
+
+	msg = vehicle.message_factory.command_long_encode(
+					0, 0,       # target system, target component
+					mavutil.mavlink.MAV_CMD_NAV_LOITER_UNLIM, # command
+					0,          # confirmation
+					0, 0, 0, 0, # param 1-4, not used
+					0, 0, 0)    # param 5-7, set 0 for current position
+	vehicle.send_mavlink(msg)
+	vehicle.flush()
+	time.sleep(duration)
+	vehicle.channels.overrides['3'] = None
+	return True
 
 # =============================================================================
 # Main
@@ -72,30 +135,37 @@ if __name__ == '__main__':
     print " Param: %s" % vehicle.parameters['WP_YAW_BEHAVIOR']
     #print vehicle.parameters
     #pprint(vars(vehicle.parameters))
-    #for property, value in vars(vehicle.parameters).iteritems():
-    #    print property, ": ", value
+    for property, value in vars(vehicle).iteritems():
+        print property, ": ", value
 
-    vehicle.mode = VehicleMode("GUIDED")
+    #vehicle.mode = VehicleMode("GUIDED")
     print vehicle.mode
 
-    vehicle.add_attribute_listener('channels', channels_callback)
+    #vehicle.add_attribute_listener('channels', channels_callback)
+    vehicle.add_attribute_listener('rangefinder', rangefinder_callback)
 
-    while pwm < 1010:
+    hover(5)
+
+    while pwm < 1005:
         SERVO_CHANNEL=1
         rgb_led = vehicle.message_factory.command_long_encode(
-            0, 0,          # target system, target component
+            vehicleid,     # target_system
+            0,             # target component
             mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
             0,             #confirmation
             8,             # param 1, Servo number
             pwm,           # PWM value
             0, 0, 0, 0, 0) # param 3 ~ 7 not used
         vehicle.send_mavlink(rgb_led)
+        vehicle.flush()
         #Command(1,1,0,mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
         #          mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
         #          0,1,SERVO_CHANNEL,pwm,0,0,0,0,0)
+        time.sleep(1)
         pwm += 1
-        time.sleep(2)
-        print pwm
+
+    vehicle.remove_attribute_listener('channels', altitude_callback)
+    vehicle.remove_attribute_listener('rangefinder', altitude_callback)
 
     vehicle.close()
 

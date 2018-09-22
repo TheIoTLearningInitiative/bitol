@@ -6,7 +6,7 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
+CONNECTION=$1
 PORT=$2
 VEHICLEID=$3
 
@@ -21,4 +21,5 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python id.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}
+#python id.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python id.py --connect="${CONNECTION}" --id=${VEHICLEID}

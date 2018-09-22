@@ -21,4 +21,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python mqtt.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python mqtt.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}

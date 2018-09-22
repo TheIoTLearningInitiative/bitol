@@ -10,8 +10,15 @@ cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
 out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
-                      'udpsink host=172.0.0.1 port=5600',
+                      'udpsink host=172.17.0.1 port=5800',
                       0, framerate, (640, 480))
+#out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,width=640,height=480 ! videoconvert ! x264enc ! rtph264pay ! '
+#                      'udpsink host=172.17.0.1 port=5600',
+#                      0, framerate, (640, 480))
+#out = cv2.VideoWriter('appsrc ! video/x-raw,width=640,height=480 !  x264enc tune=zerolatency byte-stream=true  bitrate=3000 threads=2 !  h264parse config-interval=1 !  rtph264pay !'
+#                      'udpsink host=127.0.0.1 port=5600',
+#                      0, framerate, (640, 480))
+
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 while(True):

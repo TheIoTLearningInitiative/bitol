@@ -1,11 +1,19 @@
 #!/usr/bin/python
 
 # =============================================================================
+# https://github.com/LU-Jiale/MSc_CXmodel-Drone
+# https://github.com/LU-Jiale/cx_model_drone
+# https://github.com/Drones4STEM/DroneController/
+# https://github.com/MST-MRR/IARC-2018
+# =============================================================================
+
+# =============================================================================
 # Libraries
 # =============================================================================
 
 import argparse
 import math
+import threading
 import time
 from time import sleep
 from pprint import pprint
@@ -75,6 +83,40 @@ class StandardThrusts(object):
     takeoff = 0.75
     full = 1.00
 
+class Lights(threading.Thread):
+
+    def __init__(self, atc_instance):
+        self.atc = atc_instance
+        self.stoprequest = threading.Event()
+        super(Lights, self).__init__()
+
+    def run(self):
+        while not self.stoprequest.isSet():
+            if self.atc.STATE == VehicleStates.hover or self.atc.STATE == VehicleStates.flying:
+            #self.atc.check_sonar_sensors()
+            #self.atc.check_battery_voltage()
+                sleep(0.1)
+
+    def start_lights(self):
+        pwm = 1000
+        while pwm < 1005:
+            SERVO_CHANNEL=1
+            rgb_led = self.vehicle.message_factory.command_long_encode(
+                self.vehicle_id,     # target_system
+                0,             # target component
+                mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
+                0,             #confirmation
+                8,             # param 1, Servo number
+                pwm,           # PWM value
+                0, 0, 0, 0, 0) # param 3 ~ 7 not used
+            self.vehicle.send_mavlink(rgb_led)
+            self.vehicle.flush()
+            #Command(1,1,0,mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT,
+            #          mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
+            #          0,1,SERVO_CHANNEL,pwm,0,0,0,0,0)
+            time.sleep(1)
+            pwm += 1
+
 class Drone():
 
     def __init__(self, vehicle_connection, vehicle_id):
@@ -94,19 +136,19 @@ class Drone():
         print(vehicle.rangerfinder)
 
     def start_callbacks(self):
-        self.vehicle.add_attribute_listener('channels', channels_callback)
-        self.vehicle.add_attribute_listener('rangefinder', rangefinder_callback)
+        self.vehicle.add_attribute_listener('channels', self.channels_callback)
+        self.vehicle.add_attribute_listener('rangefinder', self.rangefinder_callback)
 
     def stop_callbacks(self):
-        vehicle.remove_attribute_listener('channels', channels_callback)
-        vehicle.remove_attribute_listener('rangefinder', rangefinder_callback)
+        self.vehicle.remove_attribute_listener('channels', self.channels_callback)
+        self.vehicle.remove_attribute_listener('rangefinder', self.rangefinder_callback)
 
     def start_lights(self):
         pwm = 1000
         while pwm < 1005:
             SERVO_CHANNEL=1
             rgb_led = self.vehicle.message_factory.command_long_encode(
-                vehicleid,     # target_system
+                self.vehicle_id,     # target_system
                 0,             # target component
                 mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
                 0,             #confirmation
@@ -176,7 +218,8 @@ class Drone():
             print " Param: %s" % self.vehicle.parameters['WP_YAW_BEHAVIOR']
 
             self.vehicle.mode = VehicleMode("STABILIZE")
-            print self.vehicle.mode
+            self.STATE = VehicleStates.landed
+            self.vehicle_initialized = True
 
     def arm(self):
         self.vehicle.armed = True
@@ -186,7 +229,6 @@ class Drone():
     def takeoff(self, target_altitude):
 
         self.vehicle_state = VehicleStates.takeoff
-
         self.switch_control()
 
         initial_alt = self.vehicle.location.global_relative_frame.alt
@@ -251,9 +293,12 @@ if __name__ == '__main__':
     quintanaroo = Drone(vehicle_connection, vehicle_id)
     quintanaroo.connect()
     quintanaroo.arm()
-    quintanaroo.takeoff(5)
+    #quintanaroo.start_callbacks()
+    quintanaroo.start_lights()
+    quintanaroo.takeoff(2)
     sleep(5)
     quintanaroo.land()
+    #quintanaroo.stop_callbacks()
     quintanaroo.disarm()
     quintanaroo.disconnect()
 

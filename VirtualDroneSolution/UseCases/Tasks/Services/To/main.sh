@@ -25,6 +25,6 @@ SPEED=$7
 # =============================================================================
 
 cd $HOME/
-python go.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python go.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
                --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} \
                --speed=${SPEED}

@@ -23,5 +23,7 @@ SERVER_PORT_UDP_OUT=$3
 pwd
 ls
 cd $HOME/
+ip a
+sleep 2m
 #python3 facedetect.py ${DEVICE_PORT_UDP_IN} ${SERVER_IP} ${SERVER_PORT_UDP_OUT}
-python3 facedetect.py
+#python3 facedetect.py

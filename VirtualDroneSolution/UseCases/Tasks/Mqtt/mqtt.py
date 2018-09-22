@@ -23,6 +23,7 @@ from threading import Thread
 
 # =============================================================================
 # Functions
+# https://github.com/xe1gyq/Team0UavProject
 # =============================================================================
 
 def system_status_callback(self, attr_name, value):
