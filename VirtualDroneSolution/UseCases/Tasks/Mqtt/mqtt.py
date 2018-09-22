@@ -26,26 +26,32 @@ from threading import Thread
 # =============================================================================
 
 def system_status_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/connectivity"
     if vehicle.system_status.state == "ACTIVE":
         payload["status"] = "ON"
     else:
         payload["status"] = "OFF"
+    client.publish(topic, payload=json.dumps(payload))
 
 def battery_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/battery"
     payload["battery"] = vehicle.battery.voltage
+    client.publish(topic, payload=json.dumps(payload))
 
 def heading_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/heading"
     payload["heading"] = vehicle.heading
+    client.publish(topic, payload=json.dumps(payload))
 
 def location_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/location"
     payload["alt"] = vehicle.location.global_relative_frame.alt
+    client.publish(topic, payload=json.dumps(payload))
 
 def wildcard_callback(self, attr_name, value):
     print " CALLBACK: (%s): %s" % (attr_name,value)
     topic = "xunankab/quintanaroo"
     client.publish(topic, payload=json.dumps(payload))
-    time.sleep(1)
-
 
 # =============================================================================
 # Main
@@ -89,16 +95,16 @@ if __name__ == '__main__':
     vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
-    vehicle.add_attribute_listener('location', location_callback)
-    vehicle.add_attribute_listener('*', wildcard_callback)
+    #vehicle.add_attribute_listener('location', location_callback)
+    #vehicle.add_attribute_listener('*', wildcard_callback)
 
     time.sleep(60)
 
     vehicle.remove_attribute_listener('heading', heading_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
     vehicle.remove_attribute_listener('system_status', system_status_callback)
-    vehicle.remove_attribute_listener('global_relative_frame', global_relative_frame_callback)
-    vehicle.remove_attribute_listener('*', wildcard_callback)
+    #vehicle.remove_attribute_listener('global_relative_frame', global_relative_frame_callback)
+    #vehicle.remove_attribute_listener('*', wildcard_callback)
 
     # Close vehicle object
     vehicle.close()

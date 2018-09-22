@@ -13,6 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install pip && \
+    pip install pyserial && \
     pip install dronekit && \
     pip install dronekit-sitl -UI
 
@@ -20,7 +21,8 @@ EXPOSE 5760
 
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
-    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    adduser user dialout
 
 USER user
 WORKDIR /home/user
