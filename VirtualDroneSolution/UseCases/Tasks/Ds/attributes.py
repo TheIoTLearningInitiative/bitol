@@ -5,6 +5,7 @@
 # =============================================================================
 
 import argparse
+import time
 from pprint import pprint
 
 from pymavlink import mavutil, mavwp
@@ -44,6 +45,7 @@ if __name__ == '__main__':
     print "\nConnecting to vehicle on: %s" % connection_string
     #vehicle = connect(connection_string, wait_ready=True)
     vehicle = connect(connection_string, wait_ready=False, baud=57600)
+    time.sleep(3)
 
     #vehicle.parameters['SYSID_THISMAV'] = vehicleid
     # Get some vehicle attributes (state)
@@ -74,8 +76,27 @@ if __name__ == '__main__':
     #print " Vehicle Id: %s" % vehicle.parameters["SYSID_THISMAV"]
     #print vehicle.parameters
     #pprint(dir(vehicle.parameters))
-    for property, value in vars(vehicle.parameters).iteritems():
-        print property, ": ", value
+    #for property, value in vars(vehicle.parameters).iteritems():
+    #    print property, ": ", value
+
+    pwm = 0
+    while pwm < 20:
+        msg = vehicle.message_factory.command_long_encode(0,0,mavutil.mavlink.MAV_CMD_DO_SET_SERVO, 0, pwm, 1250, 0, 0, 0, 0, 0)
+        #rgb_led = vehicle.message_factory.command_long_encode(
+        #    0,             # target_system
+        #    0,             # target component
+        #    mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
+        #    0,             # confirmation
+        #    pwm,             # param 1, Servo number
+        #    1250,          # PWM value
+        #    0, 0, 0, 0, 0) # param 3 ~ 7 not used
+        #vehicle.send_mavlink(rgb_led)
+        #vehicle.flush()
+        vehicle.send_mavlink(msg)
+        vehicle.flush()
+        time.sleep(5)
+        pwm += 1
+        print pwm
 
     vehicle.close()
 

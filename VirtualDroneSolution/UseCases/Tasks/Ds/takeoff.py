@@ -25,13 +25,22 @@ def altitude_callback(self, attr_name, value):
 
 def arm_and_takeoff(tgt_altitude):
 
+    if vehicle.armed and vehicle.location.global_relative_frame.alt > 2:
+        print "\n\tVehicle armed and possible flying, aborting take off!\n"
+        return
+
     #print("Basic pre-arm checks")
     # Don't try to arm until autopilot is ready
     #while not vehicle.is_armable:
     #    print(" Waiting for vehicle to initialise...")
     #    time.sleep(1)
+    print "Basic pre-arm checks"
+    # Don't let the user try to fly autopilot is booting
+    if vehicle.mode.name == "INITIALISING":
+        print "Waiting for vehicle to initialise"
+        time.sleep(1)
 
-    vehicle.mode = VehicleMode("GUIDED")
+    vehicle.mode = VehicleMode("STABILIZE")
     vehicle.armed = True
 
     while not vehicle.armed:
@@ -41,13 +50,23 @@ def arm_and_takeoff(tgt_altitude):
     print("Takeoff")
     vehicle.simple_takeoff(tgt_altitude)
 
-    while True:
-        altitude = vehicle.location.global_relative_frame.alt
-        if altitude >= tgt_altitude -1:
-            print("Altitude reached")
-            break
+    #while True:
+    #    altitude = vehicle.location.global_relative_frame.alt
+    #    if altitude >= tgt_altitude -1:
+    #        print("Altitude reached")
+    #        break
+    #     time.sleep(1)
 
-        time.sleep(1)
+    try:
+        while vehicle.mode.name=="ALT_HOLD":
+            print " -> Alt:", vehicle.location.global_relative_frame.alt
+            if abs(vehicle.location.global_relative_frame.alt-tgt_altitude) < 0.05: 
+                print "\n\tReached %0.1f m\n" % (tgt_altitude)
+                break
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print "Keyboard Interrupt on arm_and_takeoff."
+        pass # do cleanup here
 
 # =============================================================================
 # Main
@@ -68,8 +87,8 @@ if __name__ == '__main__':
     altitude = float(args.alt)
 
     print('Connecting to vehicle on: %s' % connection_string)
+    #vehicle = connect(connection_string, wait_ready=False)
     vehicle = connect(connection_string, wait_ready=False, baud=57600)
-
 
     #vehicle.parameters['MAV_SYS_ID'] = vehicleid
     #vehicle.parameters['SYSID_THISMAV'] = vehicleid
@@ -85,7 +104,7 @@ if __name__ == '__main__':
 
     arm_and_takeoff(altitude)
 
-    time.sleep(5)
+    time.sleep(20)
 
     vehicle.mode = VehicleMode("LAND")
     while vehicle.armed:

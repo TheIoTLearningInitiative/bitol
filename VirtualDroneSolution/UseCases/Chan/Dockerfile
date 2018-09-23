@@ -9,13 +9,13 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt install -y sudo && \
-    apt install -y python-pip python-dev git && \
+    apt install -y python-pip python-dev && \
+    apt install -y git vi mplayer && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install pip && \
-    pip install pyserial && \
-    pip install dronekit && \
-    pip install dronekit-sitl -UI
+    pip install opencv-python && \
+    pip install pygame
 
 EXPOSE 9000
 EXPOSE 9617

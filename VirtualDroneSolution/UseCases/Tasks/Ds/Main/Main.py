@@ -8,11 +8,17 @@
 # =============================================================================
 
 # =============================================================================
+# D1L D1M D2L D2M D3L D3M D4L D4M D5L D5M D6L D6M D7L D7M D8L D8M
+# =============================================================================
+
+# =============================================================================
 # Libraries
 # =============================================================================
 
 import argparse
+import csv
 import math
+import sys
 import threading
 import time
 from time import sleep
@@ -167,6 +173,7 @@ class Drone():
         #if not self.failsafes:
         #    self.failsafes = FailsafeController(self)
         #    self.failsafes.start()
+        #print self.vehicle.mode.name
         if self.vehicle.mode.name != "GUIDED_NOGPS":
             self.vehicle.mode = VehicleMode("GUIDED_NOGPS")
             while(self.vehicle.mode.name != "GUIDED_NOGPS"):
@@ -197,12 +204,14 @@ class Drone():
 
             print "\nConnecting to vehicle on: %s" % self.vehicle_connection
             #self.vehicle = dronekit.connect(self.USB, baud = self.BAUDRATE, wait_ready=True)
-            self.vehicle = connect(self.vehicle_connection, wait_ready=True, source_system=self.vehicle_id)
-            #vehicle = connect(connection_string, wait_ready=False, baud=57600, source_system=self.vehicle_id)
+            #self.vehicle = connect(self.vehicle_connection, wait_ready=True, source_system=self.vehicle_id)
+            self.vehicle = connect(self.vehicle_connection, wait_ready=False, baud=57600, source_system=self.vehicle_id)
 
             if not self.vehicle:
                 print("\nUnable to connect to vehicle.")
                 return
+
+            time.sleep(5)
 
             #vehicle.parameters['SYSID_THISMAV'] = vehicleid
             # Get some vehicle attributes (state)
@@ -219,6 +228,8 @@ class Drone():
 
             #self.vehicle.mode = VehicleMode("STABILIZE")
             self.vehicle.mode = VehicleMode("LOITER")
+            print self.vehicle.mode
+            sleep(3)
             self.STATE = VehicleStates.landed
             self.vehicle_initialized = True
 
@@ -297,13 +308,21 @@ if __name__ == '__main__':
     vehicle_connection = args.connect
     vehicle_id = float(args.id)
 
+    with open("Sequence.txt") as csvfile:
+        content = csv.reader(csvfile, delimiter=',')
+        for row in content:
+            if len(row) == 8:
+                print "Commands"
+                for drone in row:
+                    print drone
+
     quintanaroo = Drone(vehicle_connection, vehicle_id)
     quintanaroo.connect()
     quintanaroo.arm()
     #quintanaroo.start_callbacks()
-    quintanaroo.start_lights()
+    #quintanaroo.start_lights()
     quintanaroo.takeoff(2)
-    sleep(5)
+    #sleep(5)
     quintanaroo.land()
     #quintanaroo.stop_callbacks()
     quintanaroo.disarm()
