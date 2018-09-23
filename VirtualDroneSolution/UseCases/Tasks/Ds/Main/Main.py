@@ -198,7 +198,7 @@ class Drone():
             print "\nConnecting to vehicle on: %s" % self.vehicle_connection
             #self.vehicle = dronekit.connect(self.USB, baud = self.BAUDRATE, wait_ready=True)
             self.vehicle = connect(self.vehicle_connection, wait_ready=True, source_system=self.vehicle_id)
-            #vehicle = connect(connection_string, wait_ready=False, baud=57600)
+            #vehicle = connect(connection_string, wait_ready=False, baud=57600, source_system=self.vehicle_id)
 
             if not self.vehicle:
                 print("\nUnable to connect to vehicle.")
@@ -214,15 +214,19 @@ class Drone():
             print " Is Armable?: %s" % self.vehicle.is_armable
             print " System status: %s" % self.vehicle.system_status.state
             print " Mode: %s" % self.vehicle.mode.name
-            print " Vehicle Id: %s" % self.vehicle.parameters["SYSID_THISMAV"]
-            print " Param: %s" % self.vehicle.parameters['WP_YAW_BEHAVIOR']
+            #print " Vehicle Id: %s" % self.vehicle.parameters["SYSID_THISMAV"]
+            #print " Param: %s" % self.vehicle.parameters['WP_YAW_BEHAVIOR']
 
-            self.vehicle.mode = VehicleMode("STABILIZE")
+            #self.vehicle.mode = VehicleMode("STABILIZE")
+            self.vehicle.mode = VehicleMode("LOITER")
             self.STATE = VehicleStates.landed
             self.vehicle_initialized = True
 
     def arm(self):
         self.vehicle.armed = True
+        #mav.mav.command_long_send(mav.target_system, mav.target_component,
+        #                  mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, 0, 1,
+        #                  0, 0, 0, 0, 0, 0)
         while ( not self.vehicle.armed ):
             sleep(1)
 
@@ -250,6 +254,9 @@ class Drone():
 
     def disarm(self):
         self.vehicle.armed = False
+        #mav.mav.command_long_send(mav.target_system, mav.target_component,
+        #                  mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, 0, 0,
+        #                  0, 0, 0, 0, 0, 0)
         while(self.vehicle.armed):
             sleep(1)
 
