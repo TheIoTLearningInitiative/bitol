@@ -6,6 +6,7 @@
 # https://github.com/Drones4STEM/DroneController/
 # https://github.com/MST-MRR/IARC-2018
 # https://github.com/alduxvm/DronePilot
+# https://github.com/intel-aero/meta-intel-aero/wiki
 # =============================================================================
 
 # =============================================================================
