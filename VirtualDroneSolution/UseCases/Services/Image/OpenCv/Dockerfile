@@ -48,7 +48,7 @@ RUN  cmake \
     -D PYTHON3_EXECUTABLE=/usr/bin/python3.5 \
     -D PYTHON_INCLUDE_DIR=/usr/include/python3.5 \
     -D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.5m.so \
-    -D BUILD_EXAMPLES=NO \
+    -D BUILD_EXAMPLES=YES \
     -D BUILD_NEW_PYTHON_SUPPORT=YES \
     -D WITH_LIBV4L=YES \
     -D WITH_V4L=YES \
