@@ -5,6 +5,7 @@
 # https://github.com/LU-Jiale/cx_model_drone
 # https://github.com/Drones4STEM/DroneController/
 # https://github.com/MST-MRR/IARC-2018
+# https://github.com/alduxvm/DronePilot
 # =============================================================================
 
 # =============================================================================
