@@ -1,0 +1,1 @@
+docker run --device /dev/video0 -p 54717:8888 -t -i xe1gyq/simplecv
