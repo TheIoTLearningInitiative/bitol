@@ -1,1 +1,2 @@
 docker run --device /dev/video0 -p 54717:8888 -t -i xe1gyq/simplecv
+docker run -it --device /dev/video0 -v $(pwd):/home/user/ xe1gyq/simplecv

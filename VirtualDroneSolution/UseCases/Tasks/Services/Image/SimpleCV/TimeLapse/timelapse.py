@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='commands')
     parser.add_argument('--frames', type=int)
-    parser.add_argument('--interval', type=int)
+    parser.add_argument('--interval', type=float)
     parser.add_argument('--fps', type=int)
     args = parser.parse_args()
 

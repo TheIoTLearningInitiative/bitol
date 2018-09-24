@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt install -y sudo && \
     apt install -y python-pip python-dev && \
-    apt install -y git vi mplayer && \
+    apt install -y git vim mplayer && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install pip && \

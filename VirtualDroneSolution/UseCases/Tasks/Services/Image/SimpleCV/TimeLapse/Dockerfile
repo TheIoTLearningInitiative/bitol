@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM xe1gyq/simplecv
 
 MAINTAINER Abraham Arce "xe1gyq@gmail.com"
 
@@ -10,9 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /
 
 RUN apt-get -y update
-RUN apt-get -y install ipython python-opencv python-scipy python-numpy python-setuptools python-pip python-pygame
-RUN pip install https://github.com/sightmachine/SimpleCV/zipball/master
-RUN pip install svgwrite
+RUN apt-get -y install ffmpeg
 
 EXPOSE 5000
 
