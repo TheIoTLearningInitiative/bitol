@@ -8,9 +8,7 @@ set -x
 
 CONNECTION=$1
 VEHICLEID=$2
-LATITUDE=$3
-LONGITUDE=$4
-ALTITUDE=$5
+ALTITUDE=$3
 
 # =============================================================================
 # Functions
@@ -23,5 +21,4 @@ ALTITUDE=$5
 # =============================================================================
 
 cd $HOME/
-python square.py --connect=${CONNECTION} --id=${VEHICLEID} \
-               --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} 
+python square.py --connect=${CONNECTION} --id=${VEHICLEID} --alt=${ALTITUDE}

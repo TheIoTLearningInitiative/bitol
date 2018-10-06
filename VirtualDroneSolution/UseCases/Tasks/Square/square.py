@@ -105,15 +105,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='commands')
     parser.add_argument('--connect')
     parser.add_argument('--id')
-    parser.add_argument('--lat')
-    parser.add_argument('--long')
     parser.add_argument('--alt')
     args = parser.parse_args()
 
     connection_string = args.connect
     vehicleid = float(args.id)
-    latitude = float(args.lat)
-    longitude = float(args.long)
     altitude = float(args.alt)
 
 
