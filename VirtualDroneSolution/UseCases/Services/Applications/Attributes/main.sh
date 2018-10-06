@@ -21,4 +21,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python attributes.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python attributes.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}

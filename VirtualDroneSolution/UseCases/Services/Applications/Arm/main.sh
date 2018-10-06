@@ -21,4 +21,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python arm.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python arm.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}
