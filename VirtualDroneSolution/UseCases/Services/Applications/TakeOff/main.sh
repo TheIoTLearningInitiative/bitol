@@ -22,4 +22,4 @@ ALTITUDE=$4
 # =============================================================================
 
 cd $HOME/
-python takeoff.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} --alt=${ALTITUDE}
+python takeoff.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} --alt=${ALTITUDE}
