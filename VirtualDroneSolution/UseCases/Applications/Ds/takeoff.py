@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
     arm_and_takeoff(altitude)
 
-    time.sleep(20)
+    time.sleep(1)
 
     vehicle.mode = VehicleMode("LAND")
     while vehicle.armed:

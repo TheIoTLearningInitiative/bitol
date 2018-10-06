@@ -44,10 +44,10 @@ if __name__ == '__main__':
     #   Set `wait_ready=True` to ensure default attributes are populated before `connect()` returns.
     print "\nConnecting to vehicle on: %s" % connection_string
     #vehicle = connect(connection_string, wait_ready=True)
-    vehicle = connect(connection_string, wait_ready=False, baud=57600)
-    time.sleep(3)
+    vehicle = connect(connection_string, baud=57600, source_system=vehicleid)
+    vehicle.wait_ready(True, timeout=60)
 
-    #vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    vehicle.parameters['SYSID_THISMAV'] = vehicleid
     # Get some vehicle attributes (state)
     print "Get some vehicle attribute values:"
     print " Autopilot Firmware version: %s" % vehicle.version
@@ -72,8 +72,8 @@ if __name__ == '__main__':
     print " Is Armable?: %s" % vehicle.is_armable
     print " System status: %s" % vehicle.system_status.state
     print " Mode: %s" % vehicle.mode.name
-    print " Vehicle Id: %s" % vehicle.parameters
-    #print " Vehicle Id: %s" % vehicle.parameters["SYSID_THISMAV"]
+    #print " Vehicle Id: %s" % vehicle.parameters
+    print " Vehicle Id: %s" % vehicle.parameters["SYSID_THISMAV"]
     #print vehicle.parameters
     #pprint(dir(vehicle.parameters))
     #for property, value in vars(vehicle.parameters).iteritems():

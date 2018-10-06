@@ -47,8 +47,8 @@ if __name__ == '__main__':
     vehicleid = float(args.id)
 
     print("Connection to the vehicle on %s" % connection_string)
-    vehicle = connect(connection_string, wait_ready=False, baud=57600)
-    vehicle.wait_ready('autopilot_version')
+    vehicle = connect(connection_string, baud=57600)
+    vehicle.wait_ready(True, timeout=60)
     print('Autopilot Version: %s' % vehicle.version)
 
     #if re.search(r'PX4*', str(vehicle.version)):
