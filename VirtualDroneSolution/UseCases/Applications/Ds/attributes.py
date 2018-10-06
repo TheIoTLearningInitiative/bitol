@@ -43,11 +43,12 @@ if __name__ == '__main__':
     # Connect to the Vehicle.
     #   Set `wait_ready=True` to ensure default attributes are populated before `connect()` returns.
     print "\nConnecting to vehicle on: %s" % connection_string
-    #vehicle = connect(connection_string, wait_ready=True)
-    vehicle = connect(connection_string, baud=57600, source_system=vehicleid)
-    vehicle.wait_ready(True, timeout=60)
+    vehicle = connect(connection_string, wait_ready=False)
+    #vehicle = connect(connection_string, baud=57600, wait_ready=False)
+    #vehicle = connect(connection_string, baud=57600, source_system=vehicleid)
+    #vehicle.wait_ready(False, timeout=60)
 
-    vehicle.parameters['SYSID_THISMAV'] = vehicleid
+    #vehicle.parameters['SYSID_THISMAV'] = vehicleid
     # Get some vehicle attributes (state)
     print "Get some vehicle attribute values:"
     print " Autopilot Firmware version: %s" % vehicle.version
@@ -73,28 +74,28 @@ if __name__ == '__main__':
     print " System status: %s" % vehicle.system_status.state
     print " Mode: %s" % vehicle.mode.name
     #print " Vehicle Id: %s" % vehicle.parameters
-    print " Vehicle Id: %s" % vehicle.parameters["SYSID_THISMAV"]
+    #print " Vehicle Id: %s" % vehicle.parameters["SYSID_THISMAV"]
     #print vehicle.parameters
     #pprint(dir(vehicle.parameters))
     #for property, value in vars(vehicle.parameters).iteritems():
     #    print property, ": ", value
 
-    pwm = 0
-    while pwm < 20:
-        msg = vehicle.message_factory.command_long_encode(0,0,mavutil.mavlink.MAV_CMD_DO_SET_SERVO, 0, pwm, 1250, 0, 0, 0, 0, 0)
-        #rgb_led = vehicle.message_factory.command_long_encode(
-        #    0,             # target_system
-        #    0,             # target component
-        #    mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
-        #    0,             # confirmation
-        #    pwm,             # param 1, Servo number
-        #    1250,          # PWM value
-        #    0, 0, 0, 0, 0) # param 3 ~ 7 not used
-        #vehicle.send_mavlink(rgb_led)
-        #vehicle.flush()
-        vehicle.send_mavlink(msg)
+    pwm = 1000
+    while pwm < 2000:
+        #msg = vehicle.message_factory.command_long_encode(0,0,mavutil.mavlink.MAV_CMD_DO_SET_SERVO, 0, pwm, 1250, 0, 0, 0, 0, 0)
+        rgb_led = vehicle.message_factory.command_long_encode(
+            0,             # target_system
+            0,             # target component
+            mavutil.mavlink.MAV_CMD_DO_SET_SERVO, #command
+            0,             # confirmation
+            8,             # param 1, Servo number
+            pwm,          # PWM value
+            0, 0, 0, 0, 0) # param 3 ~ 7 not used
+        vehicle.send_mavlink(rgb_led)
         vehicle.flush()
-        time.sleep(5)
+        #vehicle.send_mavlink(msg)
+        #vehicle.flush()
+        time.sleep(.1)
         pwm += 1
         print pwm
 
