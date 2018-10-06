@@ -180,14 +180,12 @@ if __name__ == '__main__':
             nextwaypoint = vehicle.commands.next
         time.sleep(1)
 
-    # wait for the vehicle to land
     while vehicle.commands.next > 0:
         time.sleep(1)
 
-    # Disarm vehicle
-    vehicle.armed = False
-    time.sleep(1)
+    print "\nSet Vehicle.mode = GUIDED (currently: %s)" % vehicle.mode.name 
+    vehicle.mode = VehicleMode("GUIDED")
+    while not vehicle.mode.name=='GUIDED':
+        print " Waiting for mode change ..."
 
-    # Close vehicle object before exiting script
     vehicle.close()
-    time.sleep(1)

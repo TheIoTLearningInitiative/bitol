@@ -6,11 +6,10 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
-PORT=$2
-VEHICLEID=$3
-ALTITUDE=$4
-SPEED=$5
+CONNECTION=$1
+VEHICLEID=$2
+ALTITUDE=$3
+SPEED=$4
 
 # =============================================================================
 # Functions
@@ -23,5 +22,5 @@ SPEED=$5
 # =============================================================================
 
 cd $HOME/
-python rtl.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python rtl.py --connect=${CONNECTION} --id=${VEHICLEID} \
               --alt=${ALTITUDE} --speed=${SPEED}

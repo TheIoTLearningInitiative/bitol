@@ -6,13 +6,12 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
-PORT=$2
-VEHICLEID=$3
-LATITUDE=$4
-LONGITUDE=$5
-ALTITUDE=$6
-SPEED=$7
+CONNECTION=$1
+VEHICLEID=$2
+LATITUDE=$3
+LONGITUDE=$4
+ALTITUDE=$5
+SPEED=$6
 
 # =============================================================================
 # Functions
@@ -25,6 +24,6 @@ SPEED=$7
 # =============================================================================
 
 cd $HOME/
-python go.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python to.py --connect=${CONNECTION} --id=${VEHICLEID} \
                --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} \
                --speed=${SPEED}

@@ -6,10 +6,9 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
-PORT=$2
-VEHICLEID=$3
-ALTITUDE=$4
+CONNECTION=$1
+VEHICLEID=$2
+ALTITUDE=$3
 
 # =============================================================================
 # Functions
@@ -22,4 +21,4 @@ ALTITUDE=$4
 # =============================================================================
 
 cd $HOME/
-python takeoff.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} --alt=${ALTITUDE}
+python takeoff.py --connect=${CONNECTION} --id=${VEHICLEID} --alt=${ALTITUDE}

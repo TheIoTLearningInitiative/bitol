@@ -47,20 +47,22 @@ if __name__ == '__main__':
     vehicleid = float(args.id)
 
     print("Connection to the vehicle on %s" % connection_string)
-    vehicle = connect(connection_string, wait_ready=False, baud=57600)
+    vehicle = connect(connection_string, wait_ready=True)
     vehicle.wait_ready('autopilot_version')
     print('Autopilot Version: %s' % vehicle.version)
 
-    #if re.search(r'PX4*', str(vehicle.version)):
-    #    print("Vehicle ID Old: %d" % vehicle.parameters['MAV_SYS_ID'])
-    #    #vehicle.parameters['MAV_SYS_ID'] = vehicleid
-    #    #time.sleep(1)
-    #    print("Vehicle ID New: %d" % vehicle.parameters['MAV_SYS_ID'])
-    #    time.sleep(1)
-    #else:
-    #    print("Vehicle ID Old: %d" % vehicle.parameters['SYSID_THISMAV'])
-    #    print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV'])
-    #    time.sleep(1)
+    if re.search(r'PX4*', str(vehicle.version)):
+        print("Vehicle ID Old: %d" % vehicle.parameters['MAV_SYS_ID'])
+        vehicle.parameters['MAV_SYS_ID'] = vehicleid
+        time.sleep(1)
+        print("Vehicle ID New: %d" % vehicle.parameters['MAV_SYS_ID'])
+        time.sleep(1)
+    else:
+        print("Vehicle ID Old: %d" % vehicle.parameters['SYSID_THISMAV'])
+        vehicle.parameters['SYSID_THISMAV'] = vehicleid
+        time.sleep(1)
+        print("Vehicle ID New: %d" % vehicle.parameters['SYSID_THISMAV'])
+        time.sleep(1)
 
     print("Vehicle ID: %d" % vehicle.parameters['SYSID_THISMAV'])
     vehicle.close()

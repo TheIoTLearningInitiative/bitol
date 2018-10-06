@@ -7,8 +7,7 @@ set -x
 # =============================================================================
 
 CONNECTION=$1
-PORT=$2
-VEHICLEID=$3
+VEHICLEID=$2
 
 # =============================================================================
 # Functions
@@ -21,5 +20,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-#python id.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}
 python id.py --connect="${CONNECTION}" --id=${VEHICLEID}

@@ -13,10 +13,9 @@ RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 ADD --chown=1000:1000 takeoff.py /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/takeoff.py'
 
-ENV IPADDRESS=172.17.0.2
-ENV PORT=5763
+ENV CONNECTION=172.17.0.2
 ENV VEHICLEID=1
 ENV ALTITUDE=5
 
 ENTRYPOINT ["/home/user/main.sh"]
-CMD [$IPADDRESS, $PORT, $VEHICLEID, $ALTITUDE]
+CMD [$CONNECTION, $VEHICLEID, $ALTITUDE]

@@ -6,12 +6,11 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
-PORT=$2
-VEHICLEID=$3
-LATITUDE=$4
-LONGITUDE=$5
-ALTITUDE=$6
+CONNECTION=$1
+VEHICLEID=$2
+LATITUDE=$3
+LONGITUDE=$4
+ALTITUDE=$5
 
 # =============================================================================
 # Functions
@@ -24,5 +23,5 @@ ALTITUDE=$6
 # =============================================================================
 
 cd $HOME/
-python square.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python square.py --connect=${CONNECTION} --id=${VEHICLEID} \
                --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} 
