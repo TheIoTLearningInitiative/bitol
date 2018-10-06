@@ -25,6 +25,6 @@ SPEED=$7
 # =============================================================================
 
 cd $HOME/
-python goto.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python goto.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
                --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} \
                --speed=${SPEED}

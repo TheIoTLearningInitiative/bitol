@@ -49,8 +49,8 @@ def arm_and_takeoff(tgt_altitude):
 def get_distance_metres(aLocation1, aLocation2):
     """
     Returns the ground distance in metres between two LocationGlobal objects.
-    This method is an approximation, and will not be accurate over large distances and close to the 
-    earth's poles. It comes from the ArduPilot test code: 
+    This method is an approximation, and will not be accurate over large distances and close to the
+    earth's poles. It comes from the ArduPilot test code:
     https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py
     """
     dlat = aLocation2.lat - aLocation1.lat
@@ -73,7 +73,7 @@ def get_location_offset_meters(original_location, dNorth, dEast, alt):
     dLon = dEast/(earth_radius*math.cos(math.pi*original_location.lat/180))
 
     #New position in decimal degrees
-    newlat = original_location.lat + (dLat * 180/math.pi)   
+    newlat = original_location.lat + (dLat * 180/math.pi)
     newlon = original_location.lon + (dLon * 180/math.pi)
     return LocationGlobal(newlat, newlon,original_location.alt+alt)
 
@@ -155,4 +155,4 @@ if __name__ == '__main__':
         print(" Waiting for disarming...")
         time.sleep(1)
 
-    vehicle.close()            
+    vehicle.close()

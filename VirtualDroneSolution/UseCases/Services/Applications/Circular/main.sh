@@ -24,5 +24,5 @@ ALTITUDE=$6
 # =============================================================================
 
 cd $HOME/
-python circular.py --connect=tcp:${IPADDRESS}:${PORT} --id=${VEHICLEID} \
+python circular.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID} \
                --lat=${LATITUDE} --lon=${LONGITUDE} --alt=${ALTITUDE} 
