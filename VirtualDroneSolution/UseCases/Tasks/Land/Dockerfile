@@ -13,9 +13,8 @@ RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 ADD --chown=1000:1000 land.py /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/land.py'
 
-ENV IPADDRESS=172.17.0.2
-ENV PORT=5763
+ENV CONNECTION=tcp:172.17.0.2:5762
 ENV VEHICLEID=1
 
 ENTRYPOINT ["/home/user/main.sh"]
-CMD [$IPADDRESS, $PORT, $VEHICLEID]
+CMD [$CONNECTION, $VEHICLEID]
