@@ -152,14 +152,13 @@ if __name__ == '__main__':
     cmds.add(cmd)
 
     # land
-    wp = get_location_offset_meters(home, 0, 0, 0);
-    cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_LAND, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
-    cmds.add(cmd)
+    #wp = get_location_offset_meters(home, 0, 0, 0);
+    #cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_LAND, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+    #cmds.add(cmd)
 
     # Upload mission
     cmds.upload()
 
-    time.sleep(2)
     #arm_and_takeoff(altitude)
     time.sleep(2)
 
@@ -176,8 +175,12 @@ if __name__ == '__main__':
             nextwaypoint = vehicle.commands.next
         time.sleep(1)
 
-    while vehicle.commands.next > 0:
-        time.sleep(1)
+    #while vehicle.commands.next > 0:
+    #    time.sleep(1)
+
+    cmds = vehicle.commands
+    cmds.clear()
+    cmds.upload()
 
     print "\nSet Vehicle.mode = GUIDED (currently: %s)" % vehicle.mode.name 
     vehicle.mode = VehicleMode("GUIDED")
