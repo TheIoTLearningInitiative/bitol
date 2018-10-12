@@ -51,7 +51,7 @@ fi
 
 cd $DIRECTORY_DOCKER
 
-bash main.sh
+bash build.sh -c all
 
 echo "Software Development Environment :: Completed"
 
