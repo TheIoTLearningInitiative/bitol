@@ -8,6 +8,8 @@ set -x
 
 export DIRECTORY_BITOL=$HOME/Bitol/
 export DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT=$DIRECTORY_BITOL/SoftwareDevelopmentEnvironment/
+export DIRECTORY_DOCKER=$DIRECTORY_BITOL/Docker/
+
 sh_c='sudo -E sh -c'
 
 # =============================================================================
@@ -47,28 +49,9 @@ else
     git clone https://github.com/TheIoTLearningInitiative/Bitol.git
 fi
 
-# cat << EOM >> $HOME/.bashrc
-# source $HOME/Bitol/Main.sh
-# EOM
-# source $HOME/.bashrc
+cd $DIRECTORY_DOCKER
 
-cd $DIRECTORY_SOFTWAREDEVELOPMENTENVIRONMENT
-
-exit 0
-
-bash OpenCV.sh
-bash PX4.sh
-bash MAVLink.sh
-bash Ardupilot.sh
-bash SITLSimulator.sh
-bash DroneKit.sh
-# bash DroneCore.sh
-bash QGroundControl.sh
-bash APMPLanner.sh
-bash GStreamer.sh
-bash JMAVSim.sh
-
-cd $HOME
+bash main.sh
 
 echo "Software Development Environment :: Completed"
 
