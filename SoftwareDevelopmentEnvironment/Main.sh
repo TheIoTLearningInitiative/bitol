@@ -32,12 +32,12 @@ $sh_c apt-get update -y
 $sh_c apt-get upgrade -y
 $sh_c apt-get autoremove -y
 
-$sh_c apt install -y tree
-$sh_c apt install -y jstest-gtk
+$sh_c apt-get install -y tree
+$sh_c apt-get install -y jstest-gtk
 
-$sh_c apt install -y git
-$sh_c apt install -y nmap
-$sh_c apt install -y screen
+$sh_c apt-get install -y git
+$sh_c apt-get install -y nmap
+$sh_c apt-get install -y screen
 
 $sh_c pip install --upgrade pip
 
