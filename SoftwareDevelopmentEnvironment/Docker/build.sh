@@ -7,8 +7,13 @@
 # =============================================================================
 
 DIRECTORY_USECASES=`dirname "$(readlink -f "$0")"`
+
 DIRECTORY_IMAGES=$DIRECTORY_USECASES/Images
 DIRECTORY_DOCKER=$DIRECTORY_IMAGES/Docker
+
+DIRECTORY_TASKS=$DIRECTORY_USECASES/Tasks
+
+DIRECTORY_APPLICATIONS=$DIRECTORY_USECASES/Applications
 
 # =============================================================================
 # Functions
@@ -51,6 +56,26 @@ do
     cd $DIRECTORY_DOCKER/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
     docker build -t $USER/$component .
+done
+
+cd $DIRECTORY_TASKS
+
+for COMPONENT in *
+do
+    cd $DIRECTORY_TASKS/$COMPONENT
+    component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
+    docker build -t $USER/t_$component .
+done
+
+exit 0
+
+cd $DIRECTORY_APPLICATIONS
+
+for COMPONENT in *
+do
+    cd $DIRECTORY_APPLICATIONS/$COMPONENT
+    component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
+    docker build -t $USER/a_$component .
 done
 
 # End of file
