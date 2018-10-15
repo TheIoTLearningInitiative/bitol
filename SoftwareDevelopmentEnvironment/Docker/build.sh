@@ -6,14 +6,11 @@ set -x
 # Variables
 # =============================================================================
 
-DIRECTORY_USECASES=`dirname "$(readlink -f "$0")"`
+DIRECTORY_DOCKER=`dirname "$(readlink -f "$0")"`
 
-DIRECTORY_IMAGES=$DIRECTORY_USECASES/Images
-DIRECTORY_DOCKER=$DIRECTORY_IMAGES/Docker
-
-DIRECTORY_TASKS=$DIRECTORY_USECASES/Tasks
-
-DIRECTORY_APPLICATIONS=$DIRECTORY_USECASES/Applications
+DIRECTORY_CORE=$DIRECTORY_DOCKER/Core
+DIRECTORY_TASKS=$DIRECTORY_DOCKER/Tasks
+DIRECTORY_APPLICATIONS=$DIRECTORY_DOCKER/Applications
 
 # =============================================================================
 # Functions
@@ -49,11 +46,11 @@ if ([ "$COMPONENTS" != "all" ]); then
     exit -1
 fi
 
-cd $DIRECTORY_DOCKER
+cd $DIRECTORY_CORE
 
 for COMPONENT in *
 do
-    cd $DIRECTORY_DOCKER/$COMPONENT
+    cd $DIRECTORY_CORE/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
     docker build -t $USER/$component .
 done
