@@ -30,6 +30,7 @@ sudo pip install sphinx monotonic future nose mock sphinx-3dr-theme
 sudo pip install pymavlink
 sudo pip install dronekit
 sudo pip install dronekit-sitl -UI
+sudo pip install pyserial
 
 cd $DIRECTORY_SOURCE
 
