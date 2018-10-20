@@ -19,7 +19,7 @@ from dronekit import connect, Command, LocationGlobal, VehicleMode, LocationGlob
 # Functions
 # =============================================================================
 
-def arm_and_wait(aTargetTime):
+def arm_and_wait(mode, aTargetTime):
     """
     Arms vehicle and fly to aTargetAltitude.
     """
@@ -32,7 +32,7 @@ def arm_and_wait(aTargetTime):
 
     print("Arming motors")
     # Copter should arm in GUIDED mode
-    vehicle.mode = VehicleMode("STABILIZED")
+    vehicle.mode = VehicleMode(mode)
     vehicle.armed = True
 
     # Confirm vehicle armed before attempting to take off
@@ -49,7 +49,6 @@ def arm_and_wait(aTargetTime):
 
 if __name__ == '__main__':
 
-    # Set up option parsing to get connection string
     parser = argparse.ArgumentParser(description='Commands vehicle using vehicle.simple_goto.')
     parser.add_argument('--connect',
                         help="Vehicle connection target string. If not specified, SITL automatically started and used.")
@@ -60,29 +59,23 @@ if __name__ == '__main__':
     vehicleid = float(args.id)
     sitl = None
 
-    # Start SITL if no connection string specified
-    if not connection_string:
-        import dronekit_sitl
-        sitl = dronekit_sitl.start_default()
-        connection_string = sitl.connection_string()
-
-    # Connect to the Vehicle
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=False)
 
-    #vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print " Type: %s" % vehicle._vehicle_type
     print " Armed: %s" % vehicle.armed
     print " System status: %s" % vehicle.system_status.state
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
-    cmds = vehicle.commands
-    cmds.clear()
-    cmds.upload()
+    #vehicle.parameters['MAV_SYS_ID'] = vehicleid
+    print " Sys Id: %s" % vehicle.parameters['MAV_SYS_ID']
 
-    # Initialize the takeoff sequence to 20m
-    arm_and_wait(5)
+    #cmds = vehicle.commands
+    #cmds.clear()
+    #cmds.upload()
+
+    arm_and_wait("STABILIZED", 5)
 
     vehicle.mode = VehicleMode("STABILIZED")
     vehicle.armed = False
@@ -90,9 +83,4 @@ if __name__ == '__main__':
         print(" Waiting for disarming...")
         time.sleep(1)
 
-    # Close vehicle object
     vehicle.close()
-
-    # Shut down simulator if it was started.
-    if sitl:
-        sitl.stop()
