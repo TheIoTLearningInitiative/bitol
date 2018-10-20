@@ -69,7 +69,10 @@ if __name__ == '__main__':
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
 
     #vehicle.parameters['MAV_SYS_ID'] = vehicleid
-    print " Sys Id: %s" % vehicle.parameters['MAV_SYS_ID']
+    #print " Sys Id: %s" % vehicle.parameters['MAV_SYS_ID']
+
+    #for property, value in vars(vehicle.parameters).iteritems():
+    #    print property, ": ", value
 
     #cmds = vehicle.commands
     #cmds.clear()
