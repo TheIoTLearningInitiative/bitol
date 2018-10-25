@@ -6,9 +6,8 @@ set -x
 # Variables
 # =============================================================================
 
-IPADDRESS=$1
-PORT=$2
-VEHICLEID=$3
+CONNECTION=$1
+VEHICLEID=$2
 
 # =============================================================================
 # Functions
@@ -21,4 +20,4 @@ VEHICLEID=$3
 # =============================================================================
 
 cd $HOME/
-python mqtt.py --connect=${IPADDRESS}:${PORT} --id=${VEHICLEID}
+python mqtt.py --connect=${CONNECTION} --id=${VEHICLEID}

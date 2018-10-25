@@ -103,6 +103,10 @@ sensor:
     state_topic: "xunankab/quintanaroo/heading"
     name: "Quintana Roo Heading"
     value_template: '{{ value_json.heading }}'
+  - platform: mqtt
+    state_topic: "xunankab/quintanaroo/altitude"
+    name: "Quintana Roo Altitude"
+    value_template: '{{ value_json.altitude }}'
 
 group:
 
@@ -128,3 +132,4 @@ group:
     entities:
       - sensor.quintana_roo_battery
       - sensor.quintana_roo_heading
+      - sensor.quintana_roo_altitude
