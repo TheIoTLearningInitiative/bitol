@@ -7,7 +7,7 @@ cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
 out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
-                      'udpsink host=172.17.0.1 port=5600',
+                      'udpsink host=172.17.0.1 port=5700',
                       0, framerate, (640, 480))
 # Create the haar cascade
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
