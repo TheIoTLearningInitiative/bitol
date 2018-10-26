@@ -11,6 +11,7 @@ DIRECTORY_DOCKER=`dirname "$(readlink -f "$0")"`
 DIRECTORY_CORE=$DIRECTORY_DOCKER/Core
 DIRECTORY_TASKS=$DIRECTORY_DOCKER/Tasks
 DIRECTORY_APPLICATIONS=$DIRECTORY_DOCKER/Applications
+DIRECTORY_SERVICES=$DIRECTORY_DOCKER/Services
 
 # =============================================================================
 # Functions
@@ -65,6 +66,16 @@ do
 done
 
 exit 0
+
+cd $DIRECTORY_SERVICES
+
+for COMPONENT in *
+do
+    echo $COMPONENT
+    cd $DIRECTORY_SERVICES/$COMPONENT
+    component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
+    docker build -t $USER/$component .
+done
 
 cd $DIRECTORY_APPLICATIONS
 
