@@ -21,6 +21,9 @@ homeassistant:
       friendly_name: Battery
       icon: mdi:battery
 
+    sensor.quintana_roo_efk:
+      friendly_name: EFK
+
     sensor.quintana_roo_gps:
       friendly_name: GPS
 
