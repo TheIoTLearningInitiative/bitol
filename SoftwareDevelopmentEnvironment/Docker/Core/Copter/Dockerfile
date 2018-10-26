@@ -26,9 +26,9 @@ RUN groupadd user && \
     useradd -u 1000 -g user -s /bin/bash -d /home/user -m user && \
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-EXPOSE 5000-5600
-EXPOSE 5760-5763
-EXPOSE 14550-14553
+#EXPOSE 5000-5600
+#EXPOSE 5760-5763
+#EXPOSE 14550-14553
 
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
     echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL
