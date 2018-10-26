@@ -12,6 +12,8 @@ DIRECTORY_CORE=$DIRECTORY_DOCKER/Core
 DIRECTORY_TASKS=$DIRECTORY_DOCKER/Tasks
 DIRECTORY_APPLICATIONS=$DIRECTORY_DOCKER/Applications
 DIRECTORY_SERVICES=$DIRECTORY_DOCKER/Services
+DIRECTORY_SERVICES_COMPUTERVISION=$DIRECTORY_SERVICES/ComputerVision
+DIRECTORY_SERVICES_TELEMETRY=$DIRECTORY_SERVICES/Telemetry
 
 # =============================================================================
 # Functions
@@ -65,15 +67,25 @@ do
     docker build -t $USER/task-$component .
 done
 
-cd $DIRECTORY_SERVICES
+cd $DIRECTORY_SERVICES_COMPUTERVISION
 
 for COMPONENT in *
 do
-    echo $COMPONENT
-    cd $DIRECTORY_SERVICES/$COMPONENT
+    cd $DIRECTORY_SERVICES_COMPUTERVISION/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/service-$component .
+    docker build -t $USER/computervision-$component .
 done
+
+cd $DIRECTORY_SERVICES_TELEMETRY
+
+for COMPONENT in *
+do
+    cd $DIRECTORY_SERVICES_TELEMETRY/$COMPONENT
+    component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
+    docker build -t $USER/telemetry-$component .
+done
+
+exit 0
 
 cd $DIRECTORY_APPLICATIONS
 
