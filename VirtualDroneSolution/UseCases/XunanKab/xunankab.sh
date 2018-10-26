@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+# set -x
 
 # =============================================================================
 # Variables
@@ -12,7 +12,7 @@ SERVER_IP=$1
 
 # Variables :: Core :: Copter
 
-COPTER_DOCKER_IMAGE=${USER}/copter
+COPTER_DOCKER_IMAGE=${USER}/core-copter
 COPTER_NUMBER=1
 COPTER_NAMES[0]='quintanaroo-copter'
 COPTER_NAMES[1]='yucatan-copter'
@@ -40,11 +40,9 @@ fi
 
 for ((i=0; i<=$COPTER_NUMBER; i++)); do
   COPTER_NAME=${COPTER_NAMES[$i]}
-  echo $COPTER_NAME
-  #docker run -itd --name ${COPTER_ONE} ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5
-  #docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_ONE}
-  #docker run -itd --name ${COPTER_TWO} ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5
-  #docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_TWO}
+  UUID=`docker run -itd --name ${COPTER_NAME} ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5`
+  IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
+  echo $COPTER_NAME $IP $UUID
 done
 
 #docker run --net ${NETWORK_NAME} --ip ${COPTER_IP} -itd ${COPTER_IMAGE}
