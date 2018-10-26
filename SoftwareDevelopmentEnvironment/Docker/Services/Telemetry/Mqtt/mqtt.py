@@ -39,6 +39,16 @@ def battery_callback(self, attr_name, value):
     payload["battery"] = vehicle.battery.voltage
     client.publish(topic, payload=json.dumps(payload))
 
+def efk_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/efk"
+    payload["efk"] = vehicle.efk_ok
+    client.publish(topic, payload=json.dumps(payload))
+
+def gps_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/gps"
+    payload["gps"] = vehicle.gps_0
+    client.publish(topic, payload=json.dumps(payload))
+
 def heading_callback(self, attr_name, value):
     topic = "xunankab/quintanaroo/heading"
     payload["heading"] = vehicle.heading
@@ -47,6 +57,11 @@ def heading_callback(self, attr_name, value):
 def location_callback(self, attr_name, value):
     topic = "xunankab/quintanaroo/altitude"
     payload["altitude"] = vehicle.location.global_relative_frame.alt
+    client.publish(topic, payload=json.dumps(payload))
+
+def velocity_callback(self, attr_name, value):
+    topic = "xunankab/quintanaroo/velocity"
+    payload["velocity"] = vehicle.velocity
     client.publish(topic, payload=json.dumps(payload))
 
 def wildcard_callback(self, attr_name, value):
@@ -75,36 +90,36 @@ if __name__ == '__main__':
 
     payload = {}
 
-    if not connection_string:
-        import dronekit_sitl
-        sitl = dronekit_sitl.start_default()
-        connection_string = sitl.connection_string()
-
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=True)
 
-    vehicle.parameters['SYSID_THISMAV'] = vehicleid
     print " Type: %s" % vehicle._vehicle_type
     print " Armed: %s" % vehicle.armed
     print " System status: %s" % vehicle.system_status.state
+    print " Battery: %s" % vehicle.battery
+    print " Heading: %s" % vehicle.heading
     print " GPS: %s" % vehicle.gps_0
     print " Alt: %s" % vehicle.location.global_relative_frame.alt
+    print " Velocity: %s" % vehicle.velocity
 
     vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
+    vehicle.add_attribute_listener('efk', efk_callback)
+    vehicle.add_attribute_listener('gps', gps_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
     vehicle.add_attribute_listener('location', location_callback)
+    vehicle.add_attribute_listener('velocity', velocity_callback)
     #vehicle.add_attribute_listener('*', wildcard_callback)
 
     time.sleep(120)
 
+    vehicle.remove_attribute_listener('velocity', velocity_callback)
     vehicle.remove_attribute_listener('location', location_callback)
     vehicle.remove_attribute_listener('heading', heading_callback)
+    vehicle.remove_attribute_listener('gps', gps_callback)
+    vehicle.remove_attribute_listener('efk', efk_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
     vehicle.remove_attribute_listener('system_status', system_status_callback)
     #vehicle.remove_attribute_listener('*', wildcard_callback)
 
     vehicle.close()
-
-    if sitl:
-        sitl.stop()

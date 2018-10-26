@@ -18,12 +18,21 @@ homeassistant:
       friendly_name: Quintana Roo
 
     sensor.quintana_roo_battery:
-      friendly_name: Baterry
+      friendly_name: Battery
       icon: mdi:battery
+
+    sensor.quintana_roo_gps:
+      friendly_name: GPS
 
     sensor.quintana_roo_heading:
       friendly_name: Heading
       icon: mdi:compass
+
+    sensor.quintana_roo_altitude:
+      friendly_name: Altitude
+
+    sensor.quintana_roo_velocity:
+      friendly_name: GPS
 
 # Show links to resources in log and frontend
 introduction:

@@ -5,6 +5,14 @@
   value_template: '{{ value_json.battery }}'
   device_class: battery
 - platform: mqtt
+  state_topic: "xunankab/quintanaroo/efk"
+  name: "Quintana Roo EFK"
+  value_template: '{{ value_json.efk }}'
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/gps"
+  name: "Quintana Roo GPS"
+  value_template: '{{ value_json.gps }}'
+- platform: mqtt
   state_topic: "xunankab/quintanaroo/heading"
   name: "Quintana Roo Heading"
   value_template: '{{ value_json.heading }}'
@@ -12,4 +20,8 @@
   state_topic: "xunankab/quintanaroo/altitude"
   name: "Quintana Roo Altitude"
   value_template: '{{ value_json.altitude }}'
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/velocity"
+  name: "Quintana Roo Velocity"
+  value_template: '{{ value_json.velocity }}'
 

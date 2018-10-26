@@ -19,6 +19,8 @@ quintanaroosensors:
   name: Sensors
   entities:
     - sensor.quintana_roo_battery
+    - sensor.quintana_roo_efk
+    - sensor.quintana_roo_gps
     - sensor.quintana_roo_heading
     - sensor.quintana_roo_altitude
-
+    - sensor.quintana_roo_velocity
