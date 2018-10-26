@@ -1,0 +1,24 @@
+default_view:
+  view: yes
+  name: Command Center
+  entities:
+    - group.xunankablands
+
+quintanaroolands:
+  view: yes
+  name: Quintana Roo
+  entities:
+    - group.quintanaroosensors
+
+xunankablands:
+  name: XunanKab
+  entities:
+    - binary_sensor.quintana_roo_connectivity
+
+quintanaroosensors:
+  name: Sensors
+  entities:
+    - sensor.quintana_roo_battery
+    - sensor.quintana_roo_heading
+    - sensor.quintana_roo_altitude
+

@@ -1,0 +1,5 @@
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/connectivity"
+  name: "Quintana Roo Connectivity"
+  device_class: connectivity
+

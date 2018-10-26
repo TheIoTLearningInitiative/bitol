@@ -1,0 +1,15 @@
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/battery"
+  name: "Quintana Roo Battery"
+  unit_of_measurement: "%"
+  value_template: '{{ value_json.battery }}'
+  device_class: battery
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/heading"
+  name: "Quintana Roo Heading"
+  value_template: '{{ value_json.heading }}'
+- platform: mqtt
+  state_topic: "xunankab/quintanaroo/altitude"
+  name: "Quintana Roo Altitude"
+  value_template: '{{ value_json.altitude }}'
+
