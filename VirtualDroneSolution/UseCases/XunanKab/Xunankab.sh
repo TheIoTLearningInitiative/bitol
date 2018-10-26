@@ -40,7 +40,7 @@ fi
 
 for ((i=0; i<=$COPTER_NUMBER; i++)); do
   COPTER_NAME=${COPTER_NAMES[$i]}
-  UUID=`docker run -itd --name ${COPTER_NAME} ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5`
+  UUID=`docker run -itd --name ${COPTER_NAME} -p 5762:5762 -p 5763:5763 ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5`
   IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
   echo $COPTER_NAME $IP $UUID
 done
