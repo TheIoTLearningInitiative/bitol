@@ -53,7 +53,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_CORE/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/$component .
+    docker build -t $USER/core-$component .
 done
 
 cd $DIRECTORY_TASKS
@@ -62,10 +62,8 @@ for COMPONENT in *
 do
     cd $DIRECTORY_TASKS/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/t_$component .
+    docker build -t $USER/task-$component .
 done
-
-exit 0
 
 cd $DIRECTORY_SERVICES
 
@@ -74,7 +72,7 @@ do
     echo $COMPONENT
     cd $DIRECTORY_SERVICES/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/$component .
+    docker build -t $USER/service-$component .
 done
 
 cd $DIRECTORY_APPLICATIONS
