@@ -26,10 +26,6 @@ RUN groupadd user && \
     useradd -u 1000 -g user -s /bin/bash -d /home/user -m user && \
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-#EXPOSE 5000-5600
-#EXPOSE 5760-5763
-#EXPOSE 14550-14553
-
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
     echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL
 
@@ -51,6 +47,9 @@ RUN cd /home/user/ardupilot && \
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 RUN /bin/bash -c 'bash /home/user/main.sh'
+
+EXPOSE 5762/tcp
+EXPOSE 5763/tcp
 
 ENV VEHICLEID=1
 ENV LATITUDE=20.6546009

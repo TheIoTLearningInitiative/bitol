@@ -6,25 +6,42 @@
 # Variables
 # =============================================================================
 
-# Variables :: Server
+# Server
 
 SERVER_IP=$1
 
-# Variables :: Core :: Copter
+# Core :: Copter
 
 COPTER_DOCKER_IMAGE=${USER}/core-copter
 COPTER_NUMBER=1
 COPTER_NAMES[0]='quintanaroo-copter'
 COPTER_NAMES[1]='yucatan-copter'
 
-COPTER_GPS_COORDINATES_LATITUDE=20.6710109
-COPTER_GPS_COORDINATES_LONGITUDE=-103.4562345
+# Vehicle
 
-# Variables :: Image
+VEHICLE_ID=1
+VEHICLE_LATITUDE=20.6552144
+#VEHICLE_LATITUDE=20.6710109
+VEHICLE_LONGITUDE=-103.3239878
+#VEHICLE_LONGITUDE=-103.4562345
+VEHICLE_ALTITUDE=5
+
+# Task
+
+TASK_DOCKER_IMAGE=${USER}/task
+TASK_DOCKER_IMAGE_ID=${TASK_DOCKER_IMAGE}-id
+
+# Connection
+
+CONNECTION_PROTOCOL=tcp
+CONNECTION_PORT_GROUND_CONTROL_STATION=5762
+CONNECTION_PORT_COMMUNICATION_LIBRARY=5763
+
+# Image
 
 SERVICE_FACEDETECT_IP=$3
 
-# Variables :: Network
+# Network
 
 NETWORK_NAME="xunankab_network"
 NETWORK_SUBNET="172.0.0.0"
@@ -40,10 +57,20 @@ fi
 
 for ((i=0; i<=$COPTER_NUMBER; i++)); do
   COPTER_NAME=${COPTER_NAMES[$i]}
-  UUID=`docker run -itd --name ${COPTER_NAME} -p 5762:5762 -p 5763:5763 ${COPTER_DOCKER_IMAGE} 1 20.6552144 -103.3239878 5`
+  UUID=`docker run -itd --name ${COPTER_NAME} \
+                               ${COPTER_DOCKER_IMAGE} \
+                               ${VEHICLE_ID} \
+                               ${VEHICLE_LATITUDE} ${VEHICLE_LONGITUDE} \
+                               ${VEHICLE_ALTITUDE}`
   IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
-  echo $COPTER_NAME $IP $UUID
+  echo "Copter Information: " $COPTER_NAME $IP $UUID
+  sleep 3
+  CONNECTION=${CONNECTION_PROTOCOL}:${IP}:${CONNECTION_PORT_COMMUNICATION_LIBRARY}
+  docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
 done
+
+                               #-p ${CONNECTION_PORT_GROUND_CONTROL_STATION}:${CONNECTION_PORT_GROUND_CONTROL_STATION=5762} \
+                               #-p ${CONNECTION_PORT_COMMUNICATION_LIBRARY}:${CONNECTION_PORT_COMMUNICATION_LIBRARY} \
 
 #docker run --net ${NETWORK_NAME} --ip ${COPTER_IP} -itd ${COPTER_IMAGE}
 
