@@ -6,6 +6,10 @@
 # Variables
 # =============================================================================
 
+# Argument
+
+INITIALIZE=$1
+
 # Core :: Copter
 
 COPTER_DOCKER_IMAGE=${USER}/core-copter
@@ -40,16 +44,26 @@ CONNECTION_PORT_COMMUNICATION_LIBRARY=5763
 # Main
 # =============================================================================
 
-for ((i=0; i<=$COPTER_NUMBER; i++)); do
-  COPTER_NAME=${COPTER_NAMES[$i]}
-  UUID=`docker run -itd --name ${COPTER_NAME} \
+
+if ([ "$INITIALIZE" == "powerup" ]); then
+  for ((i=0; i<=$COPTER_NUMBER; i++)); do
+     COPTER_NAME=${COPTER_NAMES[$i]}
+     UUID=`docker run -itd --name ${COPTER_NAME} \
                                ${COPTER_DOCKER_IMAGE} \
                                ${VEHICLE_ID} \
                                ${VEHICLE_LATITUDE} ${VEHICLE_LONGITUDE} \
                                ${VEHICLE_ALTITUDE}`
-  IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
-  echo "Copter Information: " $COPTER_NAME $IP $UUID
-  sleep 3
-  CONNECTION=${CONNECTION_PROTOCOL}:${IP}:${CONNECTION_PORT_COMMUNICATION_LIBRARY}
-  docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
-done
+     IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
+     echo "Copter Information: " $COPTER_NAME $IP $UUID
+     sleep 3
+     CONNECTION=${CONNECTION_PROTOCOL}:${IP}:${CONNECTION_PORT_COMMUNICATION_LIBRARY}
+     docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
+  done
+elif ([ "$INITIALIZE" == "powerdown" ]); then
+  for ((i=0; i<=$COPTER_NUMBER; i++)); do
+     COPTER_NAME=${COPTER_NAMES[$i]}
+     docker container rm -f ${COPTER_NAME}
+  done
+else
+    echo "No argument given..."
+fi
