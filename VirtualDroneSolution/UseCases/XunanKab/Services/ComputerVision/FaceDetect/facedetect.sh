@@ -43,10 +43,3 @@ elif ([ "$INITIALIZE" == "powerdown" ]); then
 else
     echo "No argument given..." 
 fi
-
-#                          -p 5000:5000/udp -p 5700:5700/udp \
-
-#docker run --net ${NETWORK_NAME} --ip ${SERVICE_FACEDETECT_IP} -it -p 5000:5000/udp -p 5600:5600/udp xe1gyq/facedetect
-#docker run --net ${NETWORK_NAME} --ip ${SERVICE_FACEDETECT_IP} -itd xe1gyq/facedetect
-#gst-launch-1.0 -v v4l2src device=/dev/video0 ! image/jpeg,width=640, height=480, framerate=30/1 ! rtpjpegpay ! udpsink host=${SERVICE_FACEDETECT_IP} port=5000 &
-#gst-launch-1.0 -v udpsrc port=5600 ! application/x-rtp, media=video, clock-rate=90000, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! xvimagesink sync=0 &
