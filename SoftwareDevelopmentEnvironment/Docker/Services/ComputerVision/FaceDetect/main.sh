@@ -21,5 +21,5 @@ CAMERA_DEVICE$3
 # =============================================================================
 
 cd $HOME/
-python facedetect.py
-
+ip a
+python3 facedetect.py

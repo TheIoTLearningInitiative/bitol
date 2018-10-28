@@ -10,7 +10,7 @@ out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640
                       'udpsink host=172.17.0.1 port=5700',
                       0, framerate, (640, 480))
 # Create the haar cascade
-faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml")
 
 while(True):
 	# Capture frame-by-frame

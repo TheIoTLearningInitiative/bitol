@@ -83,8 +83,8 @@ WORKDIR /home/user
 
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
-ADD --chown=1000:1000 id.py /home/user/
-RUN /bin/bash -c 'chmod +x /home/user/id.py'
+ADD --chown=1000:1000 facedetect.py /home/user/
+RUN /bin/bash -c 'chmod +x /home/user/facedetect.py'
 
 ENV SERVER=172.17.0.1
 ENV VEHICLE=172.17.0.2
