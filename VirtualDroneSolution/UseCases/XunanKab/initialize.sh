@@ -44,7 +44,6 @@ CONNECTION_PORT_COMMUNICATION_LIBRARY=5763
 # Main
 # =============================================================================
 
-
 if ([ "$INITIALIZE" == "powerup" ]); then
   for ((i=0; i<=$COPTER_NUMBER; i++)); do
      COPTER_NAME=${COPTER_NAMES[$i]}
