@@ -1,4 +1,4 @@
-FROM xe1gyq/dronekit
+FROM user/core-dronekit
 
 MAINTAINER Abraham Arce <xe1gyq@gmail.com>
 
