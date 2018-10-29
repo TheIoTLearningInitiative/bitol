@@ -55,7 +55,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_CORE/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/core-$component .
+    docker build -t user/core-$component .
 done
 
 cd $DIRECTORY_TASKS
@@ -64,7 +64,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_TASKS/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/task-$component .
+    docker build -t user/task-$component .
 done
 
 cd $DIRECTORY_SERVICES_COMPUTERVISION
@@ -73,7 +73,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_SERVICES_COMPUTERVISION/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/computervision-$component .
+    docker build -t user/computervision-$component .
 done
 
 cd $DIRECTORY_SERVICES_TELEMETRY
@@ -82,7 +82,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_SERVICES_TELEMETRY/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/telemetry-$component .
+    docker build -t user/telemetry-$component .
 done
 
 exit 0
@@ -93,7 +93,7 @@ for COMPONENT in *
 do
     cd $DIRECTORY_APPLICATIONS/$COMPONENT
     component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t $USER/a_$component .
+    docker build -t user/a_$component .
 done
 
 # End of file
