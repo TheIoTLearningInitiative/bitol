@@ -85,15 +85,4 @@ do
     docker build -t user/telemetry-$component .
 done
 
-exit 0
-
-cd $DIRECTORY_APPLICATIONS
-
-for COMPONENT in *
-do
-    cd $DIRECTORY_APPLICATIONS/$COMPONENT
-    component=`echo "$COMPONENT" | tr '[:upper:]' '[:lower:]'`
-    docker build -t user/a_$component .
-done
-
 # End of file

@@ -12,7 +12,7 @@ INITIALIZE=$1
 
 # Core :: Copter
 
-FACEDETECT_DOCKER_IMAGE=${USER}/computervision-facedetect
+FACEDETECT_DOCKER_IMAGE=user/computervision-facedetect
 FACEDETECT_NUMBER=0
 FACEDETECT_NAMES[0]='one-facedetect'
 FACEDETECT_NAMES[1]='two-facedetect'
