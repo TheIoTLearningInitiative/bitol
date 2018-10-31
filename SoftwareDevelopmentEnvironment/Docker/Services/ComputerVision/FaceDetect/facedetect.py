@@ -11,10 +11,12 @@ command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rt
 cap = cv2.VideoCapture(command)
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
-#command='appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=%s port=%s 0, framerate, (640, 480)'
-out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
-                      'udpsink host=172.17.0.1 port=5700',
-                      0, framerate, (640, 480))
+#out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
+#                      'udpsink host=172.17.0.1 port=5700',
+#                      0, framerate, (640, 480))
+command='appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=%s port=%s 0, %s, (640, 480)' % (displayip, displayport, framerate)
+out = cv2.VideoWriter(command)
+
 # Create the haar cascade
 faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml")
 
