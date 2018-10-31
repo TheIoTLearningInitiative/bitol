@@ -1,11 +1,17 @@
 import cv2
+import sys
 
 framerate=25
+streamport=sys.argv[1]
+displayip=sys.argv[2]
+displayport=sys.argv[3]
 
 #cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink')
+command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
+cap = cv2.VideoCapture(command)
 #cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
+#command='appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=%s port=%s 0, framerate, (640, 480)'
 out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
                       'udpsink host=172.17.0.1 port=5700',
                       0, framerate, (640, 480))

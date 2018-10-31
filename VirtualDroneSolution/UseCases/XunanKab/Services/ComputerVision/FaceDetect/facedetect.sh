@@ -28,7 +28,7 @@ CAMERA_DEVICE=/dev/video
 if ([ "$INITIALIZE" == "powerup" ]); then
   for ((i=0; i<=$FACEDETECT_NUMBER; i++)); do
     FACEDETECT_NAME=${FACEDETECT_NAMES[$i]}
-    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE}`
+    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE} 5000 172.17.0.1 5700`
     IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${FACEDETECT_NAME}`
     echo "Service FaceDetect Information: " $FACEDETECT_NAME $IP $UUID
     gst-launch-1.0 -v v4l2src device=${CAMERA_DEVICE}${i} ! image/jpeg,width=640, height=480, framerate=30/1 ! rtpjpegpay ! udpsink host=${IP} port=5000 &

@@ -6,9 +6,9 @@ set -x
 # Variables
 # =============================================================================
 
-SERVER=$1
-VEHICLE=$2
-CAMERA_DEVICE$3
+STREAMPORT=$1
+DISPLAYIP=$2
+DISPLAYPORT$3
 
 # =============================================================================
 # Functions
@@ -22,4 +22,4 @@ CAMERA_DEVICE$3
 
 cd $HOME/
 ip a
-python3 facedetect.py
+python3 facedetect.py $STREAMPORT $DISPLAYIP $DISPLAYPORT
