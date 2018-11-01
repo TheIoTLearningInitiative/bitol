@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+#set -x
 
 # =============================================================================
 # Variables
@@ -32,10 +32,10 @@ while getopts "i:v:n:l:r:" o; do
             NAME="$OPTARG"
             ;;
         l)
-            LOCAL_PORT="$OPTARG"
+            STREAM_PORT="$OPTARG"
             ;;
         r)
-            REMOTE_PORT="$OPTARG"
+            DISPLAY_PORT="$OPTARG"
             ;;
         *)
             usage
@@ -56,14 +56,12 @@ FACEDETECT_NAME=$NAME-facedetect
 
 if ([ "$INITIALIZE" == "powerup" ]); then
 
-    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE}`
+    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE} ${STREAM_PORT} 172.17.0.1 ${DISPLAY_PORT}`
     IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${FACEDETECT_NAME}`
     echo "Service FaceDetect Information: " $FACEDETECT_NAME $IP $UUID
-    gst-launch-1.0 -v udpsrc port=$LOCAL_PORT ! application/x-rtp, media=video, clock-rate=90000, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! xvimagesink sync=0 &
+    gst-launch-1.0 -v udpsrc port=$DISPLAY_PORT ! application/x-rtp, media=video, clock-rate=90000, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! xvimagesink sync=0 &
 
 elif ([ "$INITIALIZE" == "powerdown" ]); then
-
-    docker container rm -f ${VEHICLE_NAME}
 
     docker container rm -f ${FACEDETECT_NAME}
     killall -9 gst-launch-1.0

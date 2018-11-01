@@ -8,7 +8,7 @@ set -x
 
 STREAMPORT=$1
 DISPLAYIP=$2
-DISPLAYPORT$3
+DISPLAYPORT=$3
 
 # =============================================================================
 # Functions
@@ -20,7 +20,7 @@ DISPLAYPORT$3
 # Main
 # =============================================================================
 
-cd $HOME/
+#cd $HOME/
 ip a
 echo $STREAMPORT $DISPLAYIP $DISPLAYPORT
 sleep 5

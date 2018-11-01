@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+#set -x
 
 # =============================================================================
 # Variables
@@ -82,6 +82,8 @@ if ([ "$INITIALIZE" == "powerup" ]); then
 
     if [ -e $CAMERA_DEVICE ]; then
 
+        IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${FACEDETECT_NAME}`
+        echo "Service FaceDetect Information: " $FACEDETECT_NAME $IP
         gst-launch-1.0 -v v4l2src device=${CAMERA_DEVICE} ! image/jpeg,width=640, height=480, framerate=30/1 ! rtpjpegpay ! udpsink host=${IP} port=${STREAM_PORT} &
 
     fi
