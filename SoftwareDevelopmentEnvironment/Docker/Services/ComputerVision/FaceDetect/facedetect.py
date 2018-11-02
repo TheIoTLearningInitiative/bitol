@@ -41,10 +41,10 @@ while(True):
 
 	print("Found {0} faces!".format(len(faces)))
 
-	# Draw a rectangle around the faces
 	for (x, y, w, h) in faces:
 		cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
+	cv2.putText(frame,'XunanKab',(10,30),cv2.FONT_HERSHEY_SIMPLEX,1,(255,177,1),3)
 
 	# Display the resulting frame
 	out.write(frame)
