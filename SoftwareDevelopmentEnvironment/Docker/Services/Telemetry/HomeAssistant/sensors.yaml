@@ -24,4 +24,55 @@
   state_topic: "xunankab/quintanaroo/velocity"
   name: "Quintana Roo Velocity"
   value_template: '{{ value_json.velocity }}'
-
+- platform: mqtt
+  state_topic: "xunankab/yucatan/battery"
+  name: "Yucatan Battery"
+  unit_of_measurement: "%"
+  value_template: '{{ value_json.battery }}'
+  device_class: battery
+- platform: mqtt
+  state_topic: "xunankab/yucatan/efk"
+  name: "Yucatan EFK"
+  value_template: '{{ value_json.efk }}'
+- platform: mqtt
+  state_topic: "xunankab/yucatan/gps"
+  name: "Yucatan GPS"
+  value_template: '{{ value_json.gps }}'
+- platform: mqtt
+  state_topic: "xunankab/yucatan/heading"
+  name: "Yucatan Heading"
+  value_template: '{{ value_json.heading }}'
+- platform: mqtt
+  state_topic: "xunankab/yucatan/altitude"
+  name: "Yucatan Altitude"
+  value_template: '{{ value_json.altitude }}'
+- platform: mqtt
+  state_topic: "xunankab/yucatan/velocity"
+  name: "Yucatan Velocity"
+  value_template: '{{ value_json.velocity }}'
+- platform: mqtt
+  state_topic: "xunankab/campeche/battery"
+  name: "Campeche Battery"
+  unit_of_measurement: "%"
+  value_template: '{{ value_json.battery }}'
+  device_class: battery
+- platform: mqtt
+  state_topic: "xunankab/campeche/efk"
+  name: "Campeche EFK"
+  value_template: '{{ value_json.efk }}'
+- platform: mqtt
+  state_topic: "xunankab/campeche/gps"
+  name: "Campeche GPS"
+  value_template: '{{ value_json.gps }}'
+- platform: mqtt
+  state_topic: "xunankab/campeche/heading"
+  name: "Campeche Heading"
+  value_template: '{{ value_json.heading }}'
+- platform: mqtt
+  state_topic: "xunankab/campeche/altitude"
+  name: "Campeche Altitude"
+  value_template: '{{ value_json.altitude }}'
+- platform: mqtt
+  state_topic: "xunankab/campeche/velocity"
+  name: "Campeche Velocity"
+  value_template: '{{ value_json.velocity }}'

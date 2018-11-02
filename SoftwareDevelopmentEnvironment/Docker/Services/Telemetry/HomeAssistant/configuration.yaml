@@ -17,6 +17,14 @@ homeassistant:
     binary_sensor.quintana_roo_connectivity:
       friendly_name: Quintana Roo
 
+    binary_sensor.yucatan_connectivity:
+      friendly_name: Yucatan
+
+    binary_sensor.campeche_connectivity:
+      friendly_name: Campeche
+
+    # Quintana Roo
+
     sensor.quintana_roo_battery:
       friendly_name: Battery
       icon: mdi:battery
@@ -35,6 +43,50 @@ homeassistant:
       friendly_name: Altitude
 
     sensor.quintana_roo_velocity:
+      friendly_name: GPS
+
+    # Yucatan
+
+    sensor.yucatan_battery:
+      friendly_name: Battery
+      icon: mdi:battery
+
+    sensor.yucatan_efk:
+      friendly_name: EFK
+
+    sensor.yucatan_gps:
+      friendly_name: GPS
+
+    sensor.yucatan_heading:
+      friendly_name: Heading
+      icon: mdi:compass
+
+    sensor.yucatan_altitude:
+      friendly_name: Altitude
+
+    sensor.yucatan_velocity:
+      friendly_name: GPS
+
+    # Campeche
+
+    sensor.campeche_battery:
+      friendly_name: Battery
+      icon: mdi:battery
+
+    sensor.campeche_efk:
+      friendly_name: EFK
+
+    sensor.campeche_gps:
+      friendly_name: GPS
+
+    sensor.campeche_heading:
+      friendly_name: Heading
+      icon: mdi:compass
+
+    sensor.campeche_altitude:
+      friendly_name: Altitude
+
+    sensor.campeche_velocity:
       friendly_name: GPS
 
 # Show links to resources in log and frontend
