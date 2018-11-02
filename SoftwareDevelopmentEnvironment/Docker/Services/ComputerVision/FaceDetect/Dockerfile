@@ -86,9 +86,10 @@ RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 ADD --chown=1000:1000 facedetect.py /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/facedetect.py'
 
+ENV NAME=XunanKab
 ENV STREAMPORT=172.17.0.1
 ENV DISPLAYIP=172.17.0.2
 ENV DISPLAYPORT=5700
 
 ENTRYPOINT ["/home/user/main.sh"]
-CMD [$STREAMPORT, $DISPLAYIP, $DISPLAYPORT]
+CMD [$NAME, $STREAMPORT, $DISPLAYIP, $DISPLAYPORT]

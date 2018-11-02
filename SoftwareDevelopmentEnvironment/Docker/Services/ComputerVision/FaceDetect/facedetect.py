@@ -2,9 +2,10 @@ import cv2
 import sys
 
 framerate=25
-streamport=sys.argv[1]
-displayip=sys.argv[2]
-displayport=sys.argv[3]
+name=sys.argv[1]
+streamport=sys.argv[2]
+displayip=sys.argv[3]
+displayport=sys.argv[4]
 
 command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
 cap = cv2.VideoCapture(command)
@@ -32,7 +33,7 @@ while(True):
 	for (x, y, w, h) in faces:
 		cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-	cv2.putText(frame,'XunanKab',(10,30),cv2.FONT_HERSHEY_SIMPLEX,1,(255,177,1),3)
+	cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
 
 	out.write(frame)
 	if cv2.waitKey(1) & 0xFF == ord('q'):

@@ -6,9 +6,10 @@ set -x
 # Variables
 # =============================================================================
 
-STREAMPORT=$1
-DISPLAYIP=$2
-DISPLAYPORT=$3
+NAME=$1
+STREAMPORT=$2
+DISPLAYIP=$3
+DISPLAYPORT=$4
 
 # =============================================================================
 # Functions
@@ -22,6 +23,6 @@ DISPLAYPORT=$3
 
 #cd $HOME/
 ip a
-echo $STREAMPORT $DISPLAYIP $DISPLAYPORT
+echo $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT
 sleep 5
-python3 facedetect.py $STREAMPORT $DISPLAYIP $DISPLAYPORT
+python3 facedetect.py $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT

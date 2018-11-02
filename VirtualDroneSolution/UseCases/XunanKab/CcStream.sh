@@ -56,7 +56,7 @@ FACEDETECT_NAME=$NAME-facedetect
 
 if ([ "$INITIALIZE" == "powerup" ]); then
 
-    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE} ${STREAM_PORT} 172.17.0.1 ${DISPLAY_PORT}`
+    UUID=`docker run -itd --name ${FACEDETECT_NAME} ${FACEDETECT_DOCKER_IMAGE} ${NAME} ${STREAM_PORT} 172.17.0.1 ${DISPLAY_PORT}`
     IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${FACEDETECT_NAME}`
     echo "Service FaceDetect Information: " $FACEDETECT_NAME $IP $UUID
     gst-launch-1.0 -v udpsrc port=$DISPLAY_PORT ! application/x-rtp, media=video, clock-rate=90000, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! xvimagesink sync=0 &
