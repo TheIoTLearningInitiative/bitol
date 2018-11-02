@@ -45,11 +45,11 @@ homeassistant:
     sensor.quintana_roo_velocity:
       friendly_name: GPS
 
-    switch.quintanaroostream:
-      friendly_name: Stream
-
     switch.quintanaroofacedetect:
       friendly_name: Face Detect
+
+    switch.quintanaroostream:
+      friendly_name: Stream
 
     # Yucatan
 
@@ -73,11 +73,11 @@ homeassistant:
     sensor.yucatan_velocity:
       friendly_name: GPS
 
-    switch.yucatanstream:
-      friendly_name: Stream
-
     switch.yucatanafacedetect:
       friendly_name: Face Detect
+
+    switch.yucatanstream:
+      friendly_name: Stream
 
     # Campeche
 
@@ -102,7 +102,7 @@ homeassistant:
       friendly_name: GPS
 
 # Show links to resources in log and frontend
-introduction:
+# introduction:
 
 # Enables the frontend
 frontend:
@@ -126,7 +126,7 @@ updater:
   # include_used_components: true
 
 # Discover some devices automatically
-discovery:
+# discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:

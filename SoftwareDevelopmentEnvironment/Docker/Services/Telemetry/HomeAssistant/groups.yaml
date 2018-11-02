@@ -9,14 +9,14 @@ quintanaroolands:
   name: Quintana Roo
   entities:
     - group.quintanaroosensors
-    - group.quintanaroostreaming
+    - group.quintanaroocomputervision
 
 yucatanlands:
   view: yes
   name: Yucatan
   entities:
     - group.yucatansensors
-    - group.yucatanstreaming
+    - group.yucatancomputervision
 
 campechelands:
   view: yes
@@ -41,8 +41,8 @@ quintanaroosensors:
     - sensor.quintana_roo_altitude
     - sensor.quintana_roo_velocity
 
-quintanaroostreaming:
-  name: Streaming
+quintanaroocomputervision:
+  name: Computer Vision
   entities:
     - switch.quintanaroofacedetect
     - switch.quintanaroostream
@@ -61,8 +61,8 @@ yucatansensors:
     - sensor.yucatan_altitude
     - sensor.yucatan_velocity
 
-yucatanstreaming:
-  name: Streaming
+yucatancomputervision:
+  name: Computer Vision
   entities:
     - switch.yucatanfacedetect
     - switch.yucatanstream
