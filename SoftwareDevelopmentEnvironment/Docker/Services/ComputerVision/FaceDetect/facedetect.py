@@ -6,12 +6,17 @@ name=sys.argv[1]
 streamport=sys.argv[2]
 displayip=sys.argv[3]
 displayport=sys.argv[4]
+haport=sys.argv[5]
 
 command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
 cap = cv2.VideoCapture(command)
 
-us="appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=" + displayip + " port=" + displayport
-out = cv2.VideoWriter(us, 0, framerate, (640, 480))
+display="appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=" + displayip + " port=" + displayport
+displayout = cv2.VideoWriter(display, 0, framerate, (640, 480))
+
+#ha="appsrc ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse config-interval=1 ! matroskamux streamable=true ! tcpserversink host=" + displayip + " port=" + haport + " sync=false sync-method=2"
+ha="appsrc ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse config-interval=1 ! matroskamux streamable=true ! tcpserversink host=::0 port=9000 sync=false sync-method=2"
+haout = cv2.VideoWriter(ha, 0, framerate, (640, 480))
 
 faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml")
 
@@ -35,7 +40,8 @@ while(True):
 
 	cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
 
-	out.write(frame)
+	displayout.write(frame)
+	haout.write(frame)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
