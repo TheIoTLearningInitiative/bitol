@@ -13,3 +13,19 @@ quintanaroofacedetectstart:
 quintanaroofacedetectstop:
   sequence:
     - service: shell_command.quintanaroofacedetectstop
+
+yucatanstreamingstart:
+  sequence:
+    - service: shell_command.yucatanstreamingstart
+
+yucatanstreamingstop:
+  sequence:
+    - service: shell_command.yucatanstreamingstop
+
+yucatanfacedetectstart:
+  sequence:
+    - service: shell_command.yucatanfacedetectstart
+
+yucatanfacedetectstop:
+  sequence:
+    - service: shell_command.yucatanfacedetectstop
