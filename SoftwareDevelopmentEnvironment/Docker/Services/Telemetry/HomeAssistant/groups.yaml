@@ -9,6 +9,7 @@ quintanaroolands:
   name: Quintana Roo
   entities:
     - group.quintanaroosensors
+    - group.quintanaroostreaming
 
 yucatanlands:
   view: yes
@@ -38,6 +39,16 @@ quintanaroosensors:
     - sensor.quintana_roo_heading
     - sensor.quintana_roo_altitude
     - sensor.quintana_roo_velocity
+
+quintanaroostreaming:
+  name: Streaming
+  entities:
+    - switch.quintanaroostream
+    - switch.quintanaroofacedetect
+    - script.quintanaroostreamingstart
+    - script.quintanaroostreamingstop
+    - script.quintanaroofacedetectstart 
+    - script.quintanaroofacedetectstop
 
 yucatansensors:
   name: Sensors

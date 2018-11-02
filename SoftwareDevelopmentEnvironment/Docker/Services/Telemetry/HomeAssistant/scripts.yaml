@@ -1,0 +1,15 @@
+quintanaroostreamingstart:
+  sequence:
+    - service: shell_command.quintanaroostreamingstart
+
+quintanaroostreamingstop:
+  sequence:
+    - service: shell_command.quintanaroostreamingstop
+
+quintanaroofacedetectstart:
+  sequence:
+    - service: shell_command.quintanaroofacedetectstart
+
+quintanaroofacedetectstop:
+  sequence:
+    - service: shell_command.quintanaroofacedetectstop
