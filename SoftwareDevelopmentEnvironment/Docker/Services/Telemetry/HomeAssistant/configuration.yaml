@@ -79,7 +79,7 @@ homeassistant:
     sensor.yucatan_velocity:
       friendly_name: GPS
 
-    switch.yucatanafacedetect:
+    switch.yucatanfacedetect:
       friendly_name: Face Detect
 
     switch.yucatanstream:
