@@ -10,10 +10,24 @@ quintanaroolands:
   entities:
     - group.quintanaroosensors
 
+yucatanlands:
+  view: yes
+  name: Yucatan
+  entities:
+    - group.yucatansensors
+
+campechelands:
+  view: yes
+  name: Campeche
+  entities:
+    - group.campechesensors
+
 xunankablands:
   name: XunanKab
   entities:
     - binary_sensor.quintana_roo_connectivity
+    - binary_sensor.yucatan_connectivity
+    - binary_sensor.campeche_connectivity
 
 quintanaroosensors:
   name: Sensors
@@ -24,3 +38,23 @@ quintanaroosensors:
     - sensor.quintana_roo_heading
     - sensor.quintana_roo_altitude
     - sensor.quintana_roo_velocity
+
+yucatansensors:
+  name: Sensors
+  entities:
+    - sensor.yucatan_battery
+    - sensor.yucatan_efk
+    - sensor.yucatan_gps
+    - sensor.yucatan_heading
+    - sensor.yucatan_altitude
+    - sensor.yucatan_velocity
+
+campechesensors:
+  name: Sensors
+  entities:
+    - sensor.campeche_battery
+    - sensor.campeche_efk
+    - sensor.campeche_gps
+    - sensor.campeche_heading
+    - sensor.campeche_altitude
+    - sensor.campeche_velocity

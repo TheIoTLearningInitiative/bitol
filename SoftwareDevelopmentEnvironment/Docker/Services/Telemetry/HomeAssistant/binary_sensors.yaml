@@ -3,3 +3,13 @@
   name: "Quintana Roo Connectivity"
   device_class: connectivity
 
+- platform: mqtt
+  state_topic: "xunankab/yucatan/connectivity"
+  name: "Yucatan Connectivity"
+  device_class: connectivity
+
+- platform: mqtt
+  state_topic: "xunankab/campeche/connectivity"
+  name: "Campeche Connectivity"
+  device_class: connectivity
+
