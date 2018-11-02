@@ -16,6 +16,7 @@ yucatanlands:
   name: Yucatan
   entities:
     - group.yucatansensors
+    - group.yucatanstreaming
 
 campechelands:
   view: yes
@@ -43,8 +44,8 @@ quintanaroosensors:
 quintanaroostreaming:
   name: Streaming
   entities:
-    - switch.quintanaroostream
     - switch.quintanaroofacedetect
+    - switch.quintanaroostream
     #- script.quintanaroostreamingstart
     #- script.quintanaroostreamingstop
     #- script.quintanaroofacedetectstart 
@@ -63,8 +64,8 @@ yucatansensors:
 yucatanstreaming:
   name: Streaming
   entities:
-    - switch.yucatanstream
     - switch.yucatanfacedetect
+    - switch.yucatanstream
     #- script.yucatanstreamingstart
     #- script.yucatanstreamingstop
     #- script.yucatanfacedetectstart 
