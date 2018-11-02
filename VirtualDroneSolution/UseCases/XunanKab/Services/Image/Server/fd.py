@@ -6,19 +6,31 @@ streamport=sys.argv[1]
 displayip=sys.argv[2]
 displayport=sys.argv[3]
 
+#cap = cv2.VideoCapture(0)
 command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
 cap = cv2.VideoCapture(command)
+#cap = cv2.VideoCapture('udpsrc port=5000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
 
+#out = cv2.VideoWriter('appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! '
+#                      'udpsink host=172.17.0.1 port=5700',
+#                      0, framerate, (640, 480))
+#us='udpsink host=%s port=%s' % (displayip, displayport)
 us="appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=" + displayip + " port=" + displayport
+#us='appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=' + displayip + ' port=5700'
+print(us)
 out = cv2.VideoWriter(us, 0, framerate, (640, 480))
 
+# Create the haar cascade
 faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml")
 
 while(True):
+	# Capture frame-by-frame
 	ret, frame = cap.read()
 
+	# Our operations on the frame come here
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
+	# Detect faces in the image
 	faces = faceCascade.detectMultiScale(
 		gray,
 		scaleFactor=1.1,
@@ -34,10 +46,13 @@ while(True):
 
 	cv2.putText(frame,'XunanKab',(10,30),cv2.FONT_HERSHEY_SIMPLEX,1,(255,177,1),3)
 
+	# Display the resulting frame
 	out.write(frame)
+	#cv2.imshow('frame', frame)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
+# When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
 out.release()
