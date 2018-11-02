@@ -45,6 +45,12 @@ homeassistant:
     sensor.quintana_roo_velocity:
       friendly_name: GPS
 
+    switch.quintanaroostream:
+      friendly_name: Stream
+
+    switch.quintanaroofacedetect:
+      friendly_name: Face Detect
+
     # Yucatan
 
     sensor.yucatan_battery:
@@ -66,6 +72,12 @@ homeassistant:
 
     sensor.yucatan_velocity:
       friendly_name: GPS
+
+    switch.yucatanstream:
+      friendly_name: Stream
+
+    switch.yucatanafacedetect:
+      friendly_name: Face Detect
 
     # Campeche
 
