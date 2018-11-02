@@ -25,6 +25,9 @@ homeassistant:
 
     # Quintana Roo
 
+    switch.quintanaroovehiclesimulator:
+      friendly_name: Vehicle Simulator
+
     sensor.quintana_roo_battery:
       friendly_name: Battery
       icon: mdi:battery
@@ -52,6 +55,9 @@ homeassistant:
       friendly_name: Stream
 
     # Yucatan
+
+    switch.yucatanvehiclesimulator:
+      friendly_name: Vehicle Simulator
 
     sensor.yucatan_battery:
       friendly_name: Battery

@@ -8,6 +8,7 @@ quintanaroolands:
   view: yes
   name: Quintana Roo
   entities:
+    - group.quintanaroovehiclesimulator
     - group.quintanaroosensors
     - group.quintanaroocomputervision
 
@@ -15,6 +16,7 @@ yucatanlands:
   view: yes
   name: Yucatan
   entities:
+    - group.yucatanvehiclesimulator
     - group.yucatansensors
     - group.yucatancomputervision
 
@@ -30,6 +32,11 @@ xunankablands:
     - binary_sensor.quintana_roo_connectivity
     - binary_sensor.yucatan_connectivity
     - binary_sensor.campeche_connectivity
+
+quintanaroovehiclesimulator:
+  name: Vehicle Simulator
+  entities:
+    - switch.quintanaroovehiclesimulator
 
 quintanaroosensors:
   name: Sensors
@@ -50,6 +57,11 @@ quintanaroocomputervision:
     #- script.quintanaroostreamingstop
     #- script.quintanaroofacedetectstart 
     #- script.quintanaroofacedetectstop
+
+yucatanvehiclesimulator:
+  name: Vehicle Simulator
+  entities:
+    - switch.yucatanvehiclesimulator
 
 yucatansensors:
   name: Sensors
