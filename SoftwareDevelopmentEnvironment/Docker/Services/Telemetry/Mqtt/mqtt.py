@@ -8,6 +8,7 @@
 import argparse
 import json
 import math
+import signal
 import sys
 import time
 
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     vehicle.add_attribute_listener('velocity', velocity_callback)
     #vehicle.add_attribute_listener('*', wildcard_callback)
 
-    time.sleep(120)
+    signal.pause()
 
     vehicle.remove_attribute_listener('velocity', velocity_callback)
     vehicle.remove_attribute_listener('location', location_callback)
