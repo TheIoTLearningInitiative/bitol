@@ -10,6 +10,7 @@ NAME=$1
 STREAMPORT=$2
 DISPLAYIP=$3
 DISPLAYPORT=$4
+HAPORT=$5
 
 # =============================================================================
 # Functions
@@ -25,4 +26,4 @@ DISPLAYPORT=$4
 ip a
 echo $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT
 sleep 5
-python3 facedetect.py $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT
+python3 facedetect.py $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT $HAPORT

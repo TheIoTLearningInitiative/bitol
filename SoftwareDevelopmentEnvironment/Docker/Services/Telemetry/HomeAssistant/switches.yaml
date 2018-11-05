@@ -10,7 +10,7 @@
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Stream.sh -i powerdown -n quintanaroo &"
 
     quintanaroofacedetect:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerup -v 172.17.0.2 -n quintanaroo -l 5000 -r 5700 &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerup -v 172.17.0.2 -n quintanaroo -l 5000 -r 5700 -z 5800 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerdown -n quintanaroo &"
 
     yucatanvehiclesimulator:
@@ -22,5 +22,5 @@
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Stream.sh -i powerdown -n yucatan &"
 
     yucatanfacedetect:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerup -v 172.17.0.2 -n yucatan -l 5001 -r 5701 &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerup -v 172.17.0.2 -n yucatan -l 5001 -r 5701 -z 5800 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerdown -n yucatan &"
