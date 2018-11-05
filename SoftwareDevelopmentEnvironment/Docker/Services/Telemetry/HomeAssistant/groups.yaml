@@ -9,6 +9,7 @@ quintanaroolands:
   name: Quintana Roo
   entities:
     - group.quintanaroovehiclesimulator
+    - group.quintanarootelemetry
     - group.quintanaroosensors
     - group.quintanaroonavigation
     - group.quintanaroocomputervision
@@ -18,6 +19,7 @@ yucatanlands:
   name: Yucatan
   entities:
     - group.yucatanvehiclesimulator
+    - group.yucatantelemetry
     - group.yucatansensors
     - group.yucatannavigation
     - group.yucatancomputervision
@@ -39,6 +41,11 @@ quintanaroovehiclesimulator:
   name: Vehicle Simulator
   entities:
     - switch.quintanaroovehiclesimulator
+
+quintanarootelemetry:
+  name: Telemetry
+  entities:
+    - switch.quintanarootelemetry
 
 quintanaroosensors:
   name: Sensors
@@ -68,6 +75,11 @@ yucatanvehiclesimulator:
   name: Vehicle Simulator
   entities:
     - switch.yucatanvehiclesimulator
+
+yucatantelemetry:
+  name: Telemetry
+  entities:
+    - switch.yucatantelemetry
 
 yucatansensors:
   name: Sensors

@@ -5,6 +5,10 @@
       command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n quintanaroo -m 1 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n quintanaroo &"
 
+    quintanarootelemetry:
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerup -s 172.17.0.2 -n quintanaroo -m 1 &"
+      command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerdown -n quintanaroo &"
+
     quintanaroostream:
       command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Stream.sh -i powerup -s 172.17.0.1 -n quintanaroo -c /dev/video0 -p 5000 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Stream.sh -i powerdown -n quintanaroo &"
@@ -16,6 +20,10 @@
     yucatanvehiclesimulator:
       command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n yucatan -m 2 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n yucatan &"
+
+    yucatantelemetry:
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerup -s 172.17.0.3 -n yucatan -m 1 &"
+      command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerdown -n yucatan &"
 
     yucatanstream:
       command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Stream.sh -i powerup -s 172.17.0.1 -n yucatan -c /dev/video1 -p 5001 &"

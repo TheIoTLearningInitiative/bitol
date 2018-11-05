@@ -28,6 +28,9 @@ homeassistant:
     switch.quintanaroovehiclesimulator:
       friendly_name: Vehicle Simulator
 
+    switch.quintanarootelemetry:
+      friendly_name: Telemetry
+
     sensor.quintana_roo_battery:
       friendly_name: Battery
       icon: mdi:battery
@@ -70,6 +73,9 @@ homeassistant:
 
     switch.yucatanvehiclesimulator:
       friendly_name: Vehicle Simulator
+
+    switch.yucatantelemetry:
+      friendly_name: Telemetry
 
     sensor.yucatan_battery:
       friendly_name: Battery
