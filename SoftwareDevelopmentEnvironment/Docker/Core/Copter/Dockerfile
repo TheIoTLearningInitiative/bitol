@@ -29,6 +29,10 @@ RUN groupadd user && \
 RUN echo 'export PATH=$PATH:/ardupilot/Tools/autotest' >> $ENVIRONMENTAL && \
     echo 'export PATH=/usr/lib/ccache:$PATH' >> $ENVIRONMENTAL
 
+EXPOSE 5762/tcp
+EXPOSE 5763/tcp
+EXPOSE 5764/tcp
+
 USER user
 
 WORKDIR /home/user
@@ -47,10 +51,6 @@ RUN cd /home/user/ardupilot && \
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 RUN /bin/bash -c 'bash /home/user/main.sh'
-
-EXPOSE 5762/tcp
-EXPOSE 5763/tcp
-EXPOSE 5764/tcp
 
 ENV VEHICLEID=1
 ENV LATITUDE=20.6546009

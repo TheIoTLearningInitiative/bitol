@@ -19,8 +19,8 @@ yucatanlands:
   name: Yucatan
   entities:
     - group.yucatanvehiclesimulator
-    - group.yucatantelemetry
-    - group.yucatansensors
+    #- group.yucatantelemetry
+    #- group.yucatansensors
     - group.yucatannavigation
     - group.yucatancomputervision
 
