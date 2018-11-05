@@ -32,4 +32,4 @@ PATH=/usr/lib/ccache:$PATH
 cd $HOME/ardupilot/
 echo "SYSID_THISMAV=${VEHICLEID}" | tee -a $ARDUPILOT/Tools/autotest/default_params/copter.parm
 #sim_vehicle.py -v ArduCopter -l ${LATITUDE},${LONGITUDE},${ALTITUDE},0
-sim_vehicle.py -v ArduCopter -l ${LATITUDE},${LONGITUDE},${ALTITUDE},0 --out=tcpin:0.0.0.0:5764
+sim_vehicle.py -v ArduCopter -l ${LATITUDE},${LONGITUDE},${ALTITUDE},0 --out=tcpin:127.0.0.1:5764

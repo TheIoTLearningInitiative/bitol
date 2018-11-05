@@ -50,6 +50,7 @@ RUN /bin/bash -c 'bash /home/user/main.sh'
 
 EXPOSE 5762/tcp
 EXPOSE 5763/tcp
+EXPOSE 5764/tcp
 
 ENV VEHICLEID=1
 ENV LATITUDE=20.6546009
