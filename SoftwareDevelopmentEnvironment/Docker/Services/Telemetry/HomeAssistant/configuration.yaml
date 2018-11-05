@@ -26,7 +26,7 @@ homeassistant:
     # Quintana Roo
 
     switch.quintanaroovehiclesimulator:
-      friendly_name: Vehicle Simulator
+      friendly_name: Quintana Roo
 
     switch.quintanarootelemetry:
       friendly_name: Telemetry
@@ -72,7 +72,7 @@ homeassistant:
     # Yucatan
 
     switch.yucatanvehiclesimulator:
-      friendly_name: Vehicle Simulator
+      friendly_name: Yucatan
 
     switch.yucatantelemetry:
       friendly_name: Telemetry

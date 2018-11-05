@@ -1,14 +1,15 @@
 default_view:
   view: yes
-  name: Command Center
+  name: Main
   entities:
-    - group.xunankablands
+    #- group.xunankablands
+    - group.xunankabvehicles
 
 quintanaroolands:
   view: yes
   name: Quintana Roo
   entities:
-    - group.quintanaroovehiclesimulator
+    #- group.quintanaroovehiclesimulator
     - group.quintanarootelemetry
     - group.quintanaroosensors
     - group.quintanaroonavigation
@@ -18,7 +19,7 @@ yucatanlands:
   view: yes
   name: Yucatan
   entities:
-    - group.yucatanvehiclesimulator
+    #- group.yucatanvehiclesimulator
     #- group.yucatantelemetry
     #- group.yucatansensors
     - group.yucatannavigation
@@ -36,6 +37,12 @@ xunankablands:
     - binary_sensor.quintana_roo_connectivity
     - binary_sensor.yucatan_connectivity
     - binary_sensor.campeche_connectivity
+
+xunankabvehicles:
+  name: Vehicles
+  entities:
+    - switch.quintanaroovehiclesimulator
+    - switch.quintanaroovehiclesimulator
 
 quintanaroovehiclesimulator:
   name: Vehicle Simulator
