@@ -48,6 +48,18 @@ homeassistant:
     sensor.quintana_roo_velocity:
       friendly_name: GPS
 
+    script.quintanarootakeoff:
+      friendly_name: Take Off
+
+    script.quintanarootofirst:
+      friendly_name: To Lobby One
+
+    script.quintanarootosecond:
+      friendly_name: To Soccer Court
+
+    script.quintanarooland:
+      friendly_name: Land
+
     switch.quintanaroofacedetect:
       friendly_name: Face Detect
 
@@ -78,6 +90,18 @@ homeassistant:
 
     sensor.yucatan_velocity:
       friendly_name: GPS
+
+    script.yucatantakeoff:
+      friendly_name: Take Off
+
+    script.yucatantofirst:
+      friendly_name: To Lobby One
+
+    script.yucantantosecond:
+      friendly_name: To Soccer Court
+
+    script.yucantanland:
+      friendly_name: Land
 
     switch.yucatanfacedetect:
       friendly_name: Face Detect
