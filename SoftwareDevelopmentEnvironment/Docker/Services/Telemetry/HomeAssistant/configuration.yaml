@@ -110,7 +110,7 @@ homeassistant:
       friendly_name: To Soccer Court
 
     script.yucatansquare:
-      friendly_name: Square
+      friendly_name: Square Mission
 
     script.yucatanland:
       friendly_name: Land
