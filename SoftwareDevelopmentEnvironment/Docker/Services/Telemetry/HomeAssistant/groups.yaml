@@ -42,7 +42,7 @@ xunankabvehicles:
   name: Vehicles
   entities:
     - switch.quintanaroovehiclesimulator
-    - switch.quintanaroovehiclesimulator
+    - switch.yucatanvehiclesimulator
 
 quintanaroovehiclesimulator:
   name: Vehicle Simulator
