@@ -117,6 +117,9 @@ homeassistant:
 
     # Campeche
 
+    switch.campechevehiclesimulator:
+      friendly_name: Campeche
+
     sensor.campeche_battery:
       friendly_name: Battery
       icon: mdi:battery

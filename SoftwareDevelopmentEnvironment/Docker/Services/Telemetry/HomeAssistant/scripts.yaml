@@ -10,6 +10,10 @@ quintanarootosecond:
   sequence:
     - service: shell_command.quintanarootosecond
 
+quintanaroosquare:
+  sequence:
+    - service: shell_command.quintanaroosquare
+
 quintanarooland:
   sequence:
     - service: shell_command.quintanarooland
@@ -25,6 +29,10 @@ yucatantofirst:
 yucatantosecond:
   sequence:
     - service: shell_command.yucatantosecond
+
+yucatansquare:
+  sequence:
+    - service: shell_command.yucatansquare
 
 yucatanland:
   sequence:

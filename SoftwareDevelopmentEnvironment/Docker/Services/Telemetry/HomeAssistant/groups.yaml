@@ -25,12 +25,6 @@ yucatanlands:
     - group.yucatannavigation
     - group.yucatancomputervision
 
-campechelands:
-  view: yes
-  name: Campeche
-  entities:
-    - group.campechesensors
-
 xunankablands:
   name: XunanKab
   entities:
@@ -43,6 +37,7 @@ xunankabvehicles:
   entities:
     - switch.quintanaroovehiclesimulator
     - switch.yucatanvehiclesimulator
+    - switch.campechevehiclesimulator
 
 quintanaroovehiclesimulator:
   name: Vehicle Simulator
@@ -111,13 +106,3 @@ yucatancomputervision:
   entities:
     - switch.yucatanfacedetect
     - switch.yucatanstream
-
-campechesensors:
-  name: Sensors
-  entities:
-    - sensor.campeche_battery
-    - sensor.campeche_efk
-    - sensor.campeche_gps
-    - sensor.campeche_heading
-    - sensor.campeche_altitude
-    - sensor.campeche_velocity
