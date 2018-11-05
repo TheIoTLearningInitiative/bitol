@@ -97,10 +97,10 @@ homeassistant:
     script.yucatantofirst:
       friendly_name: To Lobby One
 
-    script.yucantantosecond:
+    script.yucatantosecond:
       friendly_name: To Soccer Court
 
-    script.yucantanland:
+    script.yucatanland:
       friendly_name: Land
 
     switch.yucatanfacedetect:
