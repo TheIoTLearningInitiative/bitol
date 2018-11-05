@@ -13,3 +13,19 @@ quintanarootosecond:
 quintanarooland:
   sequence:
     - service: shell_command.quintanarooland
+
+yucatantakeoff:
+  sequence:
+    - service: shell_command.yucatantakeoff
+
+yucatantofirst:
+  sequence:
+    - service: shell_command.yucatantofirst
+
+yucatantosecond:
+  sequence:
+    - service: shell_command.yucatantosecond
+
+yucatanland:
+  sequence:
+    - service: shell_command.yucatanland
