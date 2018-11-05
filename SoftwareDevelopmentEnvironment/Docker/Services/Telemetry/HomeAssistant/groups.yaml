@@ -10,6 +10,7 @@ quintanaroolands:
   entities:
     - group.quintanaroovehiclesimulator
     - group.quintanaroosensors
+    - group.quintanaroonavigation
     - group.quintanaroocomputervision
 
 yucatanlands:
@@ -18,6 +19,7 @@ yucatanlands:
   entities:
     - group.yucatanvehiclesimulator
     - group.yucatansensors
+    - group.yucatannavigation
     - group.yucatancomputervision
 
 campechelands:
@@ -48,15 +50,19 @@ quintanaroosensors:
     - sensor.quintana_roo_altitude
     - sensor.quintana_roo_velocity
 
+quintanaroonavigation:
+  name: Navigation
+  entities:
+    - script.quintanarootakeoff
+    - script.quintanarootofirst
+    - script.quintanarootosecond
+    - script.quintanarooland
+
 quintanaroocomputervision:
   name: Computer Vision
   entities:
     - switch.quintanaroofacedetect
     - switch.quintanaroostream
-    #- script.quintanaroostreamingstart
-    #- script.quintanaroostreamingstop
-    #- script.quintanaroofacedetectstart 
-    #- script.quintanaroofacedetectstop
 
 yucatanvehiclesimulator:
   name: Vehicle Simulator
@@ -73,15 +79,19 @@ yucatansensors:
     - sensor.yucatan_altitude
     - sensor.yucatan_velocity
 
+yucatannavigation:
+  name: Navigation
+  entities:
+    - script.yucatantakeoff
+    - script.yucatantofirst
+    - script.yucatantosecond
+    - script.yucatanland
+
 yucatancomputervision:
   name: Computer Vision
   entities:
     - switch.yucatanfacedetect
     - switch.yucatanstream
-    #- script.yucatanstreamingstart
-    #- script.yucatanstreamingstop
-    #- script.yucatanfacedetectstart 
-    #- script.yucatanfacedetectstop
 
 campechesensors:
   name: Sensors

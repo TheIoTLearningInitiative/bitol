@@ -1,31 +1,15 @@
-quintanaroostreamingstart:
+quintanarootakeoff:
   sequence:
-    - service: shell_command.quintanaroostreamingstart
+    - service: shell_command.quintanarootakeoff
 
-quintanaroostreamingstop:
+quintanarootofirst:
   sequence:
-    - service: shell_command.quintanaroostreamingstop
+    - service: shell_command.quintanarootofirst
 
-quintanaroofacedetectstart:
+quintanarootosecond:
   sequence:
-    - service: shell_command.quintanaroofacedetectstart
+    - service: shell_command.quintanarootosecond
 
-quintanaroofacedetectstop:
+quintanarooland:
   sequence:
-    - service: shell_command.quintanaroofacedetectstop
-
-yucatanstreamingstart:
-  sequence:
-    - service: shell_command.yucatanstreamingstart
-
-yucatanstreamingstop:
-  sequence:
-    - service: shell_command.yucatanstreamingstop
-
-yucatanfacedetectstart:
-  sequence:
-    - service: shell_command.yucatanfacedetectstart
-
-yucatanfacedetectstop:
-  sequence:
-    - service: shell_command.yucatanfacedetectstop
+    - service: shell_command.quintanarooland
