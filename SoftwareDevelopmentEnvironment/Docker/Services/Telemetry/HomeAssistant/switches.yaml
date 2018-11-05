@@ -2,7 +2,7 @@
   switches:
 
     quintanaroovehiclesimulator:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n quintanaroo &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n quintanaroo -m 1 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n quintanaroo &"
 
     quintanaroostream:
@@ -14,7 +14,7 @@
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerdown -n quintanaroo &"
 
     yucatanvehiclesimulator:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n yucatan &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n yucatan -m 2 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n yucatan &"
 
     yucatanstream:

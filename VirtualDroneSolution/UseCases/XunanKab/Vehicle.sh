@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#set -x
+set -x
 
 # =============================================================================
 # Variables
@@ -9,16 +9,17 @@
 SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 usage() {
-    echo "$0 [-i initialize] [-s <server>] [-n <name>]"
+    echo "$0 [-i initialize] [-s <server>] [-n <name>] [-m identification]"
     echo ""
     echo "Options:"
     echo "  -i: Initialize? powerup :: powedown"
     echo "  -s: IP address of the server"
     echo "  -n: Name of the vehicle"
+    echo "  -m: Id of the vehicle"
     echo ""
 }
 
-while getopts "i:s:n:c:p:" o; do
+while getopts "i:s:n:m:" o; do
     case "${o}" in
         i)
             INITIALIZE="$OPTARG"
@@ -29,6 +30,9 @@ while getopts "i:s:n:c:p:" o; do
         n)
             NAME="$OPTARG"
             ;;
+        m)
+            ID="$OPTARG"
+            ;;
         *)
             usage
             exit 1
@@ -38,7 +42,7 @@ done
 shift $((OPTIND-1))
 
 VEHICLE_NAME=$NAME-vehicle
-VEHICLE_ID=${VEHICLE_ID:-1}
+VEHICLE_ID=${ID}
 VEHICLE_LATITUDE=${VEHICLE_LATITUDE:-20.6679137}
 VEHICLE_LONGITUDE=${VEHICLE_LONGITUDE:--103.4630988}
 VEHICLE_ALTITUDE=${VEHICLE_ALTITUDE:-10}
@@ -67,7 +71,7 @@ if ([ "$INITIALIZE" == "powerup" ]); then
     echo "Copter Information: " $VEHICLE_NAME $IP $UUID
     sleep 3
     CONNECTION=${CONNECTION_PROTOCOL}:${IP}:${CONNECTION_PORT_COMMUNICATION_LIBRARY}
-    docker run $TASK_DOCKER_IMAGE_ID $CONNECTION $VEHICLE_ID
+    docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
 
 elif ([ "$INITIALIZE" == "powerdown" ]); then
 
