@@ -1,14 +1,15 @@
 default_view:
   view: yes
-  name: Command Center
+  name: Main
   entities:
-    - group.xunankablands
+    #- group.xunankablands
+    - group.xunankabvehicles
 
 quintanaroolands:
   view: yes
   name: Quintana Roo
   entities:
-    - group.quintanaroovehiclesimulator
+    #- group.quintanaroovehiclesimulator
     - group.quintanarootelemetry
     - group.quintanaroosensors
     - group.quintanaroonavigation
@@ -18,17 +19,11 @@ yucatanlands:
   view: yes
   name: Yucatan
   entities:
-    - group.yucatanvehiclesimulator
-    - group.yucatantelemetry
-    - group.yucatansensors
+    #- group.yucatanvehiclesimulator
+    #- group.yucatantelemetry
+    #- group.yucatansensors
     - group.yucatannavigation
     - group.yucatancomputervision
-
-campechelands:
-  view: yes
-  name: Campeche
-  entities:
-    - group.campechesensors
 
 xunankablands:
   name: XunanKab
@@ -36,6 +31,13 @@ xunankablands:
     - binary_sensor.quintana_roo_connectivity
     - binary_sensor.yucatan_connectivity
     - binary_sensor.campeche_connectivity
+
+xunankabvehicles:
+  name: Vehicles
+  entities:
+    - switch.quintanaroovehiclesimulator
+    - switch.yucatanvehiclesimulator
+    - switch.campechevehiclesimulator
 
 quintanaroovehiclesimulator:
   name: Vehicle Simulator
@@ -51,8 +53,8 @@ quintanaroosensors:
   name: Sensors
   entities:
     - sensor.quintana_roo_battery
-    - sensor.quintana_roo_efk
-    - sensor.quintana_roo_gps
+    #- sensor.quintana_roo_efk
+    #- sensor.quintana_roo_gps
     - sensor.quintana_roo_heading
     - sensor.quintana_roo_altitude
     - sensor.quintana_roo_velocity
@@ -63,6 +65,7 @@ quintanaroonavigation:
     - script.quintanarootakeoff
     - script.quintanarootofirst
     - script.quintanarootosecond
+    - script.quintanaroosquare
     - script.quintanarooland
 
 quintanaroocomputervision:
@@ -97,6 +100,7 @@ yucatannavigation:
     - script.yucatantakeoff
     - script.yucatantofirst
     - script.yucatantosecond
+    - script.yucatansquare
     - script.yucatanland
 
 yucatancomputervision:
@@ -104,13 +108,3 @@ yucatancomputervision:
   entities:
     - switch.yucatanfacedetect
     - switch.yucatanstream
-
-campechesensors:
-  name: Sensors
-  entities:
-    - sensor.campeche_battery
-    - sensor.campeche_efk
-    - sensor.campeche_gps
-    - sensor.campeche_heading
-    - sensor.campeche_altitude
-    - sensor.campeche_velocity

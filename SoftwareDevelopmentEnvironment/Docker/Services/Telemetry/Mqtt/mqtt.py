@@ -40,12 +40,12 @@ def battery_callback(self, attr_name, value):
     payload["battery"] = vehicle.battery.voltage
     client.publish(topic, payload=json.dumps(payload))
 
-def efk_callback(self, attr_name, value):
+def efk_ok_callback(self, attr_name, value):
     topic = "xunankab/quintanaroo/efk"
     payload["efk"] = vehicle.efk_ok
     client.publish(topic, payload=json.dumps(payload))
 
-def gps_callback(self, attr_name, value):
+def gps_0_callback(self, attr_name, value):
     topic = "xunankab/quintanaroo/gps"
     payload["gps"] = vehicle.gps_0
     client.publish(topic, payload=json.dumps(payload))
@@ -105,8 +105,8 @@ if __name__ == '__main__':
 
     vehicle.add_attribute_listener('system_status', system_status_callback)
     vehicle.add_attribute_listener('battery', battery_callback)
-    vehicle.add_attribute_listener('efk', efk_callback)
-    vehicle.add_attribute_listener('gps', gps_callback)
+    vehicle.add_attribute_listener('efk_ok', efk_ok_callback)
+    #vehicle.add_attribute_listener('gps_0', gps_0_callback)
     vehicle.add_attribute_listener('heading', heading_callback)
     vehicle.add_attribute_listener('location', location_callback)
     vehicle.add_attribute_listener('velocity', velocity_callback)
@@ -117,8 +117,8 @@ if __name__ == '__main__':
     vehicle.remove_attribute_listener('velocity', velocity_callback)
     vehicle.remove_attribute_listener('location', location_callback)
     vehicle.remove_attribute_listener('heading', heading_callback)
-    vehicle.remove_attribute_listener('gps', gps_callback)
-    vehicle.remove_attribute_listener('efk', efk_callback)
+    #vehicle.remove_attribute_listener('gps_0', gps_0_callback)
+    vehicle.remove_attribute_listener('efk_ok', efk_ok_callback)
     vehicle.remove_attribute_listener('battery', battery_callback)
     vehicle.remove_attribute_listener('system_status', system_status_callback)
     #vehicle.remove_attribute_listener('*', wildcard_callback)

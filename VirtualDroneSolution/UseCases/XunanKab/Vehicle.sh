@@ -9,17 +9,18 @@ set -x
 SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 usage() {
-    echo "$0 [-i initialize] [-s <server>] [-n <name>] [-m identification]"
+    echo "$0 [-i <initialize>] [-s <server>] [-n <name>] [-m <identification>] [-g <gcs port>]"
     echo ""
     echo "Options:"
     echo "  -i: Initialize? powerup :: powedown"
     echo "  -s: IP address of the server"
     echo "  -n: Name of the vehicle"
     echo "  -m: Id of the vehicle"
+    echo "  -m: Ground Control Station Port"
     echo ""
 }
 
-while getopts "i:s:n:m:" o; do
+while getopts "i:s:n:m:g:" o; do
     case "${o}" in
         i)
             INITIALIZE="$OPTARG"
@@ -32,6 +33,9 @@ while getopts "i:s:n:m:" o; do
             ;;
         m)
             ID="$OPTARG"
+            ;;
+        g)
+            GCS_PORT="$OPTARG"
             ;;
         *)
             usage
@@ -46,6 +50,9 @@ VEHICLE_ID=${ID}
 VEHICLE_LATITUDE=${VEHICLE_LATITUDE:-20.6679137}
 VEHICLE_LONGITUDE=${VEHICLE_LONGITUDE:--103.4630988}
 VEHICLE_ALTITUDE=${VEHICLE_ALTITUDE:-10}
+
+VEHICLE_TCP_PORT_A=5764
+VEHICLE_UDP_PORT_A=$GCS_PORT
 
 VEHICLE_DOCKER_IMAGE=user/core-copter
 
@@ -66,7 +73,9 @@ if ([ "$INITIALIZE" == "powerup" ]); then
                                  ${VEHICLE_DOCKER_IMAGE} \
                                  ${VEHICLE_ID} \
                                  ${VEHICLE_LATITUDE} ${VEHICLE_LONGITUDE} \
-                                 ${VEHICLE_ALTITUDE}`
+                                 ${VEHICLE_ALTITUDE}\
+                                 ${VEHICLE_TCP_PORT_A} \
+                                 ${VEHICLE_UDP_PORT_A}`
     IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${VEHICLE_NAME}`
     echo "Copter Information: " $VEHICLE_NAME $IP $UUID
     sleep 3
