@@ -3,6 +3,7 @@ apk add --no-cache git libtool automake autoconf expat-dev gcc make cmake g++ py
 
 pip install pip --upgrade 
 pip install pyserial future 
+cd
 
 git clone git://github.com/ArduPilot/ardupilot.git
 cd ardupilot
