@@ -86,9 +86,11 @@ RUN /bin/bash -c 'chmod +x /home/user/main.sh'
 ADD --chown=1000:1000 fullbody.py /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/fullbody.py'
 
-ENV SERVER=172.17.0.1
-ENV VEHICLE=172.17.0.2
-ENV CAMERA_DEVICE=/dev/video0
+ENV NAME=XunanKab
+ENV STREAMPORT=172.17.0.1
+ENV DISPLAYIP=172.17.0.2
+ENV DISPLAYPORT=5700
+ENV HAPORT=5800
 
 ENTRYPOINT ["/home/user/main.sh"]
-CMD [$SERVER, $VEHICLE, $CAMERA_DEVICE]
+CMD [$NAME, $STREAMPORT, $DISPLAYIP, $DISPLAYPORT, $HAPORT]

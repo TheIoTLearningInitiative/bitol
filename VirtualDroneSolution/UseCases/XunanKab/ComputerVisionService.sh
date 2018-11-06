@@ -9,7 +9,7 @@
 SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 usage() {
-    echo "$0 [-i initialize] [-v <vehicle>] [-n <name>] [-l <local>] [-r <remote>] [-z <zero>]"
+    echo "$0 [-i initialize] [-v <vehicle>] [-n <name>] [-l <local>] [-r <remote>] [-z <zero>] [-t <type>]"
     echo ""
     echo "Options:"
     echo "  -i: Initialize? powerup :: powedown"
@@ -18,10 +18,11 @@ usage() {
     echo "  -l: Local stream port"
     echo "  -r: Remote stream port"
     echo "  -z: Zero stream port"
+    echo "  -t: Type of service"
     echo ""
 }
 
-while getopts "i:v:n:l:r:z:" o; do
+while getopts "i:v:n:l:r:z:t:" o; do
     case "${o}" in
         i)
             INITIALIZE="$OPTARG"
@@ -41,6 +42,9 @@ while getopts "i:v:n:l:r:z:" o; do
         z)
             ZERO_PORT="$OPTARG"
             ;;
+        t)
+            TYPE="$OPTARG"
+            ;;
         *)
             usage
             exit 1
@@ -52,7 +56,7 @@ shift $((OPTIND-1))
 VEHICLE_NAME=$NAME-vehicle
 
 FACEDETECT_DOCKER_IMAGE=user/computervision-facedetect
-FACEDETECT_NAME=$NAME-facedetect
+FACEDETECT_NAME=$NAME-$TYPE
 
 # =============================================================================
 # Main

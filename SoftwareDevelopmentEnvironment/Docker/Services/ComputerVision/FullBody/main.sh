@@ -6,9 +6,11 @@ set -x
 # Variables
 # =============================================================================
 
-SERVER=$1
-VEHICLE=$2
-CAMERA_DEVICE$3
+NAME=$1
+STREAMPORT=$2
+DISPLAYIP=$3
+DISPLAYPORT=$4
+HAPORT=$5
 
 # =============================================================================
 # Functions
@@ -20,6 +22,8 @@ CAMERA_DEVICE$3
 # Main
 # =============================================================================
 
-cd $HOME/
+#cd $HOME/
 ip a
-python3 fullbody.py
+echo $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT
+sleep 5
+python3 fullbody.py $NAME $STREAMPORT $DISPLAYIP $DISPLAYPORT $HAPORT
