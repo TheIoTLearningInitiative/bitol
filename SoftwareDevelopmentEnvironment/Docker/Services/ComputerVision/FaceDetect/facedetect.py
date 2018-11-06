@@ -19,8 +19,8 @@ ha="appsrc ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse confi
 haout = cv2.VideoWriter(ha, 0, framerate, (640, 480))
 
 faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml")
-#faceCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_fullbody.xml")
 smileCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_smile.xml")
+#eyeCascade = cv2.CascadeClassifier("/usr/local/share/OpenCV/haarcascades/haarcascade_eye_tree_eyeglasses.xml")
 
 while(True):
 	ret, frame = cap.read()
@@ -34,7 +34,9 @@ while(True):
 	#	minSize=(30, 30)
 	#	flags = cv2.CV_HAAR_SCALE_IMAGE
 	)
+        #faces = face_cascade.detectMultiScale(gray, 1.3, 1)
 	smiles = smileCascade.detectMultiScale(gray, 1.3, 10)
+        #eyes = eyeCascade.detectMultiScale(gray, 1.3, 3)
 
 	print("Found {0} faces!".format(len(faces)))
 	#print("Found {0} smiles!".format(len(smiles)))
@@ -44,6 +46,9 @@ while(True):
 		for (a,b,c,d) in smiles:
 			if a>x and b>y and a+c<x+w and b+d<y+h:   
 				cv2.rectangle(frame,(a,b),(a+c,b+d),(0,255,255),2)
+		#for (a,b,c,d) in eyes:
+		#	if a>x and b>y and a+c<x+w and b+d<y+h:
+		#		cv2.rectangle(frame,(a,b),(a+c,b+d),(255,255,255),2)
 	#for (x,y,w,h) in faces:
 	#	cv2.rectangle(frame, (x, y), (x+w, y+h), (125, 255, 0), 2)
 	#	for (a,b,c,d) in smiles:
