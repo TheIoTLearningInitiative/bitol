@@ -17,6 +17,9 @@ USER user
 WORKDIR /home/user
 
 RUN git clone https://github.com/xe1gyq/Real_time_Object_detection_and_tracking.git
-WORKDIR /home/user/Real_time_Object_detection_and_tracking/
 
+WORKDIR /home/user/Real_time_Object_detection_and_tracking/model_data/
 RUN wget https://github.com/Reyes-fred/Xiaomin/raw/master/Scripts/ImageRecognition/RealtimeObjectDetection/MobileNetSSD_deploy.caffemodel
+RUN wget https://pjreddie.com/media/files/yolov2.weights
+
+WORKDIR /home/user/Real_time_Object_detection_and_tracking/
