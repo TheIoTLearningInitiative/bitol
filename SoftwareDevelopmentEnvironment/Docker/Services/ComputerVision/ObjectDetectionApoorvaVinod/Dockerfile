@@ -24,6 +24,11 @@ RUN wget https://github.com/Reyes-fred/Xiaomin/raw/master/Scripts/ImageRecogniti
 
 RUN wget https://pjreddie.com/media/files/yolov2.weights
 
+#RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
+#RUN wget https://pjreddie.com/media/files/yolov3.weights
+
+RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/coco.data
+RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
 RUN wget https://pjreddie.com/media/files/yolov3.weights
 
