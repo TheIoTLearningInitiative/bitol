@@ -25,6 +25,12 @@ yucatanlands:
     - group.yucatannavigation
     - group.yucatancomputervision
 
+intelaerolands:
+  view: yes
+  name: Intel Aero
+  entities:
+    - group.intelaeronavigation
+
 xunankablands:
   name: XunanKab
   entities:
@@ -108,3 +114,8 @@ yucatancomputervision:
   entities:
     - switch.yucatanfacedetect
     - switch.yucatanstream
+
+intelaeronavigation:
+  name: Navigation
+  entities:
+    - switch.intelaeroarm

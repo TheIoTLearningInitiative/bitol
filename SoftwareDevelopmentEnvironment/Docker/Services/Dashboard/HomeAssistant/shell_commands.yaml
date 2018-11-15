@@ -8,3 +8,4 @@ yucatantofirst: "docker run user/task-to tcp:172.17.0.3:5762 1 20.668907 -103.46
 yucatantosecond: "docker run user/task-to tcp:172.17.0.3:5762 1 20.666325 -103.4630045 20 20 &"
 yucatansquare: "docker run user/task-square tcp:172.17.0.3:5762 1 10 &"
 yucatanland: "docker run user/task-land tcp:172.17.0.3:5762 1 &"
+intelaeroarm: "/home/user/Bitol/HybridDronesolution/Deployments/IntelAeroPlatform/arm.py --connect=192.168.1.6:14550 --id=1 &"

@@ -2,11 +2,11 @@
   switches:
 
     quintanaroovehiclesimulator:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n quintanaroo -m 1 -g 14552 &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n quintanaroo -m 2 -g 15552 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n quintanaroo &"
 
     quintanarootelemetry:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerup -s 172.17.0.2 -n quintanaroo -m 1"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerup -s 172.17.0.2 -n quintanaroo -m 2"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Telemetry.sh -i powerdown -n quintanaroo"
 
     quintanaroostream:
@@ -18,7 +18,7 @@
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerdown -n quintanaroo -t facedetect &"
 
     yucatanvehiclesimulator:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n yucatan -m 2 -g 14553 &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n yucatan -m 3 -g 15553 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n yucatan &"
 
     yucatantelemetry:
@@ -34,5 +34,9 @@
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/ComputerVisionService.sh -i powerdown -n yucatan -t facedetect &"
 
     campechevehiclesimulator:
-      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n campeche -m 3 -g 14554 &"
+      command_on: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerup -s 172.17.0.1 -n campeche -m 4 -g 15554 &"
       command_off: "~/Bitol/VirtualDroneSolution/UseCases/XunanKab/Vehicle.sh -i powerdown -n campeche &"
+
+    intelaeroarm:
+      command_on: "~/Bitol/HybridDronesolution/Deployments/IntelAeroPlatform/arm.py --connect=192.168.1.6:14550 --id=1 &"
+      command_off: "echo"

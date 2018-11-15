@@ -36,12 +36,12 @@ def arm_and_wait(mode, aTargetTime):
     vehicle.armed = True
 
     # Confirm vehicle armed before attempting to take off
-    while not vehicle.armed:
-        print(" Waiting for arming...")
-        time.sleep(1)
+    #while not vehicle.armed:
+    #    print(" Waiting for arming...")
+    #    time.sleep(1)
 
     print("Wait!")
-    time.sleep(5)
+    time.sleep(aTargetTime)
 
 # =============================================================================
 # Main
@@ -62,11 +62,11 @@ if __name__ == '__main__':
     print('Connecting to vehicle on: %s' % connection_string)
     vehicle = connect(connection_string, wait_ready=False)
 
-    print " Type: %s" % vehicle._vehicle_type
-    print " Armed: %s" % vehicle.armed
-    print " System status: %s" % vehicle.system_status.state
-    print " GPS: %s" % vehicle.gps_0
-    print " Alt: %s" % vehicle.location.global_relative_frame.alt
+    print(" Type: %s" % vehicle._vehicle_type)
+    print(" Armed: %s" % vehicle.armed)
+    print(" System status: %s" % vehicle.system_status.state)
+    print(" GPS: %s" % vehicle.gps_0)
+    print(" Alt: %s" % vehicle.location.global_relative_frame.alt)
 
     #vehicle.parameters['MAV_SYS_ID'] = vehicleid
     #print " Sys Id: %s" % vehicle.parameters['MAV_SYS_ID']
@@ -80,10 +80,10 @@ if __name__ == '__main__':
 
     arm_and_wait("STABILIZED", 5)
 
-    vehicle.mode = VehicleMode("STABILIZED")
+    vehicle.mode = VehicleMode("LAND")
     vehicle.armed = False
-    while vehicle.armed:
-        print(" Waiting for disarming...")
-        time.sleep(1)
+    #while vehicle.armed:
+    #    print(" Waiting for disarming...")
+    #    time.sleep(1)
 
     vehicle.close()

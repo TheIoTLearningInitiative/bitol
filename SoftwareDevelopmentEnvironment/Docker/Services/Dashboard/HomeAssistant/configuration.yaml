@@ -146,6 +146,9 @@ homeassistant:
     sensor.campeche_velocity:
       friendly_name: GPS
 
+    switch.intelaeroarm:
+      friendly_name: Arm
+
 # Show links to resources in log and frontend
 # introduction:
 

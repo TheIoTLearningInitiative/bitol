@@ -37,3 +37,7 @@ yucatansquare:
 yucatanland:
   sequence:
     - service: shell_command.yucatanland
+
+intelaeroarm:
+  sequence:
+    - service: shell_command.intelaeroarm

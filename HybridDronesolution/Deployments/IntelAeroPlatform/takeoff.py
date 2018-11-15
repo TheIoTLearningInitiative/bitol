@@ -34,9 +34,9 @@ def arm_and_takeoff(tgt_altitude):
     #    print(" Waiting for vehicle to initialise...")
     #    time.sleep(1)
 
-    while vehicle.gps_0.fix_type < 2:
-        print "Waiting for GPS...:", vehicle.gps_0.fix_type
-        time.sleep(1)
+    #while vehicle.gps_0.fix_type < 2:
+    #    print "Waiting for GPS...:", vehicle.gps_0.fix_type
+    #    time.sleep(1)
 
     vehicle.mode = VehicleMode("STABILIZED")
     vehicle.armed = True
