@@ -72,7 +72,9 @@ RUN pip install imutils
 RUN rm -rf /opencv-$OPENCV_VERSION /opencv_contrib-$OPENCV_VERSION
 RUN ls /
 
-EXPOSE 5000
+EXPOSE 5600
+EXPOSE 5700
+EXPOSE 5800
 
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
@@ -92,5 +94,6 @@ ENV DISPLAYIP=172.17.0.2
 ENV DISPLAYPORT=5700
 ENV HAPORT=5800
 
-ENTRYPOINT ["/home/user/main.sh"]
-CMD [$NAME, $STREAMPORT, $DISPLAYIP, $DISPLAYPORT, $HAPORT]
+ENTRYPOINT ["bash"]
+#ENTRYPOINT ["/home/user/main.sh"]
+#CMD [$NAME, $STREAMPORT, $DISPLAYIP, $DISPLAYPORT, $HAPORT]
