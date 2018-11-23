@@ -19,7 +19,8 @@ EXPOSE 5000
 
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
-    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    usermod -a -G video user
 
 USER user
 WORKDIR /home/user
