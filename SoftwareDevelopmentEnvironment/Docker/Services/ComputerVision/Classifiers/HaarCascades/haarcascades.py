@@ -8,7 +8,7 @@ displayip=sys.argv[3]
 displayport=sys.argv[4]
 
 command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
-command='udpsrc port=%s ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink' % streamport
+#command='udpsrc port=%s ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink' % streamport
 cap = cv2.VideoCapture(command)
 
 display="appsrc ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480 ! jpegenc ! rtpjpegpay ! udpsink host=" + displayip + " port=" + displayport
