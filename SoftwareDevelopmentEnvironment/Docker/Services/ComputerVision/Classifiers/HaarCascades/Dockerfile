@@ -20,7 +20,7 @@ RUN /bin/bash -c 'chmod +x /home/user/haarcascades.py'
 
 ENV NAME=XunanKab
 ENV STREAMPORT=5000
-ENV DISPLAYIP=0.0.0.0
+ENV DISPLAYIP=172.17.0.1
 ENV DISPLAYPORT=5200
 
 ENTRYPOINT ["bash"]
