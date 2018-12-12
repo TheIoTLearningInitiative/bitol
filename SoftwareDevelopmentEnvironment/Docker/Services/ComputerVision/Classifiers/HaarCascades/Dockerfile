@@ -7,8 +7,7 @@ ENV USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-EXPOSE 5000
-EXPOSE 5200
+EXPOSE 5000/udp
 
 USER user
 WORKDIR /home/user
