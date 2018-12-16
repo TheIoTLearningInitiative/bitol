@@ -39,43 +39,51 @@ net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 winName = 'Running YOLO Model'
 cv2.namedWindow(winName, cv2.WINDOW_NORMAL)
 
-#Read input image
-ret, frame = cap.read()
-#print(frame)
-#rows = frame.shape[0]
-#cols = frame.shape[1]
-frame_resized = cv2.resize(frame,(300,300))
+while(True):
 
-# Get width and height
-height,width,ch=frame.shape
+    #Read input image
+    ret, frame = cap.read()
+    #print(frame)
+    #rows = frame.shape[0]
+    #cols = frame.shape[1]
+    frame_resized = cv2.resize(frame,(300,300))
 
-# Create a 4D blob from a frame.
-blob = cv2.dnn.blobFromImage(frame_resized, 1.0/255.0, (416, 416), True, crop=False)
-#blob = cv2.dnn.blobFromImage(frame, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), True)
-net.setInput(blob)
-# Run the preprocessed input blog through the network
-predictions = net.forward()
-probability_index=5
+    # Get width and height
+    #height,width,ch=frame.shape
 
-for i in range(predictions.shape[0]):
-    prob_arr=predictions[i][probability_index:]
-    class_index=prob_arr.argmax(axis=0)
-    confidence= prob_arr[class_index]
-    if confidence > min_confidence:
-        x_center=predictions[i][0]*width
-        y_center=predictions[i][1]*height
-        width_box=predictions[i][2]*width
-        height_box=predictions[i][3]*height
-     
-        x1=int(x_center-width_box * 0.5)
-        y1=int(y_center-height_box * 0.5)
-        x2=int(x_center+width_box * 0.5)
-        y2=int(y_center+height_box * 0.5)
-     
-        cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,255),1)
-        cv2.putText(frame,classes[class_index]+" "+"{0:.1f}".format(confidence),(x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),1,cv2.LINE_AA)
-        # cv2.imwrite("out_"+args.input, frame)
-cv2.imshow(winName, frame)
+    # Create a 4D blob from a frame.
+    blob = cv2.dnn.blobFromImage(frame_resized, 1.0/255.0, (416, 416), True, crop=False)
+    #blob = cv2.dnn.blobFromImage(frame, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), True)
+    net.setInput(blob)
+    # Run the preprocessed input blog through the network
+    predictions = net.forward()
+    probability_index=5
 
-if (cv2.waitKey() >= 0):
-    cv2.destroyAllWindows()
+    for i in range(predictions.shape[0]):
+        prob_arr=predictions[i][probability_index:]
+        class_index=prob_arr.argmax(axis=0)
+        confidence= prob_arr[class_index]
+        if confidence > min_confidence:
+            x_center=predictions[i][0]*width
+            y_center=predictions[i][1]*height
+            width_box=predictions[i][2]*width
+            height_box=predictions[i][3]*height
+
+            x1=int(x_center-width_box * 0.5)
+            y1=int(y_center-height_box * 0.5)
+            x2=int(x_center+width_box * 0.5)
+            y2=int(y_center+height_box * 0.5)
+    
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,255),1)
+            cv2.putText(frame,classes[class_index]+" "+"{0:.1f}".format(confidence),(x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255$
+            # cv2.imwrite("out_"+args.input, frame)
+    #cv2.imshow(winName, frame)
+    cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
+    displayout.write(frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+out.release()
+
