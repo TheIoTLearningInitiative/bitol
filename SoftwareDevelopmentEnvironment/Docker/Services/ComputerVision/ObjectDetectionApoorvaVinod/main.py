@@ -84,10 +84,9 @@ while(True):
             cv2.putText(frame,classes[class_index]+" "+"{0:.1f}".format(confidence),(x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),1,cv2.LINE_AA)
             # cv2.imwrite("out_"+args.input, frame)
     #cv2.imshow(winName, frame)
-    cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
+    banner = name + ' FPS {:.1f}'.format(1 / (time.time() - stime))
+    cv2.putText(frame, banner, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
     displayout.write(frame)
-
-    print('FPS {:.1f}'.format(1 / (time.time() - stime)))
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
