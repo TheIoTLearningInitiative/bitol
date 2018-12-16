@@ -13,8 +13,8 @@ args = parser.parse_args()
 
 # Minimum confidence threshold. Increasing this will improve false positives but will also reduce detection rate.
 min_confidence=0.14
-model = 'model_data/yolov2.weights'
-config = 'model_data/yolov2.cfg'
+model = 'yolov2.weights'
+config = 'yolov2.cfg'
 
 framerate=25
 name="quintanaroo"
@@ -31,7 +31,7 @@ displayout = cv2.VideoWriter(display, 0, framerate, (640, 480))
 
 #Load names of classes
 classes = None
-with open('model_data/coco_classes.txt', 'rt') as f:
+with open('coco.names', 'rt') as f:
     classes = f.read().rstrip('\n').split('\n')
 print(classes)
 
