@@ -1,5 +1,6 @@
 import cv2
 import sys
+import time
 
 framerate=25
 name=sys.argv[1]
@@ -17,6 +18,9 @@ displayout = cv2.VideoWriter(display, 0, framerate, (640, 480))
 faceCascade = cv2.CascadeClassifier("/usr/local/share/opencv4/haarcascades/haarcascade_frontalface_alt2.xml")
 
 while(True):
+
+	stime = time.time()
+
 	ret, frame = cap.read()
 
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -36,6 +40,9 @@ while(True):
 	cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
 
 	displayout.write(frame)
+
+	print('FPS {:.1f}'.format(1 / (time.time() - stime)))
+
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
