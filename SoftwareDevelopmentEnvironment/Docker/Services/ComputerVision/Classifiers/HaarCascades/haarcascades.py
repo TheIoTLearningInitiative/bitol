@@ -37,11 +37,9 @@ while(True):
 	for (x, y, w, h) in faces:
 		cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-	cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
-
+	banner = name + ' FPS {:.1f}'.format(1 / (time.time() - stime))
+	cv2.putText(frame, banner, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
 	displayout.write(frame)
-
-	print('FPS {:.1f}'.format(1 / (time.time() - stime)))
 
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
