@@ -1,3 +1,6 @@
+# Credit Ankit Sachan @ Blogs https://github.com/sankit1/cv-tricks.com
+# With modifications to get frame from RTP
+
 import cv2
 import argparse
 import numpy as np
