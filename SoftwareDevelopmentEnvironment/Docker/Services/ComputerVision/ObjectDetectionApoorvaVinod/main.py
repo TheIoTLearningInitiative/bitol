@@ -5,6 +5,7 @@ import cv2
 import argparse
 import numpy as np
 import sys
+import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', help='Path to input image.')
@@ -43,6 +44,8 @@ net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 #cv2.namedWindow(winName, cv2.WINDOW_NORMAL)
 
 while(True):
+
+    stime = time.time()
 
     #Read input image
     ret, frame = cap.read()
@@ -83,6 +86,9 @@ while(True):
     #cv2.imshow(winName, frame)
     cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
     displayout.write(frame)
+
+    print('FPS {:.1f}'.format(1 / (time.time() - stime)))
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
