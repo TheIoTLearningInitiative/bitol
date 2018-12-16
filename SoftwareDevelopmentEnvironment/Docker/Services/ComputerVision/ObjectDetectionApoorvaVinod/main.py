@@ -49,7 +49,7 @@ while(True):
     frame_resized = cv2.resize(frame,(300,300))
 
     # Get width and height
-    #height,width,ch=frame.shape
+    height,width,ch=frame.shape
 
     # Create a 4D blob from a frame.
     blob = cv2.dnn.blobFromImage(frame_resized, 1.0/255.0, (416, 416), True, crop=False)
