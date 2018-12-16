@@ -27,8 +27,7 @@ ENV DISPLAYIP=172.17.0.1
 ENV DISPLAYPORT=5100
 
 RUN wget https://pjreddie.com/media/files/yolov2.weights
-RUN wget https://github.com/pjreddie/darknet/blob/master/cfg/yolov2.cfg
-RUN wget https://raw.githubusercontent.com/xe1gyq/Real_time_Object_detection_and_tracking/master/model_data/coco_classes.txt
+RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov2.cfg
 RUN wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 
 ENTRYPOINT ["bash"]
