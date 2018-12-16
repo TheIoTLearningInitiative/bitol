@@ -7,9 +7,9 @@ import numpy as np
 import sys
 import time
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--input', help='Path to input image.')
-args = parser.parse_args()
+#parser = argparse.ArgumentParser()
+#parser.add_argument('--input', help='Path to input image.')
+#args = parser.parse_args()
 
 # Minimum confidence threshold. Increasing this will improve false positives but will also reduce detection rate.
 min_confidence=0.14
