@@ -17,10 +17,10 @@ model = 'yolov2.weights'
 config = 'yolov2.cfg'
 
 framerate=25
-name="quintanaroo"
-streamport="5000"
-displayip="172.17.0.1"
-displayport="5100"
+name=sys.argv[1]
+streamport=sys.argv[2]
+displayip=sys.argv[3]
+displayport=sys.argv[4]
 
 command='udpsrc port=%s ! application/x-rtp, encoding-name=JPEG, payload=26 ! rtpjpegdepay ! jpegdec ! videoconvert ! appsink' % streamport
 #command='udpsrc port=%s ! application/x-rtp ! rtph264depay ! avdec_h264 ! videoconvert ! appsink' % streamport
