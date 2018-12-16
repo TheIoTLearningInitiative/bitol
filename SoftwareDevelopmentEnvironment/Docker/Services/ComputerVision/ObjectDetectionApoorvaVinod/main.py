@@ -75,7 +75,7 @@ while(True):
             y2=int(y_center+height_box * 0.5)
     
             cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,255),1)
-            cv2.putText(frame,classes[class_index]+" "+"{0:.1f}".format(confidence),(x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255$
+            cv2.putText(frame,classes[class_index]+" "+"{0:.1f}".format(confidence),(x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),1,cv2.LINE_AA)
             # cv2.imwrite("out_"+args.input, frame)
     #cv2.imshow(winName, frame)
     cv2.putText(frame, name, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,177,1), 3)
