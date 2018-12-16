@@ -36,8 +36,8 @@ net = cv2.dnn.readNetFromDarknet(config, model)
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_DEFAULT)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
-winName = 'Running YOLO Model'
-cv2.namedWindow(winName, cv2.WINDOW_NORMAL)
+#winName = 'Running YOLO Model'
+#cv2.namedWindow(winName, cv2.WINDOW_NORMAL)
 
 while(True):
 
