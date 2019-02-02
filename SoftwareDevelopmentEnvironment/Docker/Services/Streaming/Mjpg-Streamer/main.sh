@@ -16,6 +16,5 @@ STREAMINGPORT=$1
 # Main
 # =============================================================================
 
-cd $HOME/mjpg-streamer/mjpg-streamer-experimental
-export LD_LIBRARY_PATH=.
-./mjpg_streamer -o "output_http.so -p ${STREAMINGPORT} -w ./www" -i "input_uvc.so"
+export LD_LIBRARY_PATH=$HOME/mjpg-streamer/mjpg-streamer-experimental
+$HOME/mjpg-streamer/mjpg-streamer-experimental/mjpg_streamer -o "output_http.so -p ${STREAMINGPORT} -w ./www" -i "input_uvc.so"
