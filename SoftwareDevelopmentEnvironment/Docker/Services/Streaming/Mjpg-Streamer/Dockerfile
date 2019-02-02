@@ -30,7 +30,6 @@ EXPOSE 8080
 
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
-RUN /bin/bash -c 'bash /home/user/main.sh'
 
 ENTRYPOINT ["/home/user/main.sh"]
 CMD [$STREAMINGPORT]
