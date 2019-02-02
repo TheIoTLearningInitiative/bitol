@@ -23,7 +23,7 @@ RUN groupadd user && \
 USER user
 WORKDIR /home/user
 
-RUN wget https://github.com/jacksonliam/mjpg-streamer && \
+RUN git clone https://github.com/jacksonliam/mjpg-streamer && \
     rm -f .git/ && \
     cd mjpg-streamer/mjpg-streamer-experimental/ && \
     make
