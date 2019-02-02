@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /
 
-RUN apt-get update && apt-get install -y sudo \
+RUN apt-get update && apt-get install -y sudo git \
     cmake libjpeg8-dev gcc g++ cmake && \
     rm -rf /var/lib/apt/lists/*
 
