@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y sudo git \
     cmake libjpeg8-dev gcc g++ cmake && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8080
-
 RUN groupadd user && \
     useradd -g user -s /bin/bash -d /home/user -m user && \
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -27,5 +25,7 @@ RUN git clone https://github.com/jacksonliam/mjpg-streamer && \
     rm -f .git/ && \
     cd mjpg-streamer/mjpg-streamer-experimental/ && \
     make
+
+EXPOSE 8080
 
 CMD ["/bin/bash"]
