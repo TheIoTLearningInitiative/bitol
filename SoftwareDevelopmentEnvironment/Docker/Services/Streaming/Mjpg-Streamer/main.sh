@@ -18,4 +18,4 @@ STREAMINGPORT=$1
 
 cd $HOME/mjpg-streamer/mjpg-streamer-experimental
 export LD_LIBRARY_PATH=.
-./mjpg_streamer -o "output_http.so -w ./www" -i "input_uvc.so"
+./mjpg_streamer -o "output_http.so -p ${STREAMINGPORT} -w ./www" -i "input_uvc.so"
