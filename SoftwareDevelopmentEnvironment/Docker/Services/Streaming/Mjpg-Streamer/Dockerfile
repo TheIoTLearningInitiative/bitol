@@ -22,3 +22,5 @@ RUN groupadd user && \
 
 USER user
 WORKDIR /home/user
+
+CMD ["/bin/bash"]
