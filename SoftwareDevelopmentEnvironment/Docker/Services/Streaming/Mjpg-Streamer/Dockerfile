@@ -1,0 +1,24 @@
+FROM ubuntu:16.04
+
+MAINTAINER Abraham "xe1gyq@gmail.com"
+
+ENV TIMEZONE America/Mexico_City
+ENV USER root
+
+ENV DEBIAN_FRONTEND noninteractive
+
+WORKDIR /
+
+RUN apt-get update && apt-get install -y sudo \
+    cmake libjpeg8-dev gcc g++ cmake && \
+    rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8080
+
+RUN groupadd user && \
+    useradd -g user -s /bin/bash -d /home/user -m user && \
+    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    usermod -a -G video user
+
+USER user
+WORKDIR /home/user
