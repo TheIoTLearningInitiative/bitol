@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # =============================================================================
 # Variables
@@ -16,6 +16,6 @@ STREAMINGPORT=$1
 # Main
 # =============================================================================
 
-cd $HOME/
-pwd
-echo $STREAMINGPORT
+cd $HOME/mjpg-streamer/mjpg-streamer-experimental
+export LD_LIBRARY_PATH=.
+./mjpg_streamer -o "output_http.so -w ./www" -i "input_uvc.so"
