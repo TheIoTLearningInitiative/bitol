@@ -26,10 +26,12 @@ RUN git clone https://github.com/jacksonliam/mjpg-streamer && \
     cd mjpg-streamer/mjpg-streamer-experimental/ && \
     make
 
-EXPOSE 8080
-
 ADD --chown=1000:1000 main.sh /home/user/
 RUN /bin/bash -c 'chmod +x /home/user/main.sh'
+
+EXPOSE 8080
+
+ENV STREAMINGPORT=8080
 
 ENTRYPOINT ["/home/user/main.sh"]
 CMD [$STREAMINGPORT]
