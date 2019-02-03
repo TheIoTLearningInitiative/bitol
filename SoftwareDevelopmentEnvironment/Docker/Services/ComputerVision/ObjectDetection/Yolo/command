@@ -1,7 +1,0 @@
-# https://github.com/xe1gyq/Real_time_Object_detection_and_tracking
-docker run -it -e DISPLAY=:0 -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0 user/computervision-objectdetectionapoorvavinod
-docker run -it -e DISPLAY=:0 -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0 -p 5001:5000/udp user/computervision-objectdetectionapoorvavinod
-
-python3 src/main.py --model model_data/yolov2.weights --config model_data/yolov2.cfg --classes model_data/coco_classes.txt --input media/sample_video.mp4 --output out/sample_output.avi
-python3 src/main.py --model model_data/MobileNetSSD_deploy.caffemodel --config model_data/MobileNetSSD_deploy.prototxt --classes model_data/MobileNet_classes.txt --input /dev/video0 --output out/sample_output.avi
-
