@@ -1,4 +1,4 @@
-FROM user/core-opencv
+FROM xe1gyq/opencv
 
 MAINTAINER Abraham Arce "xe1gyq@gmail.com"
 
