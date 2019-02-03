@@ -5,7 +5,7 @@ $ gst-launch-1.0 -v v4l2src device=/dev/video0 ! image/jpeg,width=640, height=48
 ```
 
 ```sh
-docker run -it -e DISPLAY=:0 -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0 -p 5001:5000/udp xe1gyq/yolo
+$ docker run -it -e DISPLAY=:0 -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0 -p 5001:5000/udp xe1gyq/yolo
 ```
 
 ```sh
