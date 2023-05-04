@@ -16,11 +16,12 @@ usage() {
     echo "  -s: IP address of the server"
     echo "  -n: Name of the vehicle"
     echo "  -m: Id of the vehicle"
-    echo "  -m: Ground Control Station Port"
+    echo "  -g: Ground Control Station Port"
+    echo "  -g: Ports"
     echo ""
 }
 
-while getopts "i:s:n:m:g:" o; do
+while getopts "i:s:n:m:g:p:" o; do
     case "${o}" in
         i)
             INITIALIZE="$OPTARG"
@@ -37,6 +38,9 @@ while getopts "i:s:n:m:g:" o; do
         g)
             GCS_PORT="$OPTARG"
             ;;
+	p)
+	    PORT="$OPTARG"
+	    ;;
         *)
             usage
             exit 1
@@ -51,17 +55,17 @@ VEHICLE_LATITUDE=${VEHICLE_LATITUDE:-20.6679137}
 VEHICLE_LONGITUDE=${VEHICLE_LONGITUDE:--103.4630988}
 VEHICLE_ALTITUDE=${VEHICLE_ALTITUDE:-10}
 
-VEHICLE_TCP_PORT_A=5764
+VEHICLE_TCP_PORT_A=$((${PORT} + 3))
 VEHICLE_UDP_PORT_A=$GCS_PORT
 
-VEHICLE_DOCKER_IMAGE=user/core-copter
+VEHICLE_DOCKER_IMAGE=xe1gyq/copter
 
-TASK_DOCKER_IMAGE=user/task
-TASK_DOCKER_IMAGE_ID=${TASK_DOCKER_IMAGE}-id
+TASK_DOCKER_IMAGE=task-id
+TASK_DOCKER_IMAGE_ID=${TASK_DOCKER_IMAGE}
 
 CONNECTION_PROTOCOL=tcp
-CONNECTION_PORT_GROUND_CONTROL_STATION=5762
-CONNECTION_PORT_COMMUNICATION_LIBRARY=5763
+CONNECTION_PORT_GROUND_CONTROL_STATION=$((${PORT} + 1))
+CONNECTION_PORT_COMMUNICATION_LIBRARY=$((${PORT} + 2))
 
 # =============================================================================
 # Main

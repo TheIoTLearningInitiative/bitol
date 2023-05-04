@@ -12,8 +12,8 @@ INITIALIZE=$1
 
 # Core :: Copter
 
-COPTER_DOCKER_IMAGE=${USER}/core-copter
-COPTER_NUMBER=4
+COPTER_DOCKER_IMAGE=xe1gyq/copter
+COPTER_NUMBER=1
 COPTER_NAMES[0]='quintanaroo-copter'
 COPTER_NAMES[1]='yucatan-copter'
 COPTER_NAMES[2]='campeche-copter'
@@ -56,7 +56,7 @@ if ([ "$INITIALIZE" == "powerup" ]); then
      echo "Copter Information: " $COPTER_NAME $IP $UUID
      sleep 3
      CONNECTION=${CONNECTION_PROTOCOL}:${IP}:${CONNECTION_PORT_COMMUNICATION_LIBRARY}
-     docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
+     # docker run $TASK_DOCKER_IMAGE_ID $CONNECTION ${VEHICLE_ID}
   done
 elif ([ "$INITIALIZE" == "powerdown" ]); then
   for ((i=0; i<=$COPTER_NUMBER; i++)); do
