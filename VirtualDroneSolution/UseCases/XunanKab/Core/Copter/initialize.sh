@@ -13,7 +13,7 @@ INITIALIZE=$1
 # Core :: Copter
 
 COPTER_DOCKER_IMAGE=xe1gyq/copter
-COPTER_NUMBER=1
+COPTER_NUMBER=4
 COPTER_NAMES[0]='quintanaroo-copter'
 COPTER_NAMES[1]='yucatan-copter'
 COPTER_NAMES[2]='campeche-copter'
@@ -49,7 +49,7 @@ if ([ "$INITIALIZE" == "powerup" ]); then
      COPTER_NAME=${COPTER_NAMES[$i]}
      UUID=`docker run -itd --name ${COPTER_NAME} \
                                ${COPTER_DOCKER_IMAGE} \
-                               ${VEHICLE_ID} \
+                               $i \
                                ${VEHICLE_LATITUDE} ${VEHICLE_LONGITUDE} \
                                ${VEHICLE_ALTITUDE}`
      IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${COPTER_NAME}`
